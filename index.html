@@ -515,4 +515,37 @@ a[href^="tel:"]:hover{background:rgba(20,168,166,.22)!important;border-color:var
       });
   })();
 </script>
+<style id="vb-2026-fix">
+/* Fix: reveal solo aplica si no est\u00e1 ya visible al cargar */
+.vb-reveal{opacity:1;transform:none}
+.vb-reveal.vb-needs-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.vb-reveal.vb-needs-reveal.in{opacity:1;transform:none}
+/* Fix: que un mismo elemento no tenga banner-pro y banner-urg al mismo tiempo */
+.vb-banner-pro.vb-banner-urg::before{background-image:url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1400&q=80&auto=format&fit=crop')!important}
+.vb-banner-pro.vb-banner-urg::after{background:linear-gradient(135deg,rgba(230,57,70,.88) 0%,rgba(11,27,43,.7) 100%)!important}
+</style>
+<script>
+  (function(){
+      function ready(fn){if(document.readyState!=='loading')fn();else document.addEventListener('DOMContentLoaded',fn)}
+      ready(function(){
+            try{
+                    // 1) Reset clases conflictivas en search-section (no es banner)
+                    document.querySelectorAll('.search-section.vb-banner-pro').forEach(function(el){el.classList.remove('vb-banner-pro');el.style.background=''});
+                    document.querySelectorAll('.search-section.vb-banner-urg').forEach(function(el){el.classList.remove('vb-banner-urg');el.style.background=''});
+                    // 2) Forzar que todo lo que est\u00e9 visible al cargar quede in
+                    var vh=window.innerHeight;
+                    document.querySelectorAll('.vb-reveal').forEach(function(el){
+                              var r=el.getBoundingClientRect();
+                              if(r.top<vh && r.bottom>0){el.classList.add('in')}
+                              else{el.classList.add('vb-needs-reveal')}
+                    });
+                    // 3) Re-observar los que faltan
+                    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+                    document.querySelectorAll('.vb-reveal.vb-needs-reveal:not(.in)').forEach(function(el){io.observe(el)});
+                    // 4) Safety net: si despu\u00e9s de 3 seg algo sigue invisible, forzarlo
+                    setTimeout(function(){document.querySelectorAll('.vb-reveal:not(.in)').forEach(function(el){el.classList.add('in')})},3000);
+            }catch(e){console.warn('vb-fix:',e);document.querySelectorAll('.vb-reveal').forEach(function(el){el.classList.add('in')})}
+  });
+  })();
+</script>
 </body></html>
