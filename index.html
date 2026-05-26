@@ -1659,4 +1659,236 @@ else window.addEventListener('load',ready);
   }catch(e){console.warn('vb-filters:',e)}
   })();
 </script>
+<style id="vb-2026-quantum">
+/* === BLOQUE 12: SEARCH DIALOG GLOBAL + PWA + KEYBOARD SHORTCUTS === */
+
+/* Search dialog full-screen estilo Algolia */
+.vb-sd{position:fixed;inset:0;background:rgba(15,23,42,.65);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;z-index:99995;padding:80px 20px 20px;animation:vbSdIn .2s ease-out}
+.vb-sd.show{display:flex}
+@keyframes vbSdIn{from{opacity:0}to{opacity:1}}
+.vb-sd-box{background:#fff;border-radius:18px;width:100%;max-width:640px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px -10px rgba(0,0,0,.5);animation:vbSdZoom .25s cubic-bezier(.16,1,.3,1)}
+@keyframes vbSdZoom{from{transform:translateY(-12px);opacity:0}to{transform:translateY(0);opacity:1}}
+:root[data-vb-theme="dark"] .vb-sd-box{background:#0F172A;color:#F1F5F9}
+.vb-sd-input{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid #E2E8F0}
+:root[data-vb-theme="dark"] .vb-sd-input{border-color:#1E293B}
+.vb-sd-input svg{width:20px;height:20px;stroke:#94A3B8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.vb-sd-input input{flex:1;border:none;outline:none;font-size:17px;background:transparent;color:#0F172A;font-family:inherit}
+:root[data-vb-theme="dark"] .vb-sd-input input{color:#F1F5F9}
+.vb-sd-input input::placeholder{color:#94A3B8}
+.vb-sd-input kbd{background:#F1F5F9;color:#64748B;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:inherit;border:1px solid #E2E8F0;letter-spacing:.02em}
+:root[data-vb-theme="dark"] .vb-sd-input kbd{background:#1F2937;color:#94A3B8;border-color:#334155}
+.vb-sd-results{overflow-y:auto;flex:1;padding:8px}
+.vb-sd-section-title{font-size:11px;font-weight:800;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;padding:12px 12px 6px}
+.vb-sd-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;cursor:pointer;transition:background .12s;text-decoration:none;color:inherit}
+.vb-sd-item:hover,.vb-sd-item.sel{background:#F0FDFA}
+:root[data-vb-theme="dark"] .vb-sd-item:hover,:root[data-vb-theme="dark"] .vb-sd-item.sel{background:#0F2A2A}
+.vb-sd-item img{width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;background:#F1F5F9}
+.vb-sd-item-info{flex:1;min-width:0}
+.vb-sd-item-name{font-weight:700;font-size:15px;color:#0F172A;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-vb-theme="dark"] .vb-sd-item-name{color:#F1F5F9}
+.vb-sd-item-meta{font-size:12px;color:#64748B;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vb-sd-item-meta mark{background:#FEF3C7;color:#92400E;padding:0 2px;border-radius:3px;font-weight:600}
+:root[data-vb-theme="dark"] .vb-sd-item-meta mark{background:#78350F;color:#FEF3C7}
+.vb-sd-empty{padding:48px 20px;text-align:center;color:#94A3B8;font-size:14px}
+.vb-sd-foot{padding:12px 20px;border-top:1px solid #E2E8F0;display:flex;gap:14px;font-size:11px;color:#94A3B8;flex-wrap:wrap}
+:root[data-vb-theme="dark"] .vb-sd-foot{border-color:#1E293B}
+.vb-sd-foot span{display:inline-flex;align-items:center;gap:5px}
+.vb-sd-foot kbd{background:#F1F5F9;color:#475569;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;border:1px solid #E2E8F0}
+:root[data-vb-theme="dark"] .vb-sd-foot kbd{background:#1F2937;color:#CBD5E1;border-color:#334155}
+
+/* Search trigger button */
+.vb-sd-trigger{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:10px;cursor:pointer;color:#64748B;font-size:13px;font-weight:500;min-width:200px;transition:all .2s}
+.vb-sd-trigger:hover{border-color:#14B8A6;background:#F0FDFA}
+.vb-sd-trigger svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.vb-sd-trigger .vb-sd-spacer{flex:1}
+.vb-sd-trigger kbd{background:#fff;color:#475569;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;border:1px solid #E2E8F0;font-family:inherit}
+:root[data-vb-theme="dark"] .vb-sd-trigger{background:#1F2937;border-color:#334155;color:#94A3B8}
+:root[data-vb-theme="dark"] .vb-sd-trigger kbd{background:#0B1220;color:#CBD5E1;border-color:#334155}
+
+/* Install PWA banner */
+.vb-pwa{position:fixed;left:16px;right:16px;bottom:16px;max-width:380px;margin:0 auto;background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:14px;display:none;align-items:center;gap:12px;box-shadow:0 18px 50px -10px rgba(15,23,42,.25);z-index:996;animation:vbSdZoom .35s cubic-bezier(.16,1,.3,1)}
+.vb-pwa.show{display:flex}
+:root[data-vb-theme="dark"] .vb-pwa{background:#1F2937;border-color:#334155;color:#F1F5F9}
+.vb-pwa-ico{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#14B8A6,#0D9488);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.vb-pwa-text{flex:1;min-width:0}
+.vb-pwa-title{font-weight:700;font-size:14px;margin:0;color:#0F172A}
+:root[data-vb-theme="dark"] .vb-pwa-title{color:#F1F5F9}
+.vb-pwa-sub{font-size:12px;color:#64748B;margin:2px 0 0}
+.vb-pwa-btns{display:flex;gap:6px;flex-shrink:0}
+.vb-pwa-install{background:#14B8A6;color:#fff;border:none;padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer}
+.vb-pwa-x{background:transparent;border:none;color:#94A3B8;cursor:pointer;font-size:18px;line-height:1;padding:4px;border-radius:8px}
+.vb-pwa-x:hover{background:#F1F5F9}
+
+/* Keyboard hint chip */
+.vb-kbd-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:#F0FDFA;color:#0D9488;border-radius:999px;font-size:11px;font-weight:700;margin-left:8px;border:1px solid #CCFBF1}
+.vb-kbd-chip kbd{background:#fff;padding:2px 6px;border-radius:4px;font-size:10px;border:1px solid #CCFBF1}
+:root[data-vb-theme="dark"] .vb-kbd-chip{background:#0F2A2A;color:#5EEAD4;border-color:#1E3A3A}
+
+/* Skeleton loader para primer paint */
+.vb-sk-card{background:#F1F5F9;border-radius:16px;height:280px;position:relative;overflow:hidden}
+.vb-sk-card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:vbShimmer 1.5s infinite}
+</style>
+<script id="vb-2026-quantum-js">
+(function(){try{
+
+/* 1. Build search index desde las cards existentes */
+function buildIndex(){
+  var items=[];
+  document.querySelectorAll('.card,.vet-card,article.card').forEach(function(c){
+    var h=c.querySelector('h1,h2,h3,h4,.card-title,.vet-name,.name');
+    var img=c.querySelector('img');
+    var link=c.querySelector('a[href]');
+    items.push({
+      name:(h?h.textContent:'').trim()||'Veterinaria',
+      text:(c.textContent||'').replace(/\s+/g,' ').trim().toLowerCase(),
+      img:img?img.src:'',
+      url:link?link.href:'#',
+      el:c
+  });
+  });
+  return items;
+  }
+
+/* 2. Search dialog */
+var sd=document.createElement('div');sd.className='vb-sd';
+sd.innerHTML=
+  '<div class="vb-sd-box">'+
+    '<div class="vb-sd-input">'+
+      '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'+
+      '<input type="search" placeholder="Buscar veterinarias, barrios o servicios..." autocomplete="off">'+
+      '<kbd>ESC</kbd>'+
+    '</div>'+
+    '<div class="vb-sd-results"></div>'+
+    '<div class="vb-sd-foot">'+
+      '<span><kbd>\u2191</kbd><kbd>\u2193</kbd> navegar</span>'+
+      '<span><kbd>\u21b5</kbd> abrir</span>'+
+      '<span><kbd>ESC</kbd> cerrar</span>'+
+    '</div>'+
+  '</div>';
+document.body.appendChild(sd);
+var sdInput=sd.querySelector('input');var sdResults=sd.querySelector('.vb-sd-results');var sdBox=sd.querySelector('.vb-sd-box');
+sd.addEventListener('click',function(e){if(e.target===sd)closeSd()});
+sdBox.addEventListener('click',function(e){e.stopPropagation()});
+
+var INDEX=[];var selIdx=-1;var currentItems=[];
+
+function highlight(text,q){
+  if(!q)return text.substring(0,80);
+  var lc=text.toLowerCase();var i=lc.indexOf(q.toLowerCase());
+  if(i<0)return text.substring(0,80);
+  var start=Math.max(0,i-25);var end=Math.min(text.length,i+q.length+50);
+  var snippet=(start>0?'...':'')+text.substring(start,end);
+  var re=new RegExp('('+q.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')+')','ig');
+  return snippet.replace(re,'<mark>$1</mark>');
+  }
+
+function renderResults(q){
+  selIdx=-1;
+  if(!q||q.length<2){
+    sdResults.innerHTML='<div class="vb-sd-section-title">Populares</div>'+
+      ['Veterinaria 24 horas','Urgencias','Vacunaci\u00f3n','Castraci\u00f3n','Palermo','Caballito','Belgrano']
+        .map(function(t,i){return '<a class="vb-sd-item" href="#" data-q="'+t+'"><div class="vb-sd-item-info"><p class="vb-sd-item-name">'+t+'</p><p class="vb-sd-item-meta">B\u00fasqueda r\u00e1pida</p></div></a>'}).join('');
+    sdResults.querySelectorAll('.vb-sd-item').forEach(function(a){
+      a.addEventListener('click',function(e){e.preventDefault();sdInput.value=this.dataset.q;sdInput.dispatchEvent(new Event('input'))});
+  });
+    currentItems=[];return;
+  }
+  var lc=q.toLowerCase();
+  var matches=INDEX.filter(function(it){return it.text.indexOf(lc)>-1}).slice(0,12);
+  currentItems=matches;
+  if(!matches.length){sdResults.innerHTML='<div class="vb-sd-empty">No encontramos resultados para "<b>'+q+'</b>"</div>';return}
+  sdResults.innerHTML='<div class="vb-sd-section-title">'+matches.length+' resultado'+(matches.length>1?'s':'')+'</div>'+
+    matches.map(function(m,i){
+      return '<a class="vb-sd-item" data-i="'+i+'" href="'+m.url+'">'+
+        (m.img?'<img src="'+m.img+'" alt="">':'<div class="vb-sd-item-img" style="width:44px;height:44px;background:#F0FDFA;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#14B8A6">\ud83d\udc3e</div>')+
+        '<div class="vb-sd-item-info">'+
+          '<p class="vb-sd-item-name">'+m.name+'</p>'+
+          '<p class="vb-sd-item-meta">'+highlight(m.text,q)+'</p>'+
+        '</div>'+
+      '</a>';
+  }).join('');
+  }
+
+function openSd(){
+  INDEX=buildIndex();
+  sd.classList.add('show');document.body.style.overflow='hidden';
+  setTimeout(function(){sdInput.focus();sdInput.value='';renderResults('')},50);
+  }
+function closeSd(){sd.classList.remove('show');document.body.style.overflow=''}
+
+sdInput.addEventListener('input',function(){renderResults(this.value)});
+sdInput.addEventListener('keydown',function(e){
+  var items=sdResults.querySelectorAll('.vb-sd-item');
+  if(e.key==='Escape'){closeSd();}
+  else if(e.key==='ArrowDown'){e.preventDefault();selIdx=Math.min(items.length-1,selIdx+1);items.forEach(function(it,i){it.classList.toggle('sel',i===selIdx)});if(items[selIdx])items[selIdx].scrollIntoView({block:'nearest'})}
+  else if(e.key==='ArrowUp'){e.preventDefault();selIdx=Math.max(0,selIdx-1);items.forEach(function(it,i){it.classList.toggle('sel',i===selIdx)});if(items[selIdx])items[selIdx].scrollIntoView({block:'nearest'})}
+  else if(e.key==='Enter'&&selIdx>=0&&items[selIdx]){e.preventDefault();items[selIdx].click()}
+  });
+
+/* 3. Global keyboard shortcuts: / o Ctrl+Shift+F para abrir */
+document.addEventListener('keydown',function(e){
+  if(sd.classList.contains('show'))return;
+  if(['INPUT','TEXTAREA','SELECT'].indexOf(e.target.tagName)>-1)return;
+  if(e.target.isContentEditable)return;
+  if(e.key==='/'||(e.key==='k'&&(e.ctrlKey||e.metaKey)&&e.shiftKey)){
+    e.preventDefault();openSd();
+  }
+  });
+
+/* 4. Search trigger button en header */
+var header=document.querySelector('header,.header,.site-header,.navbar');
+if(header&&!header.querySelector('.vb-sd-trigger')){
+  var t=document.createElement('button');t.className='vb-sd-trigger';t.type='button';
+  t.innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Buscar...</span><span class="vb-sd-spacer"></span><kbd>/</kbd>';
+  t.addEventListener('click',openSd);
+  /* Insertar antes del CTA del header */
+  var nav=header.querySelector('nav,.nav,.header-inner')||header;
+  nav.appendChild(t);
+  }
+
+/* 5. PWA install prompt */
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();deferredPrompt=e;
+  try{if(localStorage.getItem('vb-pwa-dismiss'))return}catch(_){}
+  showPwaBanner();
+  });
+function showPwaBanner(){
+  if(document.querySelector('.vb-pwa'))return;
+  var b=document.createElement('div');b.className='vb-pwa show';
+  b.innerHTML='<div class="vb-pwa-ico">\ud83d\udc3e</div>'+
+    '<div class="vb-pwa-text"><p class="vb-pwa-title">Instal\u00e1 VetBA</p><p class="vb-pwa-sub">Acceso r\u00e1pido en tu pantalla de inicio</p></div>'+
+    '<div class="vb-pwa-btns"><button class="vb-pwa-install">Instalar</button><button class="vb-pwa-x" aria-label="Cerrar">\u00d7</button></div>';
+  document.body.appendChild(b);
+  b.querySelector('.vb-pwa-install').addEventListener('click',function(){
+    if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;b.remove()})}
+  });
+  b.querySelector('.vb-pwa-x').addEventListener('click',function(){try{localStorage.setItem('vb-pwa-dismiss','1')}catch(_){}b.remove()});
+  }
+
+/* 6. Detectar standalone mode (PWA instalada) */
+if(matchMedia('(display-mode:standalone)').matches){
+  document.documentElement.classList.add('vb-standalone');
+  }
+
+/* 7. Manifest inline link si no existe */
+if(!document.querySelector('link[rel="manifest"]')){
+  var mf={
+    name:'VetBA - Veterinarias Buenos Aires',
+    short_name:'VetBA',
+    description:'Encontr\u00e1 veterinarias en Buenos Aires',
+    start_url:'/',
+    display:'standalone',
+    background_color:'#ffffff',
+    theme_color:'#14B8A6',
+    icons:[{src:'/favicon.png',sizes:'192x192',type:'image/png'},{src:'/favicon.png',sizes:'512x512',type:'image/png'}]
+  };
+  var blob=new Blob([JSON.stringify(mf)],{type:'application/manifest+json'});
+  var link=document.createElement('link');link.rel='manifest';link.href=URL.createObjectURL(blob);
+  document.head.appendChild(link);
+  }
+
+  }catch(e){console.warn('vb-quantum:',e)}
+  })();
+</script>
 </body></html>
