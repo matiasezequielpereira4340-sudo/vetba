@@ -1453,4 +1453,210 @@ else window.addEventListener('load',initMap);
   }catch(e){console.warn('vb-map:',e)}
   })();
 </script>
+<style id="vb-2026-filters">
+/* === BLOQUE 11: FILTROS AVANZADOS + GEOLOCALIZACI\u00d3N + ORDENAMIENTO === */
+
+.vb-tools-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0;padding:12px;background:#F8FAFC;border-radius:14px;border:1px solid #E2E8F0}
+:root[data-vb-theme="dark"] .vb-tools-bar{background:#111827;border-color:#1E293B}
+.vb-tools-bar .vb-tb-count{font-size:13px;color:#64748B;font-weight:600}
+.vb-tools-bar .vb-tb-count b{color:#14B8A6;font-size:15px;font-weight:800}
+.vb-tools-spacer{flex:1}
+
+.vb-btn-tool{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:#fff;border:1.5px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;cursor:pointer;transition:all .2s}
+.vb-btn-tool:hover{border-color:#14B8A6;color:#14B8A6}
+.vb-btn-tool.active{background:#14B8A6;color:#fff;border-color:#14B8A6}
+.vb-btn-tool svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-vb-theme="dark"] .vb-btn-tool{background:#1F2937;border-color:#334155;color:#CBD5E1}
+
+.vb-sort{position:relative;display:inline-block}
+.vb-sort-menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #E2E8F0;border-radius:12px;box-shadow:0 20px 50px -10px rgba(15,23,42,.18);min-width:200px;padding:6px;z-index:1500;display:none}
+.vb-sort-menu.show{display:block}
+.vb-sort-menu button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:10px 12px;background:transparent;border:none;border-radius:8px;cursor:pointer;font-size:14px;color:#0F172A;transition:background .15s}
+.vb-sort-menu button:hover{background:#F0FDFA}
+.vb-sort-menu button.sel{background:#F0FDFA;color:#0D9488;font-weight:700}
+.vb-sort-menu button svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+:root[data-vb-theme="dark"] .vb-sort-menu{background:#1F2937;border-color:#334155}
+:root[data-vb-theme="dark"] .vb-sort-menu button{color:#F1F5F9}
+:root[data-vb-theme="dark"] .vb-sort-menu button:hover,:root[data-vb-theme="dark"] .vb-sort-menu button.sel{background:#0F2A2A;color:#5EEAD4}
+
+/* Filtros drawer */
+.vb-drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;box-shadow:-20px 0 60px -10px rgba(15,23,42,.25);transform:translateX(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);z-index:99997;display:flex;flex-direction:column;overflow:hidden}
+.vb-drawer.show{transform:translateX(0)}
+.vb-drawer-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:99996}
+.vb-drawer-backdrop.show{opacity:1;pointer-events:auto}
+.vb-drawer-head{padding:20px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between}
+.vb-drawer-head h3{margin:0;font-size:18px;font-weight:800;color:#0F172A}
+.vb-drawer-close{background:transparent;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#64748B}
+.vb-drawer-close:hover{background:#F1F5F9}
+.vb-drawer-close svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5}
+.vb-drawer-body{padding:20px;overflow-y:auto;flex:1}
+.vb-drawer-foot{padding:16px 20px;border-top:1px solid #E2E8F0;display:flex;gap:10px}
+.vb-drawer-foot button{flex:1;padding:12px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;border:none}
+.vb-drawer-foot .vb-apply{background:#14B8A6;color:#fff}
+.vb-drawer-foot .vb-clear{background:#F1F5F9;color:#475569}
+:root[data-vb-theme="dark"] .vb-drawer{background:#0B1220;color:#F1F5F9}
+:root[data-vb-theme="dark"] .vb-drawer-head,:root[data-vb-theme="dark"] .vb-drawer-foot{border-color:#1E293B}
+:root[data-vb-theme="dark"] .vb-drawer-head h3{color:#F1F5F9}
+:root[data-vb-theme="dark"] .vb-drawer-close:hover{background:#1F2937}
+:root[data-vb-theme="dark"] .vb-drawer-foot .vb-clear{background:#1F2937;color:#CBD5E1}
+
+.vb-filter-group{margin-bottom:22px}
+.vb-filter-group h4{margin:0 0 10px;font-size:13px;font-weight:700;color:#0F172A;text-transform:uppercase;letter-spacing:.05em}
+:root[data-vb-theme="dark"] .vb-filter-group h4{color:#F1F5F9}
+.vb-checks{display:flex;flex-direction:column;gap:8px}
+.vb-check{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:background .15s;font-size:14px;color:#334155}
+.vb-check:hover{background:#F8FAFC}
+:root[data-vb-theme="dark"] .vb-check{color:#CBD5E1}
+:root[data-vb-theme="dark"] .vb-check:hover{background:#1F2937}
+.vb-check input{width:18px;height:18px;accent-color:#14B8A6;cursor:pointer}
+.vb-chips-row{display:flex;flex-wrap:wrap;gap:6px}
+.vb-chip{padding:6px 12px;border-radius:999px;background:#F1F5F9;font-size:12px;font-weight:600;color:#475569;cursor:pointer;border:1.5px solid transparent;transition:all .2s}
+.vb-chip.on{background:#14B8A6;color:#fff;border-color:#14B8A6}
+:root[data-vb-theme="dark"] .vb-chip{background:#1F2937;color:#CBD5E1}
+
+/* Highlight cuando est\u00e1 cerca */
+.card.vb-near::after{content:"\ud83d\udccd Cerca";position:absolute;bottom:10px;left:10px;background:#14B8A6;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;z-index:5}
+</style>
+<script id="vb-2026-filters-js">
+(function(){try{
+var ICO={filter:'<svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',sort:'<svg viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>',pin:'<svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',cls:'<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',check:'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>'};
+
+function toast(msg){
+  var t=document.querySelector('.vb-share-toast');
+  if(!t){t=document.createElement('div');t.className='vb-share-toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},2200);
+  }
+
+/* Esperar a que haya cards */
+function ready(){
+  var grid=document.querySelector('.cards,.vets-grid,.results,.grid,[class*="grid"]');
+  if(!grid||grid.children.length<2)return;
+  if(document.querySelector('.vb-tools-bar'))return;
+
+  /* Tools bar */
+  var bar=document.createElement('div');bar.className='vb-tools-bar';
+  bar.innerHTML='<span class="vb-tb-count">Mostrando <b>'+grid.children.length+'</b> resultados</span>'+
+    '<div class="vb-tools-spacer"></div>'+
+    '<button class="vb-btn-tool vb-near-btn">'+ICO.pin+'Cerca de m\u00ed</button>'+
+    '<div class="vb-sort"><button class="vb-btn-tool vb-sort-btn">'+ICO.sort+'Ordenar</button>'+
+      '<div class="vb-sort-menu">'+
+        '<button data-s="default" class="sel">'+ICO.check+'Por defecto</button>'+
+        '<button data-s="name">'+ICO.check+'Nombre A-Z</button>'+
+        '<button data-s="name-d">'+ICO.check+'Nombre Z-A</button>'+
+        '<button data-s="rating">'+ICO.check+'Mejor rating</button>'+
+        '<button data-s="distance">'+ICO.check+'M\u00e1s cercanas</button>'+
+      '</div></div>'+
+    '<button class="vb-btn-tool vb-filt-btn">'+ICO.filter+'Filtros</button>';
+  grid.parentNode.insertBefore(bar,grid);
+  var countEl=bar.querySelector('.vb-tb-count b');
+
+  /* Drawer */
+  var bd=document.createElement('div');bd.className='vb-drawer-backdrop';document.body.appendChild(bd);
+  var dr=document.createElement('aside');dr.className='vb-drawer';
+  dr.innerHTML='<div class="vb-drawer-head"><h3>Filtros</h3><button class="vb-drawer-close" aria-label="Cerrar">'+ICO.cls+'</button></div>'+
+    '<div class="vb-drawer-body">'+
+      '<div class="vb-filter-group"><h4>Disponibilidad</h4><div class="vb-checks">'+
+        ['24 horas','Atiende urgencias','Abierto ahora','S\u00e1bados','Domingos'].map(function(t){return '<label class="vb-check"><input type="checkbox" data-key="'+t.toLowerCase()+'">'+t+'</label>'}).join('')+
+      '</div></div>'+
+      '<div class="vb-filter-group"><h4>Servicios</h4><div class="vb-chips-row">'+
+        ['Vacunaci\u00f3n','Castraci\u00f3n','Peluquer\u00eda','Cirug\u00eda','Ecograf\u00eda','An\u00e1lisis','Internaci\u00f3n','Odontolog\u00eda'].map(function(t){return '<span class="vb-chip" data-key="'+t.toLowerCase()+'">'+t+'</span>'}).join('')+
+      '</div></div>'+
+      '<div class="vb-filter-group"><h4>Tipo</h4><div class="vb-checks">'+
+        ['Cl\u00ednica veterinaria','Pet shop','Peluquer\u00eda','Guarder\u00eda'].map(function(t){return '<label class="vb-check"><input type="checkbox" data-key="'+t.toLowerCase()+'">'+t+'</label>'}).join('')+
+      '</div></div>'+
+      '<div class="vb-filter-group"><h4>Calidad</h4><div class="vb-chips-row">'+
+        ['Verificadas','PRO','Top rated','Recomendadas'].map(function(t){return '<span class="vb-chip" data-key="'+t.toLowerCase()+'">'+t+'</span>'}).join('')+
+      '</div></div>'+
+    '</div>'+
+    '<div class="vb-drawer-foot"><button class="vb-clear">Limpiar</button><button class="vb-apply">Aplicar</button></div>';
+  document.body.appendChild(dr);
+  function openDrawer(){dr.classList.add('show');bd.classList.add('show');document.body.style.overflow='hidden'}
+  function closeDrawer(){dr.classList.remove('show');bd.classList.remove('show');document.body.style.overflow=''}
+  bd.addEventListener('click',closeDrawer);
+  dr.querySelector('.vb-drawer-close').addEventListener('click',closeDrawer);
+  bar.querySelector('.vb-filt-btn').addEventListener('click',openDrawer);
+
+  /* Chip toggle */
+  dr.querySelectorAll('.vb-chip').forEach(function(c){c.addEventListener('click',function(){this.classList.toggle('on')})});
+
+  /* Apply filters */
+  function applyFilters(){
+    var keys=[];
+    dr.querySelectorAll('.vb-check input:checked').forEach(function(i){keys.push(i.dataset.key)});
+    dr.querySelectorAll('.vb-chip.on').forEach(function(c){keys.push(c.dataset.key)});
+    var shown=0;
+    Array.prototype.forEach.call(grid.children,function(c){
+      if(!keys.length){c.style.display='';shown++;return}
+      var t=(c.textContent||'').toLowerCase();
+      var match=keys.every(function(k){return t.indexOf(k)>-1});
+      c.style.display=match?'':'none';if(match)shown++;
+  });
+    countEl.textContent=shown;
+    if(keys.length)toast('Filtros aplicados: '+keys.length);
+    else toast('Filtros limpiados');
+    closeDrawer();
+  }
+  dr.querySelector('.vb-apply').addEventListener('click',applyFilters);
+  dr.querySelector('.vb-clear').addEventListener('click',function(){
+    dr.querySelectorAll('input[type="checkbox"]').forEach(function(i){i.checked=false});
+    dr.querySelectorAll('.vb-chip.on').forEach(function(c){c.classList.remove('on')});
+    applyFilters();
+  });
+
+  /* Sort */
+  var sortBtn=bar.querySelector('.vb-sort-btn');var sortMenu=bar.querySelector('.vb-sort-menu');
+  sortBtn.addEventListener('click',function(e){e.stopPropagation();sortMenu.classList.toggle('show')});
+  document.addEventListener('click',function(e){if(!sortMenu.contains(e.target))sortMenu.classList.remove('show')});
+  function nameOf(c){var h=c.querySelector('h1,h2,h3,h4,.card-title,.vet-name');return(h?h.textContent:c.textContent||'').trim().toLowerCase()}
+  function ratingOf(c){var r=c.querySelector('.vb-rating-value,.rating,.stars,.score');var m=(r?r.textContent:'').match(/(\d(?:[.,]\d)?)/);return m?parseFloat(m[1].replace(',','.')):0}
+  var defaultOrder=Array.from(grid.children);
+  sortMenu.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      sortMenu.querySelectorAll('button').forEach(function(x){x.classList.remove('sel')});
+      this.classList.add('sel');
+      var s=this.dataset.s;
+      var items=Array.from(grid.children);
+      if(s==='name')items.sort(function(a,b){return nameOf(a).localeCompare(nameOf(b))});
+      else if(s==='name-d')items.sort(function(a,b){return nameOf(b).localeCompare(nameOf(a))});
+      else if(s==='rating')items.sort(function(a,b){return ratingOf(b)-ratingOf(a)});
+      else if(s==='distance'){items.sort(function(a,b){return (parseFloat(a.dataset.vbDist)||999)-(parseFloat(b.dataset.vbDist)||999)})}
+      else items=defaultOrder.slice();
+      items.forEach(function(it){grid.appendChild(it)});
+      toast('Orden: '+this.textContent.trim());
+      sortMenu.classList.remove('show');
+  });
+  });
+
+  /* Geo cerca de m\u00ed (Haversine simple, marca como .vb-near las cards que coincidan en barrio) */
+  bar.querySelector('.vb-near-btn').addEventListener('click',function(){
+    var b=this;
+    if(!navigator.geolocation){toast('Geolocalizaci\u00f3n no disponible');return}
+    b.classList.add('active');b.textContent='Localizando...';
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var lat=pos.coords.latitude,lon=pos.coords.longitude;
+      /* Buscar barrios cercanos por distancia */
+      var BARRIOS_GEO={'palermo':[-34.5755,-58.4338],'recoleta':[-34.5895,-58.3974],'belgrano':[-34.5627,-58.4583],'caballito':[-34.6189,-58.4407],'villa crespo':[-34.5996,-58.4396],'almagro':[-34.6101,-58.4203],'nu\u00f1ez':[-34.5447,-58.4633],'villa urquiza':[-34.5722,-58.4895],'flores':[-34.6280,-58.4639],'boedo':[-34.6271,-58.4145],'san telmo':[-34.6210,-58.3736],'colegiales':[-34.5754,-58.4495]};
+      function dist(la1,lo1,la2,lo2){var R=6371,dLa=(la2-la1)*Math.PI/180,dLo=(lo2-lo1)*Math.PI/180;var a=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)*Math.sin(dLo/2);return 2*R*Math.asin(Math.sqrt(a))}
+      var nearBarrios=Object.keys(BARRIOS_GEO).filter(function(n){return dist(lat,lon,BARRIOS_GEO[n][0],BARRIOS_GEO[n][1])<2.5});
+      var n=0;
+      Array.prototype.forEach.call(grid.children,function(c){
+        var t=(c.textContent||'').toLowerCase();
+        var match=nearBarrios.some(function(bn){return t.indexOf(bn)>-1});
+        c.classList.toggle('vb-near',match);
+        if(match){n++;var d=999;nearBarrios.forEach(function(bn){if(t.indexOf(bn)>-1){d=Math.min(d,dist(lat,lon,BARRIOS_GEO[bn][0],BARRIOS_GEO[bn][1]))}});c.dataset.vbDist=d.toFixed(2)}
+  });
+      b.innerHTML=ICO.pin+(n?n+' cerca':'No hay cerca');
+      toast(n?'Encontradas '+n+' cerca tuyo':'No hay veterinarias cerca');
+  },function(err){
+      b.classList.remove('active');b.innerHTML=ICO.pin+'Cerca de m\u00ed';
+      toast('Permiso de ubicaci\u00f3n denegado');
+  },{enableHighAccuracy:false,timeout:10000});
+  });
+  }
+if(document.readyState==='complete'||document.readyState==='interactive')setTimeout(ready,600);
+else window.addEventListener('load',ready);
+
+  }catch(e){console.warn('vb-filters:',e)}
+  })();
+</script>
 </body></html>
