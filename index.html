@@ -2089,4 +2089,141 @@ setTimeout(showWelcome,1500);
 
   }catch(e){console.warn('vb-legacy:',e)}})();
 </script>
+<style id="vb-2026-offline">
+.vb-open-now{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.vb-open-now.open{background:rgba(16,185,129,.12);color:#047857}
+.vb-open-now.closed{background:rgba(239,68,68,.1);color:#b91c1c}
+.vb-open-now.soon{background:rgba(245,158,11,.12);color:#b45309}
+.vb-open-now .dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 currentColor;animation:vbPulseDot 1.8s infinite}
+.vb-open-now.closed .dot{animation:none}
+@keyframes vbPulseDot{0%{box-shadow:0 0 0 0 currentColor}70%{box-shadow:0 0 0 6px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.vb-schedule{margin-top:10px;display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:.7rem}
+.vb-schedule .vb-day{padding:6px 2px;text-align:center;border-radius:6px;background:rgba(20,136,166,.06);color:#475569;font-weight:600}
+.vb-schedule .vb-day.today{background:#1488A6;color:#fff;box-shadow:0 4px 10px -2px rgba(20,136,166,.5)}
+.vb-schedule .vb-day.closed-day{background:rgba(239,68,68,.08);color:#94a3b8;text-decoration:line-through}
+.vb-schedule-label{font-size:.72rem;color:#64748b;margin:8px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+:root[data-vb-theme="dark"] .vb-schedule .vb-day{background:rgba(255,255,255,.06);color:#cbd5e1}
+:root[data-vb-theme="dark"] .vb-schedule-label{color:#94a3b8}
+.vb-offline-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120%);background:#0f172a;color:#fff;padding:12px 20px;border-radius:14px;font-size:.88rem;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 20px 50px -10px rgba(0,0,0,.5);z-index:99997;transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-width:90vw}
+.vb-offline-toast.show{transform:translateX(-50%) translateY(0)}
+.vb-offline-toast svg{width:18px;height:18px;flex-shrink:0}
+.vb-offline-toast.online{background:#059669}
+.vb-offline-toast.offline{background:#dc2626}
+.vb-update-banner{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120%);background:linear-gradient(135deg,#1488A6,#0f6e87);color:#fff;padding:12px 18px;border-radius:14px;font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:12px;box-shadow:0 20px 50px -10px rgba(20,136,166,.5);z-index:99998;transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-width:90vw}
+.vb-update-banner.show{transform:translateX(-50%) translateY(0)}
+.vb-update-banner button{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);padding:5px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.78rem}
+.vb-update-banner button:hover{background:rgba(255,255,255,.3)}
+@media (prefers-reduced-motion: reduce){.vb-open-now .dot,.vb-offline-toast,.vb-update-banner{animation:none!important;transition:none!important}}
+</style>
+<script id="vb-2026-offline-js">
+(function(){try{
+/* === OPEN NOW + HORARIO SEMANAL === */
+var DAYS=['Dom','Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b'];
+var FULL=['Domingo','Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado'];
+function parseHours(str){
+ if(!str)return null;
+ if(/24\s*hs|24\s*horas|24\/7/i.test(str))return{is24:true};
+ var m=str.match(/(\d{1,2})[:\.]?(\d{0,2})\s*[-a\u2013]\s*(\d{1,2})[:\.]?(\d{0,2})/);
+ if(!m)return null;
+ return{open:parseInt(m[1])*60+parseInt(m[2]||'0'),close:parseInt(m[3])*60+parseInt(m[4]||'0')};
+  }
+function statusFor(card){
+ var now=new Date();var mins=now.getHours()*60+now.getMinutes();
+ var attr=card.dataset.vbHours||card.dataset.hours||'';
+ var txt=attr||(card.textContent.match(/(?:hor[ai]rio|abierto|atenci[o\u00f3]n)[:\s]*([^\n]{4,60})/i)||[])[1]||'';
+ if(/24\s*hs|24\s*horas|24\/7/i.test(txt)||/24\s*hs|urgencia/i.test(card.className))return{state:'open',label:'Abierto 24hs'};
+ var h=parseHours(txt);if(!h)return null;
+ if(h.is24)return{state:'open',label:'Abierto 24hs'};
+ if(mins>=h.open&&mins<=h.close){
+  var rest=h.close-mins;
+  if(rest<=60)return{state:'soon',label:'Cierra en '+rest+'min'};
+  return{state:'open',label:'Abierto ahora'};
+  }
+ if(mins<h.open&&h.open-mins<=60)return{state:'soon',label:'Abre en '+(h.open-mins)+'min'};
+ return{state:'closed',label:'Cerrado'};
+  }
+function injectOpenNow(card){
+ if(card.querySelector('.vb-open-now'))return;
+ var s=statusFor(card);if(!s)return;
+ var b=document.createElement('span');b.className='vb-open-now '+s.state;
+ b.innerHTML='<span class="dot"></span>'+s.label;
+ var anchor=card.querySelector('h2,h3,.vet-name,header')||card.firstElementChild;
+ if(anchor)anchor.appendChild(b);else card.prepend(b);
+  }
+function injectSchedule(card){
+ if(card.querySelector('.vb-schedule'))return;
+ var closedDays=(card.dataset.vbClosed||'').split(',').filter(Boolean).map(Number);
+ var today=new Date().getDay();
+ var label=document.createElement('div');label.className='vb-schedule-label';label.textContent='Horario semanal';
+ var grid=document.createElement('div');grid.className='vb-schedule';
+ DAYS.forEach(function(d,i){
+  var el=document.createElement('div');el.className='vb-day';
+  if(i===today)el.classList.add('today');
+  if(closedDays.indexOf(i)>=0)el.classList.add('closed-day');
+  el.textContent=d;el.title=FULL[i]+(closedDays.indexOf(i)>=0?' (cerrado)':'');
+  grid.appendChild(el);
+  });
+ card.appendChild(label);card.appendChild(grid);
+  }
+function scanCards(){
+ document.querySelectorAll('article[id], [data-vb-vet-id], .vet-card').forEach(function(c){
+  if(c.dataset.vbOpenChecked)return;
+  c.dataset.vbOpenChecked='1';
+  injectOpenNow(c);
+  });
+  }
+setTimeout(scanCards,500);
+setInterval(scanCards,60000);
+var moOn=new MutationObserver(function(){clearTimeout(window._vbOnTimer);window._vbOnTimer=setTimeout(scanCards,300)});
+moOn.observe(document.body,{childList:true,subtree:true});
+document.addEventListener('click',function(e){
+ var card=e.target.closest('article[id], [data-vb-vet-id]');
+ if(card&&!card.dataset.vbSchedDone){card.dataset.vbSchedDone='1';setTimeout(function(){injectSchedule(card)},100)}
+  },true);
+
+/* === SERVICE WORKER OFFLINE === */
+function registerSW(){
+ if(!('serviceWorker' in navigator))return;
+ var swCode="const C='vb-cache-v1';const ASSETS=['/'];self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(ASSETS).catch(()=>{})))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;var u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(caches.match(e.request).then(r=>{var net=fetch(e.request).then(res=>{if(res&&res.status===200){var clone=res.clone();caches.open(C).then(c=>c.put(e.request,clone))}return res}).catch(()=>r||caches.match('/'));return r||net}))});";
+ try{
+  var blob=new Blob([swCode],{type:'application/javascript'});
+  var url=URL.createObjectURL(blob);
+  navigator.serviceWorker.register(url,{scope:'/'}).then(function(reg){
+   reg.addEventListener('updatefound',function(){
+    var nw=reg.installing;if(!nw)return;
+    nw.addEventListener('statechange',function(){
+     if(nw.state==='installed'&&navigator.serviceWorker.controller)showUpdateBanner(reg);
+  });
+  });
+  }).catch(function(e){console.warn('SW register fail:',e.message)});
+  }catch(e){console.warn('SW blob fail:',e.message)}
+  }
+function showUpdateBanner(reg){
+ var b=document.createElement('div');b.className='vb-update-banner';
+ b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Nueva versi\u00f3n disponible</span><button type="button">Actualizar</button>';
+ document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add('show')});
+ b.querySelector('button').addEventListener('click',function(){
+  if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
+  setTimeout(function(){location.reload()},400);
+  });
+  }
+if(location.protocol==='https:'||location.hostname==='localhost')setTimeout(registerSW,2000);
+
+/* === INDICADOR ONLINE/OFFLINE === */
+function showConn(online){
+ var t=document.getElementById('vb-conn-toast');
+ if(!t){t=document.createElement('div');t.id='vb-conn-toast';t.className='vb-offline-toast';document.body.appendChild(t)}
+ t.classList.toggle('online',online);t.classList.toggle('offline',!online);
+ t.innerHTML=online
+  ?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span>Conexi\u00f3n restablecida</span>'
+  :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span>Sin conexi\u00f3n \u2014 modo offline</span>';
+ t.classList.add('show');
+ clearTimeout(window._vbToastT);
+ window._vbToastT=setTimeout(function(){t.classList.remove('show')},online?2500:5000);
+  }
+window.addEventListener('online',function(){showConn(true)});
+window.addEventListener('offline',function(){showConn(false)});
+
+  }catch(e){console.warn('vb-offline:',e)}})();
+</script>
 </body></html>
