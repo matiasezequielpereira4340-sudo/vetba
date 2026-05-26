@@ -461,4 +461,58 @@ a[href^="tel:"]:hover{background:rgba(20,168,166,.22)!important;border-color:var
 ::selection{background:rgba(20,168,166,.4);color:#fff}
 .vb-reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.8,.2,1)}.vb-reveal.in{opacity:1;transform:none}
 @media (max-width:768px){h1{font-size:clamp(1.8rem,7vw,2.6rem)}.card:hover,article:hover{transform:none}}
-</style></body></html>
+</style>
+<style id="vb-2026-imagery">.vb-banner-pro,.vb-banner-urg{position:relative;overflow:hidden;border-radius:20px;isolation:isolate}.vb-banner-pro::before,.vb-banner-urg::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2}.vb-banner-pro::after,.vb-banner-urg::after{content:"";position:absolute;inset:0;z-index:-1}.vb-banner-pro::before{background-image:url('https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=1400&q=80&auto=format&fit=crop')}.vb-banner-pro::after{background:linear-gradient(135deg,rgba(14,124,123,.92) 0%,rgba(11,27,43,.78) 100%)}.vb-banner-urg::before{background-image:url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1400&q=80&auto=format&fit=crop')}.vb-banner-urg::after{background:linear-gradient(135deg,rgba(230,57,70,.88) 0%,rgba(11,27,43,.7) 100%)}
+.vb-logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--vb-fd);font-weight:800;font-size:22px;letter-spacing:-.02em;color:#fff!important;text-decoration:none}.vb-logo svg{width:34px;height:34px;display:block}
+.vb-mini-search{position:fixed;top:-80px;left:50%;transform:translateX(-50%);width:min(560px,90vw);background:rgba(11,27,43,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;z-index:9998;display:flex;align-items:center;gap:10px;transition:top .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 16px 40px -16px rgba(0,0,0,.6)}.vb-mini-search.in{top:14px}.vb-mini-search input{flex:1;background:transparent!important;border:none!important;color:#fff;font-size:14px;outline:none!important}.vb-mini-search svg{width:18px;height:18px;color:var(--vb-teal-500);flex-shrink:0}
+.vb-icon{display:inline-block;vertical-align:middle;width:1em;height:1em;stroke-width:2;stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<script>
+  (function(){
+      function ready(fn){if(document.readyState!=='loading')fn();else document.addEventListener('DOMContentLoaded',fn)}
+      ready(function(){
+            // 1) Reemplazar fondo del banner PRO y banner Urgencias
+            document.querySelectorAll('*').forEach(function(el){
+                    var t=(el.textContent||'').trim();
+                    if(t.includes('Tenés una veterinaria')||t.includes('VETBA PRO')){
+                              var p=el.closest('.slide,[class*="slide"],.banner,[class*="banner"],section,div');
+                              if(p&&!p.classList.contains('vb-banner-pro')&&p.offsetWidth>200){p.classList.add('vb-banner-pro');p.style.background='transparent'}
+                    }
+                    if(t.includes('necesita atención urgente')||t.includes('mascota necesita atención')){
+                              var p=el.closest('.slide,[class*="slide"],.banner,[class*="banner"],section,div');
+                              if(p&&!p.classList.contains('vb-banner-urg')&&p.offsetWidth>200){p.classList.add('vb-banner-urg');p.style.background='transparent'}
+                    }
+            });
+            // 2) Logo SVG huella en lugar del 🐾 del header
+            var pawSVG='<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14A8A6"/><stop offset="1" stop-color="#0E7C7B"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#vbg)"/><g fill="#fff"><ellipse cx="20" cy="24" rx="5" ry="7"/><ellipse cx="32" cy="20" rx="5" ry="7"/><ellipse cx="44" cy="24" rx="5" ry="7"/><ellipse cx="14" cy="36" rx="4.5" ry="6"/><ellipse cx="50" cy="36" rx="4.5" ry="6"/><path d="M32 32c-9 0-14 7-14 13 0 4 3 6 7 6 3 0 5-2 7-2s4 2 7 2c4 0 7-2 7-6 0-6-5-13-14-13z"/></g></svg>';
+            document.querySelectorAll('a,div,span,h1').forEach(function(el){
+                    if(el.children.length===0){
+                              var html=el.innerHTML;
+                              if(html&&html.indexOf('🐾')>-1&&el.closest('header,nav,.header,.navbar')){
+                                          el.innerHTML=html.replace('🐾','<span class="vb-logo-mark" style="display:inline-block;width:34px;height:34px;vertical-align:middle">'+pawSVG+'</span>');
+                              }
+                    }
+            });
+            // 3) Mini buscador sticky al hacer scroll
+            var mini=document.createElement('div');
+            mini.className='vb-mini-search';
+            mini.innerHTML='<svg class="vb-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input placeholder="Buscar veterinaria, barrio o servicio..." />';
+            document.body.appendChild(mini);
+            var hero=document.querySelector('section,header')||document.body;
+            window.addEventListener('scroll',function(){
+                    var y=window.scrollY||window.pageYOffset;
+                    if(y>520) mini.classList.add('in'); else mini.classList.remove('in');
+            },{passive:true});
+            mini.querySelector('input').addEventListener('keydown',function(e){
+                    if(e.key==='Enter'){
+                              var main=document.querySelector('input[type="search"],input[placeholder*="Buscá"],input[placeholder*="Nombre"]');
+                              if(main){main.value=this.value;main.dispatchEvent(new Event('input',{bubbles:true}));main.scrollIntoView({behavior:'smooth',block:'center'})}
+                    }
+            });
+            // 4) Scroll reveal
+            var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.15});
+            document.querySelectorAll('section,article,.card,[class*="card"]').forEach(function(el){el.classList.add('vb-reveal');io.observe(el)});
+      });
+  })();
+</script>
+</body></html>
