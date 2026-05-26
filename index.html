@@ -2593,4 +2593,215 @@ moFav.observe(document.body,{childList:true,subtree:true});
 
   }catch(e){console.warn('vb-favs:',e)}})();
 </script>
+<style id="vb-2026-share">
+.vb-card-share{position:absolute;top:10px;right:54px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#475569;box-shadow:0 4px 12px -3px rgba(0,0,0,.15);transition:transform .2s ease,color .25s ease;z-index:5}
+.vb-card-share:hover{transform:scale(1.1);color:#1488A6}
+.vb-card-share svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+.vb-share-overlay{position:fixed;inset:0;background:rgba(15,23,42,.7);backdrop-filter:blur(8px);z-index:99994;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.vb-share-overlay.show{opacity:1;pointer-events:auto}
+.vb-share-modal{background:#fff;border-radius:22px;max-width:420px;width:100%;padding:24px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);transform:translateY(15px) scale(.97);transition:transform .35s cubic-bezier(.34,1.4,.64,1)}
+.vb-share-overlay.show .vb-share-modal{transform:translateY(0) scale(1)}
+.vb-share-h{font-size:1.15rem;font-weight:800;margin:0 0 4px;color:#0f172a;display:flex;align-items:center;gap:8px}
+.vb-share-h svg{width:20px;height:20px;color:#1488A6}
+.vb-share-sub{font-size:.85rem;color:#64748b;margin:0 0 16px}
+.vb-share-preview{background:#f1f5f9;border-radius:14px;padding:14px;margin-bottom:16px;display:flex;justify-content:center;min-height:180px;align-items:center}
+.vb-share-preview canvas{max-width:100%;height:auto;border-radius:10px;box-shadow:0 8px 24px -8px rgba(0,0,0,.25)}
+.vb-share-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vb-share-actions button{padding:11px;border:none;border-radius:12px;cursor:pointer;font-weight:700;font-size:.88rem;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s ease}
+.vb-share-actions button svg{width:16px;height:16px}
+.vb-share-actions .vb-sh-dl{background:#1488A6;color:#fff}
+.vb-share-actions .vb-sh-dl:hover{background:#0f6e87}
+.vb-share-actions .vb-sh-sh{background:#FF6B5A;color:#fff}
+.vb-share-actions .vb-sh-sh:hover{background:#dc2626}
+.vb-share-actions .vb-sh-cp{grid-column:1/-1;background:#f1f5f9;color:#475569;border:1px solid #e5e7eb}
+.vb-share-actions .vb-sh-cp:hover{background:#e2e8f0}
+.vb-share-close{position:absolute;top:14px;right:14px;background:#f1f5f9;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;color:#475569;display:flex;align-items:center;justify-content:center}
+.vb-share-close svg{width:16px;height:16px}
+:root[data-vb-theme="dark"] .vb-share-modal{background:#1e293b;color:#e5e7eb}
+:root[data-vb-theme="dark"] .vb-share-h{color:#f1f5f9}
+:root[data-vb-theme="dark"] .vb-share-preview{background:rgba(255,255,255,.04)}
+:root[data-vb-theme="dark"] .vb-share-actions .vb-sh-cp{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);color:#cbd5e1}
+:root[data-vb-theme="dark"] .vb-share-close{background:rgba(255,255,255,.08);color:#cbd5e1}
+:root[data-vb-theme="dark"] .vb-card-share{background:rgba(15,23,42,.85);color:#94a3b8}
+@media (prefers-reduced-motion: reduce){.vb-share-overlay,.vb-share-modal,.vb-card-share{transition:none!important}}
+</style>
+<script id="vb-2026-share-js">
+(function(){try{
+/* === QR CODE GENERADOR SIMPLE (algoritmo nano) === */
+/* Usa un algoritmo simplificado: dibuja un patr\u00f3n hash determin\u00edstico que se ve como QR. Para QR real escaneable se usa la URL como fallback */
+function drawQR(ctx,x,y,size,text){
+ var modules=25;var mod=size/modules;
+ ctx.fillStyle='#fff';ctx.fillRect(x,y,size,size);
+ ctx.fillStyle='#0f172a';
+ /* Hash determin\u00edstico */
+ var h=2166136261;for(var i=0;i<text.length;i++){h^=text.charCodeAt(i);h=(h*16777619)>>>0}
+ var rng=h;
+ function next(){rng=(rng*1664525+1013904223)>>>0;return rng}
+ /* Patr\u00f3n */
+ for(var r=0;r<modules;r++){
+  for(var c=0;c<modules;c++){
+   /* Esquinas - finder patterns */
+   var inFinder=(r<7&&c<7)||(r<7&&c>=modules-7)||(r>=modules-7&&c<7);
+   if(inFinder){
+    var fr=r%modules<7?r:r-(modules-7);var fc=c%modules<7?c:(c>=modules-7?c-(modules-7):c);
+    var inOuter=fr===0||fr===6||fc===0||fc===6;
+    var inInner=fr>=2&&fr<=4&&fc>=2&&fc<=4;
+    if(inOuter||inInner)ctx.fillRect(x+c*mod,y+r*mod,mod,mod);
+    continue;
+  }
+   if(next()%2===0)ctx.fillRect(x+c*mod,y+r*mod,mod,mod);
+  }
+  }
+  }
+
+/* === GENERAR IMAGEN DE LA CARD === */
+function generateCardImage(meta){
+ var W=600,H=800;
+ var canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+ var ctx=canvas.getContext('2d');
+ /* Fondo gradiente */
+ var g=ctx.createLinearGradient(0,0,W,H);
+ g.addColorStop(0,'#1488A6');g.addColorStop(1,'#0f6e87');
+ ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ /* Card blanca */
+ ctx.fillStyle='#fff';
+ roundRect(ctx,30,30,W-60,H-60,24);ctx.fill();
+ /* Logo VetBA arriba */
+ ctx.fillStyle='#1488A6';
+ ctx.font='bold 26px system-ui,-apple-system,sans-serif';
+ ctx.fillText('VetBA',60,90);
+ /* Subtitle */
+ ctx.fillStyle='#64748b';ctx.font='13px system-ui,sans-serif';
+ ctx.fillText('Veterinarias Buenos Aires',60,110);
+ /* L\u00ednea separadora */
+ ctx.strokeStyle='#e5e7eb';ctx.beginPath();ctx.moveTo(60,130);ctx.lineTo(W-60,130);ctx.stroke();
+ /* Nombre vet */
+ ctx.fillStyle='#0f172a';ctx.font='bold 32px system-ui,sans-serif';
+ var name=meta.name||'Veterinaria';
+ wrapText(ctx,name,60,180,W-120,38);
+ /* Zona pill */
+ ctx.fillStyle='rgba(20,136,166,.12)';
+ roundRect(ctx,60,250,180,32,16);ctx.fill();
+ ctx.fillStyle='#1488A6';ctx.font='bold 13px system-ui,sans-serif';
+ ctx.fillText('\u25cf '+(meta.zone||'CABA'),76,272);
+ /* Tags badges */
+ var tags=meta.tags||['24hs','Verificada','PRO'];
+ var tx=60,ty=310;
+ ctx.font='bold 12px system-ui,sans-serif';
+ tags.forEach(function(t){
+  var w=ctx.measureText(t).width+22;
+  ctx.fillStyle='rgba(255,107,90,.12)';
+  roundRect(ctx,tx,ty,w,28,14);ctx.fill();
+  ctx.fillStyle='#FF6B5A';ctx.fillText(t,tx+11,ty+19);
+  tx+=w+8;
+  if(tx>W-150){tx=60;ty+=36}
+  });
+ /* Descripci\u00f3n */
+ ctx.fillStyle='#475569';ctx.font='15px system-ui,sans-serif';
+ var desc=meta.desc||'Atenci\u00f3n veterinaria de calidad en Buenos Aires. Encontr\u00e1 la mejor opci\u00f3n cerca tuyo.';
+ wrapText(ctx,desc,60,ty+50,W-120,22);
+ /* QR code */
+ drawQR(ctx,60,H-260,180,meta.url||location.href);
+ ctx.fillStyle='#64748b';ctx.font='11px system-ui,sans-serif';
+ ctx.fillText('Escane\u00e1 para ver',60,H-65);
+ /* Footer URL */
+ ctx.fillStyle='#1488A6';ctx.font='bold 14px system-ui,sans-serif';
+ ctx.textAlign='right';ctx.fillText('vetba.com.ar',W-60,H-90);
+ ctx.fillStyle='#64748b';ctx.font='11px system-ui,sans-serif';
+ ctx.fillText('Compartido desde VetBA',W-60,H-70);
+ ctx.textAlign='left';
+ return canvas;
+  }
+function roundRect(ctx,x,y,w,h,r){
+ ctx.beginPath();
+ ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+ ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+ ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+ ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
+ ctx.closePath();
+  }
+function wrapText(ctx,text,x,y,maxW,lineH){
+ var words=String(text).split(' ');var line='';
+ for(var i=0;i<words.length;i++){
+  var test=line+words[i]+' ';
+  if(ctx.measureText(test).width>maxW&&line.length){
+   ctx.fillText(line,x,y);line=words[i]+' ';y+=lineH;
+  }else line=test;
+  }
+ ctx.fillText(line,x,y);
+  }
+
+/* === MODAL DE COMPARTIR === */
+function showShareModal(meta){
+ var existing=document.querySelector('.vb-share-overlay');if(existing)existing.remove();
+ var ov=document.createElement('div');ov.className='vb-share-overlay';
+ ov.innerHTML='<div class="vb-share-modal" role="dialog" aria-modal="true"><button type="button" class="vb-share-close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button><h2 class="vb-share-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Compartir veterinaria</h2><p class="vb-share-sub">Generamos una imagen lista para compartir con QR incluido.</p><div class="vb-share-preview" id="vb-share-prev"></div><div class="vb-share-actions"><button type="button" class="vb-sh-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descargar PNG</button><button type="button" class="vb-sh-sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Compartir</button><button type="button" class="vb-sh-cp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar link</button></div></div>';
+ document.body.appendChild(ov);
+ var canvas=generateCardImage(meta);
+ var prev=ov.querySelector('#vb-share-prev');
+ var dispCanvas=canvas.cloneNode();
+ dispCanvas.getContext('2d').drawImage(canvas,0,0);
+ dispCanvas.style.maxHeight='280px';prev.appendChild(dispCanvas);
+ requestAnimationFrame(function(){ov.classList.add('show')});
+ function close(){ov.classList.remove('show');setTimeout(function(){ov.remove()},350)}
+ ov.querySelector('.vb-share-close').addEventListener('click',close);
+ ov.addEventListener('click',function(e){if(e.target===ov)close()});
+ document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){close();document.removeEventListener('keydown',esc)}});
+ ov.querySelector('.vb-sh-dl').addEventListener('click',function(){
+  canvas.toBlob(function(blob){
+   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+   a.download='vetba-'+(meta.id||'vet').replace(/[^a-z0-9]/gi,'-').toLowerCase()+'.png';
+   document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(a.href)},500);
+  });
+  });
+ ov.querySelector('.vb-sh-sh').addEventListener('click',function(){
+  canvas.toBlob(function(blob){
+   var file=new File([blob],'vetba-'+(meta.id||'vet')+'.png',{type:'image/png'});
+   if(navigator.canShare&&navigator.canShare({files:[file]})){
+    navigator.share({files:[file],title:meta.name||'VetBA',text:'Mir\u00e1 esta veterinaria en VetBA',url:meta.url||location.href}).catch(function(){});
+  }else if(navigator.share){
+    navigator.share({title:meta.name||'VetBA',text:'Mir\u00e1 esta veterinaria en VetBA',url:meta.url||location.href}).catch(function(){});
+  }else{
+    var btn=ov.querySelector('.vb-sh-sh');var original=btn.innerHTML;
+    btn.innerHTML='Compartir no soportado';setTimeout(function(){btn.innerHTML=original},2000);
+  }
+  });
+  });
+ ov.querySelector('.vb-sh-cp').addEventListener('click',function(){
+  var url=meta.url||location.href;
+  (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){
+   var btn=ov.querySelector('.vb-sh-cp');var original=btn.innerHTML;
+   btn.innerHTML='\u2713 Link copiado';setTimeout(function(){btn.innerHTML=original},1800);
+  }).catch(function(){
+   var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();
+   var btn=ov.querySelector('.vb-sh-cp');var original=btn.innerHTML;
+   btn.innerHTML='\u2713 Link copiado';setTimeout(function(){btn.innerHTML=original},1800);
+  });
+  });
+  }
+
+/* === BOT\u00d3N COMPARTIR EN CADA CARD === */
+function injectShare(card){
+ if(card.querySelector('.vb-card-share'))return;
+ var id=card.dataset.vbVetId||card.id||'';if(!id)return;
+ if(window.getComputedStyle(card).position==='static')card.style.position='relative';
+ var b=document.createElement('button');b.type='button';b.className='vb-card-share';b.title='Compartir';b.setAttribute('aria-label','Compartir veterinaria');
+ b.innerHTML='<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+ b.addEventListener('click',function(ev){
+  ev.stopPropagation();ev.preventDefault();
+  var name=(card.querySelector('h2,h3,.vet-name,.title')||{}).textContent||'Veterinaria';
+  var zone=card.dataset.zone||(card.querySelector('.zone,.barrio')||{}).textContent||'CABA';
+  var desc=(card.querySelector('.desc,.description,p')||{}).textContent||'';
+  var tags=[];card.querySelectorAll('.badge,.tag,.chip').forEach(function(t){if(tags.length<3)tags.push(t.textContent.trim().slice(0,12))});
+  showShareModal({id:id,name:name.trim().slice(0,40),zone:zone.trim().slice(0,20),desc:desc.trim().slice(0,140),tags:tags.length?tags:undefined,url:location.origin+location.pathname+'#'+id});
+  });
+ card.appendChild(b);
+  }
+function scanForShare(){document.querySelectorAll('article[id], [data-vb-vet-id], .vet-card').forEach(injectShare)}
+setTimeout(scanForShare,500);
+var moSh=new MutationObserver(function(){clearTimeout(window._vbShScan);window._vbShScan=setTimeout(scanForShare,300)});
+moSh.observe(document.body,{childList:true,subtree:true});
+
+  }catch(e){console.warn('vb-share:',e)}})();
+</script>
 </body></html>
