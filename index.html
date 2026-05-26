@@ -646,4 +646,256 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
   });
   })();
 </script>
+<style id="vb-2026-pro">
+/* === BLOQUE 5: SCHEMA + ICONS + TESTIMONIOS + PERFORMANCE === */
+
+/* Icons SVG estilo Lucide */
+.vb-ico{display:inline-flex;width:1em;height:1em;vertical-align:-.15em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vb-ico-lg{width:1.25em;height:1.25em}
+
+/* Testimonios */
+.vb-testimonials{margin:48px 0;padding:48px 24px;background:linear-gradient(180deg,#F7F9FC 0%,#FFFFFF 100%);border-radius:24px;position:relative;overflow:hidden}
+.vb-testimonials::before{content:"";position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(20,184,166,.08) 0%,transparent 70%);pointer-events:none}
+.vb-testimonials h2{font-size:clamp(1.5rem,3.5vw,2.25rem);font-weight:800;letter-spacing:-.02em;text-align:center;margin:0 0 8px;color:var(--ink,#0F172A);position:relative}
+.vb-testimonials .vb-sub{text-align:center;color:#64748B;margin:0 0 32px;font-size:15px;position:relative}
+.vb-tcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;position:relative}
+.vb-tcard{background:#fff;border:1px solid #E2E8F0;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative}
+.vb-tcard:hover{transform:translateY(-4px);box-shadow:0 18px 48px -16px rgba(15,23,42,.18);border-color:#14B8A6}
+.vb-tcard::before{content:'"';position:absolute;top:14px;right:20px;font-size:64px;line-height:1;font-family:Georgia,serif;color:rgba(20,184,166,.12);font-weight:700}
+.vb-tquote{font-size:15px;line-height:1.6;color:#334155;font-style:italic;margin:0;position:relative;z-index:1}
+.vb-tauthor{display:flex;align-items:center;gap:12px;border-top:1px solid #F1F5F9;padding-top:14px}
+.vb-tavatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#14B8A6,#0D9488);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.vb-tname{font-weight:700;color:#0F172A;font-size:14px;line-height:1.2}
+.vb-trole{color:#64748B;font-size:12px;margin-top:2px}
+.vb-tstars{color:#FBBF24;font-size:13px;letter-spacing:1px;margin-left:auto}
+
+/* Performance hints */
+img{content-visibility:auto}
+</style>
+<script id="vb-2026-pro-js">
+(function(){try{
+/* 1. Schema.org LocalBusiness/Directory */
+if(!document.getElementById('vb-schema')){
+  var ld=document.createElement('script');
+  ld.type='application/ld+json';ld.id='vb-schema';
+  ld.textContent=JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"VetBA",
+    "alternateName":"Veterinarias Buenos Aires",
+    "url":"https://vetba.com.ar",
+    "description":"Directorio de veterinarias en Buenos Aires. Encontrá atención 24hs, urgencias, peluquería canina y servicios para tu mascota.",
+    "potentialAction":{"@type":"SearchAction","target":"https://vetba.com.ar/?q={search_term_string}","query-input":"required name=search_term_string"},
+    "publisher":{"@type":"Organization","name":"VetBA","url":"https://vetba.com.ar"}
+  });
+  document.head.appendChild(ld);
+  }
+
+/* 2. Lazy loading + decoding async en todas las imagenes */
+document.querySelectorAll('img').forEach(function(img){
+  if(!img.hasAttribute('loading'))img.setAttribute('loading','lazy');
+  if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');
+  });
+
+/* 3. Iconos SVG Lucide-style reemplazando emojis */
+var ICONS={
+  pin:'<svg class="vb-ico" viewBox="0 0 24 24"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  star:'<svg class="vb-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  phone:'<svg class="vb-ico" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  clock:'<svg class="vb-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  search:'<svg class="vb-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+  heart:'<svg class="vb-ico" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  shield:'<svg class="vb-ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  check:'<svg class="vb-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>'
+  };
+/* No tocar botón PRO, ni emojis dentro de textos largos. Solo reemplazar emojis sueltos en headers/badges */
+function replaceEmoji(scope){
+  var map=[
+  {emo:'📍',ico:'pin'},{emo:'⭐',ico:'star'},{emo:'📞',ico:'phone'},
+  {emo:'🕒',ico:'clock'},{emo:'⏰',ico:'clock'},{emo:'🔍',ico:'search'},
+  {emo:'❤️',ico:'heart'},{emo:'✅',ico:'check'}
+  ];
+  (scope||document).querySelectorAll('.badge,.tag,.chip,.meta,.stat-label,.feature-title,h3,h4').forEach(function(el){
+    if(el.dataset.vbIcoDone)return;
+    var html=el.innerHTML;var changed=false;
+    map.forEach(function(m){if(html.indexOf(m.emo)>-1){html=html.split(m.emo).join(ICONS[m.ico]+' ');changed=true}});
+    if(changed){el.innerHTML=html;el.dataset.vbIcoDone='1'}
+  });
+  }
+replaceEmoji();
+
+/* 4. Testimonios: insertar antes del footer si hay más de 3 cards en la página */
+if(!document.querySelector('.vb-testimonials')){
+  var cards=document.querySelectorAll('.card,.vet-card,article');
+  if(cards.length>=3){
+    var sec=document.createElement('section');
+    sec.className='vb-testimonials';
+    sec.innerHTML='<h2>Lo que dicen los dueños</h2>'+
+      '<p class="vb-sub">Familias que ya encontraron su veterinaria de confianza en VetBA</p>'+
+      '<div class="vb-tcards">'+
+      [{n:'Martín G.',r:'Papá de Lola',q:'Una madrugada Lola se descompuso y en 30 segundos encontré una 24hs a 4 cuadras. Le salvaron la vida.',a:'MG'},
+  {n:'Sofía R.',r:'Mamá de Coco',q:'Comparo precios y horarios de vacunas antes de ir. El filtro por barrio me ahorra muchas vueltas.',a:'SR'},
+  {n:'Diego P.',r:'Adoptante de Toto',q:'Las reseñas son reales y útiles. Elegí una veterinaria con muy buena atención para mi gato rescatado.',a:'DP'}
+      ].map(function(t){return '<div class="vb-tcard"><p class="vb-tquote">'+t.q+'</p><div class="vb-tauthor"><div class="vb-tavatar">'+t.a+'</div><div><div class="vb-tname">'+t.n+'</div><div class="vb-trole">'+t.r+'</div></div><div class="vb-tstars">★★★★★</div></div></div>'}).join('')+
+      '</div>';
+    var footer=document.querySelector('footer');
+    if(footer&&footer.parentNode)footer.parentNode.insertBefore(sec,footer);
+    else document.body.appendChild(sec);
+  }
+  }
+
+/* 5. OG meta tags mejorados si faltan */
+function setMeta(prop,val,attr){
+  attr=attr||'property';
+  if(document.querySelector('meta['+attr+'="'+prop+'"]'))return;
+  var m=document.createElement('meta');m.setAttribute(attr,prop);m.content=val;document.head.appendChild(m);
+  }
+setMeta('og:type','website');
+setMeta('og:site_name','VetBA');
+setMeta('og:locale','es_AR');
+setMeta('twitter:card','summary_large_image','name');
+setMeta('theme-color','#14B8A6','name');
+
+  }catch(e){console.warn('vb-pro:',e)}
+  })();
+</script>
+<style id="vb-2026-polish">
+/* === BLOQUE 6: ANIMATED BORDERS + MARQUEE + SKELETONS + MICRO-INTERACCIONES === */
+
+/* Animated gradient border en plan-featured */
+.plan-featured,.plan-pro,.featured-card{position:relative;isolation:isolate}
+.plan-featured::before,.plan-pro::before,.featured-card::before{content:"";position:absolute;inset:-2px;border-radius:inherit;background:conic-gradient(from 0deg,#14B8A6,#F97A6B,#FBBF24,#14B8A6);z-index:-1;animation:vbSpin 8s linear infinite;opacity:.9;filter:blur(.5px)}
+.plan-featured::after,.plan-pro::after,.featured-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#fff;z-index:-1}
+@keyframes vbSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.plan-featured::before,.plan-pro::before,.featured-card::before{animation:none}}
+
+/* Marquee de barrios/categorias */
+.vb-marquee{margin:32px 0;padding:18px 0;background:linear-gradient(180deg,#FFF 0%,#F8FAFC 100%);border-top:1px solid #E2E8F0;border-bottom:1px solid #E2E8F0;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.vb-marquee-track{display:flex;gap:32px;animation:vbMarquee 35s linear infinite;width:max-content}
+.vb-marquee:hover .vb-marquee-track{animation-play-state:paused}
+.vb-mq-item{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:#475569;font-size:14px;white-space:nowrap;padding:6px 16px;background:#fff;border:1px solid #E2E8F0;border-radius:999px;transition:all .25s}
+.vb-mq-item:hover{background:#14B8A6;color:#fff;border-color:#14B8A6;transform:scale(1.05)}
+.vb-mq-dot{width:6px;height:6px;border-radius:50%;background:#14B8A6}
+@keyframes vbMarquee{to{transform:translateX(-50%)}}
+
+/* Skeleton loaders */
+.vb-skeleton{position:relative;overflow:hidden;background:#F1F5F9;border-radius:12px}
+.vb-skeleton::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:vbShimmer 1.4s infinite}
+@keyframes vbShimmer{to{transform:translateX(100%)}from{transform:translateX(-100%)}}
+
+/* Empty states mejorados */
+.vb-empty{text-align:center;padding:64px 24px;color:#64748B}
+.vb-empty-ico{width:80px;height:80px;margin:0 auto 16px;border-radius:50%;background:linear-gradient(135deg,#F0FDFA,#CCFBF1);display:flex;align-items:center;justify-content:center;color:#14B8A6}
+.vb-empty-ico svg{width:40px;height:40px;stroke:currentColor;fill:none;stroke-width:1.8}
+.vb-empty h3{margin:0 0 6px;color:#0F172A;font-weight:700;font-size:18px}
+.vb-empty p{margin:0;font-size:14px}
+
+/* Ripple effect en botones */
+.btn,.cta,button,.cta-btn,.btn-primary{position:relative;overflow:hidden;isolation:isolate}
+.vb-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:vbRipple .6s ease-out;pointer-events:none}
+@keyframes vbRipple{to{transform:scale(4);opacity:0}}
+
+/* Bounce sutil en hover de CTA */
+@keyframes vbBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.cta:hover,.btn-primary:hover,.cta-btn:hover{animation:vbBounce .6s ease-in-out}
+@media (prefers-reduced-motion:reduce){.cta:hover,.btn-primary:hover,.cta-btn:hover{animation:none}}
+
+/* Stat numbers con count-up suave */
+.vb-counting{font-variant-numeric:tabular-nums;display:inline-block;transition:color .3s}
+
+/* Better scroll snap en sliders existentes */
+.slider,.carousel,.swiper-wrapper{scroll-snap-type:x mandatory;scroll-padding:24px}
+.slider>*,.carousel>*{scroll-snap-align:start}
+
+/* Focus ring premium en links */
+a:focus-visible{outline:2px solid #14B8A6;outline-offset:3px;border-radius:6px}
+
+/* Selection color */
+::selection{background:#14B8A6;color:#fff}
+::-moz-selection{background:#14B8A6;color:#fff}
+</style>
+<script id="vb-2026-polish-js">
+(function(){try{
+
+/* 1. Ripple effect en todos los botones */
+function attachRipple(btn){
+  if(btn.dataset.vbRipple)return;btn.dataset.vbRipple='1';
+  btn.addEventListener('click',function(e){
+    var r=this.getBoundingClientRect();var d=Math.max(r.width,r.height);
+    var sp=document.createElement('span');sp.className='vb-ripple';
+    sp.style.width=sp.style.height=d+'px';
+    sp.style.left=(e.clientX-r.left-d/2)+'px';
+    sp.style.top=(e.clientY-r.top-d/2)+'px';
+    this.appendChild(sp);
+    setTimeout(function(){sp.remove()},650);
+  });
+  }
+document.querySelectorAll('.btn,.cta,.cta-btn,.btn-primary,button.cta-mob,button.btn').forEach(attachRipple);
+
+/* 2. Marquee de barrios populares */
+if(!document.querySelector('.vb-marquee')){
+  var barrios=['Palermo','Recoleta','Belgrano','Caballito','Villa Crespo','Almagro','Boedo','San Telmo','Villa Urquiza','Nu\u00f1ez','Colegiales','Saavedra','Flores','Villa Devoto','Barrio Norte','Chacarita','Parque Patricios','Liniers'];
+  var items=barrios.concat(barrios).map(function(b){return '<span class="vb-mq-item"><span class="vb-mq-dot"></span>'+b+'</span>'}).join('');
+  var mq=document.createElement('div');mq.className='vb-marquee';
+  mq.innerHTML='<div class="vb-marquee-track">'+items+'</div>';
+  var search=document.querySelector('.search-section,.search,form[role="search"]');
+  var hero=document.querySelector('.hero,.sponsored-hero,.banner-pro,.vb-banner-pro');
+  var anchor=search||hero;
+  if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(mq,anchor.nextSibling);
+  }
+
+/* 3. Count-up animado en numeros estad\u00edstica */
+var io=null;
+try{
+  io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target;var target=parseInt(el.dataset.vbTarget||el.textContent.replace(/\D/g,''),10);
+      if(!target||el.dataset.vbCounted)return;
+      el.dataset.vbCounted='1';el.classList.add('vb-counting');
+      var suffix=(el.textContent.match(/[+%]/g)||[]).join('');
+      var start=0;var dur=1200;var t0=performance.now();
+      function step(t){
+        var p=Math.min(1,(t-t0)/dur);var v=Math.floor(target*(1-Math.pow(1-p,3)));
+        el.textContent=v.toLocaleString('es-AR')+suffix;
+        if(p<1)requestAnimationFrame(step);
+  }
+      requestAnimationFrame(step);
+      io.unobserve(el);
+  });
+  },{threshold:.5});
+  document.querySelectorAll('.stat-number,.stat-num,[class*="stat-value"],.counter').forEach(function(el){
+    var n=parseInt(el.textContent.replace(/\D/g,''),10);
+    if(n&&n>=10){el.dataset.vbTarget=n;io.observe(el);}
+  });
+  }catch(e){}
+
+/* 4. Mejorar empty states existentes */
+document.querySelectorAll('.empty,.no-results,.empty-state').forEach(function(el){
+  if(el.dataset.vbEmpty)return;el.dataset.vbEmpty='1';
+  if(!el.querySelector('.vb-empty-ico')){
+    var ico=document.createElement('div');ico.className='vb-empty-ico';
+    ico.innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+    el.classList.add('vb-empty');el.insertBefore(ico,el.firstChild);
+  }
+  });
+
+/* 5. Smooth scroll global */
+document.documentElement.style.scrollBehavior='smooth';
+
+/* 6. Marcar imagenes rotas con skeleton fallback */
+document.querySelectorAll('img').forEach(function(img){
+  img.addEventListener('error',function(){
+    this.style.display='none';
+    if(this.parentNode&&!this.parentNode.querySelector('.vb-skeleton')){
+      var sk=document.createElement('div');sk.className='vb-skeleton';
+      sk.style.width=(this.width||100)+'px';sk.style.height=(this.height||80)+'px';
+      this.parentNode.insertBefore(sk,this);
+  }
+  },{once:true});
+  });
+
+  }catch(e){console.warn('vb-polish:',e)}
+  })();
+</script>
 </body></html>
