@@ -1047,4 +1047,410 @@ try{
   }catch(e){console.warn('vb-deluxe:',e)}
   })();
 </script>
+<style id="vb-2026-detail">
+/* === BLOQUE 8: CARDS REDISE\u00d1ADAS + BADGES + SHARE + RATING VISUAL === */
+.vb-badges{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;position:relative;z-index:2}
+.vb-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.vb-badge svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.vb-b-pro{background:linear-gradient(135deg,#FBBF24,#F59E0B);color:#78350F;box-shadow:0 4px 10px -4px rgba(245,158,11,.5)}
+.vb-b-24h{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.vb-b-top{background:linear-gradient(135deg,#14B8A6,#0D9488);color:#fff}
+.vb-b-verified{background:#D1FAE5;color:#065F46}
+:root[data-vb-theme="dark"] .vb-b-24h{background:#7F1D1D;color:#FECACA;border-color:#991B1B}
+:root[data-vb-theme="dark"] .vb-b-verified{background:#064E3B;color:#A7F3D0}
+.vb-rating{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#475569}
+.vb-rating-stars{display:inline-flex;gap:1px}
+.vb-rating-stars svg{width:14px;height:14px;fill:#E5E7EB}
+.vb-rating-stars svg.f{fill:#FBBF24}
+.vb-rating-value{font-weight:800;color:#0F172A}
+.vb-rating-count{color:#94A3B8;font-size:12px}
+:root[data-vb-theme="dark"] .vb-rating-value{color:#F1F5F9}
+.vb-share{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#F1F5F9;border:none;cursor:pointer;color:#475569;transition:all .2s}
+.vb-share:hover{background:#14B8A6;color:#fff;transform:scale(1.08)}
+.vb-share svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-vb-theme="dark"] .vb-share{background:#1F2937;color:#94A3B8}
+.vb-share-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0F172A;color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.16,1,.3,1);z-index:9999;box-shadow:0 20px 40px -10px rgba(15,23,42,.3)}
+.vb-share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.card,.vet-card{position:relative}
+.vb-card-actions{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:3;opacity:0;transition:opacity .25s}
+.card:hover .vb-card-actions,.vet-card:hover .vb-card-actions{opacity:1}
+@media (hover:none){.vb-card-actions{opacity:1}}
+.card.vb-visited::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#14B8A6,#0D9488);border-radius:4px 0 0 4px;z-index:2}
+.vb-quick-filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;padding:4px}
+.vb-qf{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#fff;border:1.5px solid #E2E8F0;font-size:13px;font-weight:600;color:#475569;cursor:pointer;transition:all .25s;user-select:none;text-decoration:none}
+.vb-qf:hover{border-color:#14B8A6;color:#14B8A6;background:#F0FDFA;transform:translateY(-1px)}
+.vb-qf.active{background:#14B8A6;color:#fff;border-color:#14B8A6}
+.vb-qf svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-vb-theme="dark"] .vb-qf{background:#1F2937;border-color:#334155;color:#CBD5E1}
+</style>
+<script id="vb-2026-detail-js">
+(function(){try{
+var T={share:'<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>',star:'<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',shield:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',zap:'<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'};
+function toast(msg){var t=document.querySelector('.vb-share-toast');if(!t){t=document.createElement('div');t.className='vb-share-toast';document.body.appendChild(t);}t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},2200);}
+document.querySelectorAll('.card,.vet-card,article.card').forEach(function(card){
+  if(card.dataset.vbShare)return;card.dataset.vbShare='1';
+  var actions=card.querySelector('.vb-card-actions');
+  if(!actions){actions=document.createElement('div');actions.className='vb-card-actions';card.appendChild(actions);}
+  var s=document.createElement('button');s.type='button';s.className='vb-share';s.setAttribute('aria-label','Compartir');s.innerHTML=T.share;
+  s.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();
+    var h=card.querySelector('h1,h2,h3,h4,.card-title,.vet-name,.name');var name=h?h.textContent.trim():'Veterinaria';
+    var link=card.querySelector('a[href]');var url=link?link.href:location.href;
+    var data={title:name+' - VetBA',text:'Mir\u00e1 '+name+' en VetBA',url:url};
+    if(navigator.share){navigator.share(data).catch(function(){})}
+    else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast('Link copiado')}).catch(function(){toast('No se pudo copiar')})}
+    else{toast('No soportado')}
+  });
+  actions.appendChild(s);
+  });
+document.querySelectorAll('.card,.vet-card,article.card').forEach(function(card){
+  if(card.dataset.vbBadges)return;card.dataset.vbBadges='1';
+  var text=(card.textContent||'').toLowerCase();var badges=[];
+  if(/\b24\s?hs?\b|\b24\s?horas\b|urgencia/.test(text))badges.push('<span class="vb-badge vb-b-24h">'+T.zap+'24hs</span>');
+  if(/\bpro\b|destacad|premium/.test(text))badges.push('<span class="vb-badge vb-b-pro">'+T.star+'PRO</span>');
+  if(/verificad|verified/.test(text))badges.push('<span class="vb-badge vb-b-verified">'+T.shield+'Verificada</span>');
+  if(!badges.length)return;
+  var slot=document.createElement('div');slot.className='vb-badges';slot.innerHTML=badges.join('');
+  var img=card.querySelector('img');if(img&&img.parentNode)img.parentNode.insertBefore(slot,img.nextSibling);else card.insertBefore(slot,card.firstChild);
+  });
+document.querySelectorAll('.rating,.stars,.score,[class*="rating"],[class*="stars"]').forEach(function(el){
+  if(el.dataset.vbRating)return;
+  var m=(el.textContent||'').match(/(\d(?:[.,]\d)?)/);if(!m)return;
+  var val=parseFloat(m[1].replace(',','.'));if(isNaN(val)||val<0||val>5)return;
+  el.dataset.vbRating='1';
+  var count=(el.textContent.match(/\((\d+)\)/)||[])[1];
+  var stars='';for(var i=1;i<=5;i++){stars+='<svg viewBox="0 0 24 24" class="'+(i<=Math.round(val)?'f':'')+'"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'}
+  el.classList.add('vb-rating');
+  el.innerHTML='<span class="vb-rating-stars">'+stars+'</span> <span class="vb-rating-value">'+val.toFixed(1)+'</span>'+(count?' <span class="vb-rating-count">('+count+')</span>':'');
+  });
+document.querySelectorAll('.card a[href],.vet-card a[href],article.card a[href]').forEach(function(a){
+  a.addEventListener('click',function(){
+    var c=this.closest('.card,.vet-card,article.card');if(c)c.classList.add('vb-visited');
+    try{var v=JSON.parse(localStorage.getItem('vb-visited')||'[]');if(v.indexOf(this.href)<0){v.push(this.href);localStorage.setItem('vb-visited',JSON.stringify(v.slice(-50)))}}catch(e){}
+  });
+  });
+try{var visited=JSON.parse(localStorage.getItem('vb-visited')||'[]');document.querySelectorAll('.card a[href],.vet-card a[href]').forEach(function(a){if(visited.indexOf(a.href)>-1){var c=a.closest('.card,.vet-card,article.card');if(c)c.classList.add('vb-visited');}});}catch(e){}
+  }catch(e){console.warn('vb-detail:',e)}
+  })();
+</script>
+<style id="vb-2026-pulse">
+/* === BLOQUE 9: VIEW MODES + AUTOCOMPLETE BARRIOS + PARALLAX + ZONAS CALIENTES === */
+
+/* View modes toggle */
+.vb-view-toggle{display:inline-flex;background:#F1F5F9;border-radius:12px;padding:3px;gap:2px;margin:0 0 16px}
+.vb-view-toggle button{display:inline-flex;align-items:center;justify-content:center;width:36px;height:32px;border:none;background:transparent;border-radius:9px;cursor:pointer;color:#64748B;transition:all .2s}
+.vb-view-toggle button.active{background:#fff;color:#14B8A6;box-shadow:0 1px 3px rgba(15,23,42,.08)}
+.vb-view-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-vb-theme="dark"] .vb-view-toggle{background:#1F2937}
+:root[data-vb-theme="dark"] .vb-view-toggle button.active{background:#0B1220;color:#5EEAD4}
+
+/* View modes en grilla */
+body.vb-view-list .cards,body.vb-view-list .vets-grid,body.vb-view-list .results,body.vb-view-list .grid,body.vb-view-list [class*="grid"]{display:flex!important;flex-direction:column!important;gap:12px!important}
+body.vb-view-list .card,body.vb-view-list .vet-card,body.vb-view-list article.card{display:grid!important;grid-template-columns:120px 1fr;gap:16px;padding:14px!important;align-items:center}
+body.vb-view-list .card img,body.vb-view-list .vet-card img{height:90px!important;width:120px!important;object-fit:cover;border-radius:10px}
+
+body.vb-view-compact .cards,body.vb-view-compact .vets-grid,body.vb-view-compact .results,body.vb-view-compact .grid{gap:10px!important}
+body.vb-view-compact .card,body.vb-view-compact .vet-card,body.vb-view-compact article.card{padding:10px!important}
+body.vb-view-compact .card img,body.vb-view-compact .vet-card img{height:120px!important}
+body.vb-view-compact .card p,body.vb-view-compact .vet-card p{font-size:13px;line-height:1.4}
+
+/* Autocomplete dropdown */
+.vb-ac{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #E2E8F0;border-radius:14px;box-shadow:0 20px 50px -10px rgba(15,23,42,.18);max-height:300px;overflow-y:auto;z-index:1500;display:none;padding:6px}
+.vb-ac.show{display:block}
+.vb-ac-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:14px;color:#0F172A;transition:background .15s}
+.vb-ac-item:hover,.vb-ac-item.sel{background:#F0FDFA;color:#0D9488}
+.vb-ac-item mark{background:transparent;color:#14B8A6;font-weight:700}
+.vb-ac-item .vb-ac-cat{margin-left:auto;font-size:11px;color:#94A3B8;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.vb-ac-item svg{width:14px;height:14px;stroke:#94A3B8;fill:none;stroke-width:2;flex-shrink:0}
+:root[data-vb-theme="dark"] .vb-ac{background:#1F2937;border-color:#334155}
+:root[data-vb-theme="dark"] .vb-ac-item{color:#F1F5F9}
+:root[data-vb-theme="dark"] .vb-ac-item:hover,:root[data-vb-theme="dark"] .vb-ac-item.sel{background:#0F2A2A;color:#5EEAD4}
+
+/* Parallax sutil en imagenes hero */
+.vb-parallax{will-change:transform;transition:transform .2s linear}
+
+/* Pulse en zonas calientes */
+.vb-hot{position:relative}
+.vb-hot::after{content:"";position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#F97A6B;box-shadow:0 0 0 0 rgba(249,122,107,.7);animation:vbPulse 1.8s infinite}
+@keyframes vbPulse{0%{box-shadow:0 0 0 0 rgba(249,122,107,.7)}70%{box-shadow:0 0 0 14px rgba(249,122,107,0)}100%{box-shadow:0 0 0 0 rgba(249,122,107,0)}}
+
+/* Stats bar de cobertura */
+.vb-stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:24px 0;padding:18px;background:linear-gradient(135deg,#F0FDFA,#fff);border-radius:18px;border:1px solid #CCFBF1}
+.vb-stat-item{text-align:center}
+.vb-stat-num{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#14B8A6;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
+.vb-stat-lbl{font-size:12px;color:#64748B;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-top:4px}
+:root[data-vb-theme="dark"] .vb-stats-bar{background:linear-gradient(135deg,#0F2A2A,#111827);border-color:#1E3A3A}
+:root[data-vb-theme="dark"] .vb-stat-lbl{color:#94A3B8}
+
+/* Position relative para que el input pueda contener el dropdown */
+form,.search-bar,.search-section{position:relative}
+</style>
+<script id="vb-2026-pulse-js">
+(function(){try{
+
+var BARRIOS=['Palermo','Recoleta','Belgrano','Caballito','Villa Crespo','Almagro','Boedo','San Telmo','Villa Urquiza','Nu\u00f1ez','Colegiales','Saavedra','Flores','Villa Devoto','Barrio Norte','Chacarita','Parque Patricios','Liniers','Mataderos','Floresta','Villa Luro','Monserrat','Constituci\u00f3n','Balvanera','Once','Villa del Parque','Coghlan','Agronom\u00eda','Paternal','Villa Ortuzar','Villa Pueyrred\u00f3n','Villa General Mitre','Versalles','Velez Sarsfield','Parque Avellaneda','Parque Chacabuco','Parque Chas','Puerto Madero','Retiro','San Crist\u00f3bal','San Nicol\u00e1s','Boca','Barracas','Pompeya'];
+var SERVICIOS=['Veterinaria 24hs','Urgencias','Vacunaci\u00f3n','Peluquer\u00eda canina','Castraci\u00f3n','Cirug\u00eda','An\u00e1lisis cl\u00ednicos','Ecograf\u00eda','Odontolog\u00eda veterinaria','Dermatolog\u00eda','Oftalmolog\u00eda','Cardiolog\u00eda','Internaci\u00f3n','Guarder\u00eda','Adiestramiento','Pet shop'];
+
+/* 1. Autocomplete en inputs de busqueda */
+document.querySelectorAll('input[type="search"],input[placeholder*="ombre" i],input[placeholder*="barrio" i],input[placeholder*="direcci" i],input[name*="search" i],input.search-input').forEach(function(inp){
+  if(inp.dataset.vbAc)return;inp.dataset.vbAc='1';
+  var wrap=inp.parentNode;if(getComputedStyle(wrap).position==='static')wrap.style.position='relative';
+  var dd=document.createElement('div');dd.className='vb-ac';wrap.appendChild(dd);
+  var sel=-1;
+  function render(q){
+    var lc=q.toLowerCase().trim();
+    if(!lc){dd.classList.remove('show');return}
+    var matches=[];
+    BARRIOS.forEach(function(b){if(b.toLowerCase().indexOf(lc)>-1)matches.push({t:b,c:'BARRIO'})});
+    SERVICIOS.forEach(function(s){if(s.toLowerCase().indexOf(lc)>-1)matches.push({t:s,c:'SERVICIO'})});
+    matches=matches.slice(0,7);
+    if(!matches.length){dd.classList.remove('show');return}
+    var re=new RegExp('('+lc.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')+')','ig');
+    dd.innerHTML=matches.map(function(m,i){
+      var hl=m.t.replace(re,'<mark>$1</mark>');
+      var ico=m.c==='BARRIO'?'<svg viewBox="0 0 24 24"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>':'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+      return '<div class="vb-ac-item" data-i="'+i+'" data-val="'+m.t+'">'+ico+'<span>'+hl+'</span><span class="vb-ac-cat">'+m.c+'</span></div>';
+  }).join('');
+    dd.classList.add('show');sel=-1;
+    dd.querySelectorAll('.vb-ac-item').forEach(function(it){
+      it.addEventListener('mousedown',function(e){e.preventDefault();inp.value=this.dataset.val;dd.classList.remove('show');inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));});
+  });
+  }
+  inp.addEventListener('input',function(){render(this.value)});
+  inp.addEventListener('focus',function(){if(this.value)render(this.value)});
+  inp.addEventListener('blur',function(){setTimeout(function(){dd.classList.remove('show')},150)});
+  inp.addEventListener('keydown',function(e){
+    var items=dd.querySelectorAll('.vb-ac-item');if(!items.length)return;
+    if(e.key==='ArrowDown'){e.preventDefault();sel=(sel+1)%items.length;items.forEach(function(it,i){it.classList.toggle('sel',i===sel)});items[sel].scrollIntoView({block:'nearest'});}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=(sel-1+items.length)%items.length;items.forEach(function(it,i){it.classList.toggle('sel',i===sel)});items[sel].scrollIntoView({block:'nearest'});}
+    else if(e.key==='Enter'&&sel>=0){e.preventDefault();this.value=items[sel].dataset.val;dd.classList.remove('show');this.dispatchEvent(new Event('input',{bubbles:true}));}
+    else if(e.key==='Escape'){dd.classList.remove('show')}
+  });
+  });
+
+/* 2. View modes toggle */
+var grid=document.querySelector('.cards,.vets-grid,.results,.grid,[class*="grid"]');
+if(grid&&!document.querySelector('.vb-view-toggle')){
+  var tg=document.createElement('div');tg.className='vb-view-toggle';
+  tg.innerHTML='<button data-v="grid" class="active" aria-label="Grilla"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button>'+
+            '<button data-v="list" aria-label="Lista"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>'+
+            '<button data-v="compact" aria-label="Compacto"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>';
+  grid.parentNode.insertBefore(tg,grid);
+  function applyView(v){document.body.classList.remove('vb-view-grid','vb-view-list','vb-view-compact');document.body.classList.add('vb-view-'+v);try{localStorage.setItem('vb-view',v)}catch(e){}tg.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.v===v)})}
+  tg.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){applyView(this.dataset.v)})});
+  var saved='grid';try{saved=localStorage.getItem('vb-view')||'grid'}catch(e){}
+  applyView(saved);
+  }
+
+/* 3. Parallax sutil en imagenes hero */
+var heroImg=document.querySelector('.hero img,.sponsored-hero img,.vb-banner-pro img,.banner-pro img');
+if(heroImg){
+  heroImg.classList.add('vb-parallax');
+  var ticking=false;
+  function update(){
+    var r=heroImg.getBoundingClientRect();
+    var center=r.top+r.height/2-innerHeight/2;
+    var t=-center*.08;
+    heroImg.style.transform='translateY('+t+'px) scale(1.05)';
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});
+  update();
+  }
+
+/* 4. Stats bar de cobertura (si no existe ya) */
+if(!document.querySelector('.vb-stats-bar')){
+  var refs=document.querySelectorAll('.card,.vet-card,article.card').length;
+  if(refs>=10){
+    var sb=document.createElement('div');sb.className='vb-stats-bar';
+    sb.innerHTML='<div class="vb-stat-item"><div class="vb-stat-num">'+refs+'</div><div class="vb-stat-lbl">Veterinarias</div></div>'+
+                 '<div class="vb-stat-item"><div class="vb-stat-num">48</div><div class="vb-stat-lbl">Barrios CABA</div></div>'+
+                 '<div class="vb-stat-item"><div class="vb-stat-num">24/7</div><div class="vb-stat-lbl">Urgencias</div></div>'+
+                 '<div class="vb-stat-item"><div class="vb-stat-num">100%</div><div class="vb-stat-lbl">Gratis</div></div>';
+    var grid2=document.querySelector('.cards,.vets-grid,.results,.grid');
+    if(grid2&&grid2.parentNode)grid2.parentNode.insertBefore(sb,grid2);
+  }
+  }
+
+/* 5. Marcar barrios calientes (los primeros con muchas vet) */
+var hotZones=['Palermo','Caballito','Belgrano'];
+document.querySelectorAll('.barrio-card,.zona,.zone-card,[class*="barrio"]').forEach(function(el){
+  var t=el.textContent||'';
+  if(hotZones.some(function(h){return t.indexOf(h)>-1})){el.classList.add('vb-hot')}
+  });
+
+  }catch(e){console.warn('vb-pulse:',e)}
+  })();
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style id="vb-2026-map">
+/* === BLOQUE 10: MAPA INTERACTIVO + LIGHTBOX + COMPARADOR === */
+
+/* Map section */
+.vb-map-section{margin:48px 0;padding:24px;background:#fff;border-radius:24px;border:1px solid #E2E8F0;position:relative}
+.vb-map-section h2{font-size:clamp(1.5rem,3.5vw,2.25rem);font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#0F172A}
+.vb-map-section .vb-sub{color:#64748B;margin:0 0 18px;font-size:15px}
+.vb-map{width:100%;height:420px;border-radius:18px;overflow:hidden;border:1px solid #E2E8F0;background:#F1F5F9;position:relative;z-index:1}
+:root[data-vb-theme="dark"] .vb-map-section{background:#111827;border-color:#1E293B;color:#F1F5F9}
+:root[data-vb-theme="dark"] .vb-map-section .vb-sub{color:#94A3B8}
+:root[data-vb-theme="dark"] .vb-map{border-color:#334155;filter:hue-rotate(180deg) invert(95%) contrast(.85)}
+.vb-map-loading{display:flex;align-items:center;justify-content:center;height:100%;color:#94A3B8;font-size:14px}
+
+/* Leaflet popup mejorado */
+.leaflet-popup-content-wrapper{border-radius:14px!important;box-shadow:0 18px 40px -10px rgba(15,23,42,.25)!important;padding:4px}
+.leaflet-popup-content{margin:12px 14px!important;font-family:inherit;font-size:14px}
+.leaflet-popup-content b{color:#14B8A6;font-size:15px}
+.leaflet-container a.leaflet-popup-close-button{color:#94A3B8!important}
+.leaflet-marker-icon{filter:drop-shadow(0 4px 6px rgba(20,184,166,.4))}
+
+/* Lightbox */
+.vb-lb{position:fixed;inset:0;background:rgba(15,23,42,.94);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99999;animation:vbLbIn .25s ease-out}
+.vb-lb.show{display:flex}
+@keyframes vbLbIn{from{opacity:0}to{opacity:1}}
+.vb-lb img{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 30px 80px -10px rgba(0,0,0,.6);animation:vbLbZoom .35s cubic-bezier(.16,1,.3,1)}
+@keyframes vbLbZoom{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.vb-lb-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:all .2s}
+.vb-lb-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}
+.vb-lb-close svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
+.vb-lb img{cursor:zoom-out}
+.card img,.vet-card img,article.card img{cursor:zoom-in}
+
+/* Compare bar */
+.vb-compare-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#F1F5F9;border:none;cursor:pointer;color:#475569;transition:all .2s}
+.vb-compare-btn:hover{background:#FBBF24;color:#78350F;transform:scale(1.08)}
+.vb-compare-btn.on{background:#FBBF24;color:#78350F}
+.vb-compare-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:root[data-vb-theme="dark"] .vb-compare-btn{background:#1F2937;color:#94A3B8}
+
+.vb-compare-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#0F172A;color:#fff;padding:14px 20px;border-radius:18px;display:none;align-items:center;gap:14px;z-index:996;box-shadow:0 20px 50px -10px rgba(15,23,42,.4);opacity:0;transition:all .35s cubic-bezier(.16,1,.3,1);max-width:92vw}
+.vb-compare-bar.show{display:flex;opacity:1;transform:translateX(-50%) translateY(0)}
+.vb-compare-bar .vb-cb-count{font-weight:800;font-size:13px;background:#FBBF24;color:#78350F;padding:4px 10px;border-radius:999px}
+.vb-compare-bar .vb-cb-go{background:#14B8A6;color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+.vb-compare-bar .vb-cb-clear{background:transparent;color:#94A3B8;border:none;cursor:pointer;font-size:13px}
+.vb-compare-bar .vb-cb-go:hover{background:#0D9488}
+
+/* Compare modal */
+.vb-cmp-modal{position:fixed;inset:0;background:rgba(15,23,42,.86);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:99998;padding:20px;overflow-y:auto}
+.vb-cmp-modal.show{display:flex}
+.vb-cmp-inner{background:#fff;border-radius:20px;max-width:1100px;width:100%;max-height:88vh;overflow:auto;padding:24px;position:relative}
+:root[data-vb-theme="dark"] .vb-cmp-inner{background:#111827;color:#F1F5F9}
+.vb-cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
+.vb-cmp-col{border:1px solid #E2E8F0;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+:root[data-vb-theme="dark"] .vb-cmp-col{border-color:#334155}
+.vb-cmp-col img{width:100%;height:140px;object-fit:cover;border-radius:10px}
+.vb-cmp-col h3{margin:0;font-size:16px;font-weight:700}
+</style>
+<script id="vb-2026-map-js">
+(function(){try{
+var T={cmp:'<svg viewBox="0 0 24 24"><polyline points="3 6 7 6 9 4 15 4 17 6 21 6"/><rect x="3" y="6" width="18" height="14" rx="2"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>',cls:'<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'};
+
+/* 1. Lightbox para imagenes de cards */
+var lb=document.createElement('div');lb.className='vb-lb';
+lb.innerHTML='<button class="vb-lb-close" aria-label="Cerrar">'+T.cls+'</button><img alt="">';
+document.body.appendChild(lb);
+var lbImg=lb.querySelector('img');var lbClose=lb.querySelector('.vb-lb-close');
+function openLb(src){lbImg.src=src;lb.classList.add('show');document.body.style.overflow='hidden'}
+function closeLb(){lb.classList.remove('show');document.body.style.overflow=''}
+lb.addEventListener('click',function(e){if(e.target===lb||e.target===lbImg)closeLb()});
+lbClose.addEventListener('click',closeLb);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+document.querySelectorAll('.card img,.vet-card img,article.card img').forEach(function(img){
+  if(img.dataset.vbLb)return;img.dataset.vbLb='1';
+  img.addEventListener('click',function(e){
+    if(img.closest('a')){e.preventDefault();e.stopPropagation();}
+    openLb(this.src);
+  });
+  });
+
+/* 2. Comparador de veterinarias */
+var compareSet=new Set();var maxCompare=3;
+var bar=document.createElement('div');bar.className='vb-compare-bar';
+bar.innerHTML='<span>Comparar</span><span class="vb-cb-count">0</span><button class="vb-cb-go">Ver comparaci\u00f3n</button><button class="vb-cb-clear">Limpiar</button>';
+document.body.appendChild(bar);
+var cbCount=bar.querySelector('.vb-cb-count');
+function refreshBar(){
+  cbCount.textContent=compareSet.size;
+  if(compareSet.size>0)bar.classList.add('show');else bar.classList.remove('show');
+  }
+bar.querySelector('.vb-cb-clear').addEventListener('click',function(){
+  compareSet.forEach(function(c){c.querySelector('.vb-compare-btn').classList.remove('on');c.classList.remove('vb-cmp-active')});
+  compareSet.clear();refreshBar();
+  });
+bar.querySelector('.vb-cb-go').addEventListener('click',function(){
+  if(!compareSet.size)return;
+  var modal=document.querySelector('.vb-cmp-modal');
+  if(!modal){modal=document.createElement('div');modal.className='vb-cmp-modal';
+    modal.innerHTML='<div class="vb-cmp-inner"><button class="vb-lb-close" aria-label="Cerrar">'+T.cls+'</button><h2 style="margin:0;font-size:22px;font-weight:800">Comparaci\u00f3n de veterinarias</h2><div class="vb-cmp-grid"></div></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click',function(e){if(e.target===modal||e.target.closest('.vb-lb-close'))modal.classList.remove('show')});
+  }
+  var grid=modal.querySelector('.vb-cmp-grid');
+  grid.innerHTML='';
+  compareSet.forEach(function(c){
+    var name=(c.querySelector('h1,h2,h3,h4,.card-title')||{}).textContent||'Veterinaria';
+    var img=c.querySelector('img');
+    var meta=Array.from(c.querySelectorAll('.meta,.tag,.badge,.vb-badge')).map(function(m){return m.textContent.trim()}).filter(Boolean).slice(0,5);
+    var col=document.createElement('div');col.className='vb-cmp-col';
+    col.innerHTML=(img?'<img src="'+img.src+'" alt="">':'')+'<h3>'+name.trim()+'</h3>'+'<div style="display:flex;flex-wrap:wrap;gap:6px">'+meta.map(function(m){return '<span style="background:#F1F5F9;padding:4px 10px;border-radius:999px;font-size:12px">'+m+'</span>'}).join('')+'</div>';
+    grid.appendChild(col);
+  });
+  modal.classList.add('show');
+  });
+
+document.querySelectorAll('.card,.vet-card,article.card').forEach(function(card){
+  if(card.dataset.vbCmp)return;card.dataset.vbCmp='1';
+  var actions=card.querySelector('.vb-card-actions');
+  if(!actions){actions=document.createElement('div');actions.className='vb-card-actions';card.appendChild(actions);}
+  var b=document.createElement('button');b.type='button';b.className='vb-compare-btn';
+  b.setAttribute('aria-label','Comparar');b.innerHTML=T.cmp;
+  b.addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();
+    if(compareSet.has(card)){compareSet.delete(card);b.classList.remove('on');card.classList.remove('vb-cmp-active')}
+    else{if(compareSet.size>=maxCompare){return}compareSet.add(card);b.classList.add('on');card.classList.add('vb-cmp-active')}
+    refreshBar();
+  });
+  actions.appendChild(b);
+  });
+
+/* 3. Mapa interactivo Leaflet */
+function loadLeaflet(cb){
+  if(window.L){cb();return}
+  var s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.crossOrigin='';s.onload=cb;document.head.appendChild(s);
+  }
+function initMap(){
+  if(document.querySelector('.vb-map-section'))return;
+  var anchor=document.querySelector('.vb-testimonials')||document.querySelector('footer');
+  if(!anchor)return;
+  var sec=document.createElement('section');sec.className='vb-map-section';
+  sec.innerHTML='<h2>Mapa de cobertura</h2><p class="vb-sub">Las veterinarias destacadas en CABA, organizadas por barrio</p><div class="vb-map" id="vb-map-el"><div class="vb-map-loading">Cargando mapa...</div></div>';
+  anchor.parentNode.insertBefore(sec,anchor);
+  loadLeaflet(function(){
+    var mapEl=document.getElementById('vb-map-el');mapEl.innerHTML='';
+    var map=L.map(mapEl,{scrollWheelZoom:false,zoomControl:true}).setView([-34.6037,-58.4438],12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'\u00a9 OpenStreetMap',maxZoom:18}).addTo(map);
+    var spots=[
+  {n:'Palermo',c:[-34.5755,-58.4338],q:'52 veterinarias'},
+  {n:'Recoleta',c:[-34.5895,-58.3974],q:'28 veterinarias'},
+  {n:'Belgrano',c:[-34.5627,-58.4583],q:'41 veterinarias'},
+  {n:'Caballito',c:[-34.6189,-58.4407],q:'37 veterinarias'},
+  {n:'Villa Crespo',c:[-34.5996,-58.4396],q:'22 veterinarias'},
+  {n:'Almagro',c:[-34.6101,-58.4203],q:'25 veterinarias'},
+  {n:'Nu\u00f1ez',c:[-34.5447,-58.4633],q:'18 veterinarias'},
+  {n:'Villa Urquiza',c:[-34.5722,-58.4895],q:'24 veterinarias'},
+  {n:'Flores',c:[-34.6280,-58.4639],q:'30 veterinarias'},
+  {n:'Boedo',c:[-34.6271,-58.4145],q:'15 veterinarias'},
+  {n:'San Telmo',c:[-34.6210,-58.3736],q:'12 veterinarias'},
+  {n:'Colegiales',c:[-34.5754,-58.4495],q:'14 veterinarias'}
+    ];
+    var icon=L.divIcon({className:'vb-mk',html:'<div style="width:32px;height:32px;background:linear-gradient(135deg,#14B8A6,#0D9488);border:3px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 14px -2px rgba(20,184,166,.5);display:flex;align-items:center;justify-content:center"><span style="transform:rotate(45deg);color:#fff;font-weight:800;font-size:12px">\ud83d\udc3e</span></div>',iconSize:[32,32],iconAnchor:[16,32]});
+    spots.forEach(function(s){
+      L.marker(s.c,{icon:icon}).addTo(map).bindPopup('<b>'+s.n+'</b><br>'+s.q);
+  });
+  });
+  }
+if(document.readyState==='complete'||document.readyState==='interactive')setTimeout(initMap,400);
+else window.addEventListener('load',initMap);
+
+  }catch(e){console.warn('vb-map:',e)}
+  })();
+</script>
 </body></html>
