@@ -2398,4 +2398,199 @@ whenMap(function(){
 
   }catch(e){console.warn('vb-cluster:',e)}})();
 </script>
+<style id="vb-2026-favs">
+.vb-fav-btn{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#94a3b8;box-shadow:0 4px 12px -3px rgba(0,0,0,.15);transition:transform .2s ease,color .25s ease,background .25s ease;z-index:5}
+.vb-fav-btn:hover{transform:scale(1.1);color:#FF6B5A}
+.vb-fav-btn.active{color:#FF6B5A;background:#fff}
+.vb-fav-btn.active svg{fill:#FF6B5A;animation:vbHeartPop .5s cubic-bezier(.34,1.56,.64,1)}
+.vb-fav-btn svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.2;fill:transparent;transition:fill .25s ease}
+@keyframes vbHeartPop{0%{transform:scale(.6)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
+.vb-fav-toggle{position:fixed;bottom:158px;right:20px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#FF6B5A,#dc2626);color:#fff;border:none;cursor:pointer;box-shadow:0 12px 30px -8px rgba(255,107,90,.55);display:flex;align-items:center;justify-content:center;z-index:9989;transition:transform .2s ease}
+.vb-fav-toggle:hover{transform:scale(1.1)}
+.vb-fav-toggle svg{width:24px;height:24px;fill:currentColor}
+.vb-fav-count{position:absolute;top:-4px;right:-4px;background:#1488A6;color:#fff;font-size:.7rem;font-weight:800;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.vb-fav-count[data-n="0"]{display:none}
+.vb-fav-drawer{position:fixed;top:0;right:-400px;width:380px;max-width:92vw;height:100vh;background:#fff;box-shadow:-20px 0 60px -10px rgba(0,0,0,.25);z-index:99991;transition:right .42s cubic-bezier(.34,1.2,.64,1);overflow-y:auto;padding:0;font-family:inherit;display:flex;flex-direction:column}
+.vb-fav-drawer.open{right:0}
+.vb-fav-head{position:sticky;top:0;background:linear-gradient(135deg,#FF6B5A,#dc2626);color:#fff;padding:20px;display:flex;align-items:center;gap:12px;z-index:2}
+.vb-fav-head h2{font-size:1.15rem;font-weight:800;margin:0;display:flex;align-items:center;gap:8px}
+.vb-fav-head h2 svg{width:22px;height:22px;fill:currentColor}
+.vb-fav-head .vb-fav-x{margin-left:auto;background:rgba(255,255,255,.2);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center}
+.vb-fav-head .vb-fav-x svg{width:18px;height:18px}
+.vb-fav-tools{padding:14px 20px;display:flex;gap:8px;border-bottom:1px solid #e5e7eb;background:#f8fafc}
+.vb-fav-tools button{flex:1;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:8px;cursor:pointer;font-size:.78rem;font-weight:600;color:#475569;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s ease}
+.vb-fav-tools button:hover{border-color:#1488A6;color:#1488A6}
+.vb-fav-tools svg{width:14px;height:14px}
+.vb-fav-list{padding:14px 20px;flex:1;overflow-y:auto}
+.vb-fav-card{padding:12px;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s ease;position:relative;background:#fff}
+.vb-fav-card:hover{border-color:#FF6B5A;transform:translateX(-3px);box-shadow:0 8px 18px -6px rgba(255,107,90,.25)}
+.vb-fav-card .vfc-name{font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:3px;padding-right:30px}
+.vb-fav-card .vfc-meta{font-size:.75rem;color:#64748b;display:flex;align-items:center;gap:8px}
+.vb-fav-card .vfc-meta svg{width:12px;height:12px}
+.vb-fav-card .vfc-remove{position:absolute;top:10px;right:10px;background:none;border:none;cursor:pointer;color:#cbd5e1;padding:4px;border-radius:6px;transition:all .2s ease}
+.vb-fav-card .vfc-remove:hover{color:#dc2626;background:rgba(220,38,38,.08)}
+.vb-fav-card .vfc-remove svg{width:16px;height:16px}
+.vb-fav-empty{text-align:center;padding:40px 20px;color:#94a3b8}
+.vb-fav-empty svg{width:48px;height:48px;color:#cbd5e1;margin-bottom:12px;stroke-width:1.5;fill:none;stroke:currentColor}
+.vb-fav-empty p{font-size:.9rem;line-height:1.4;margin:0}
+.vb-fav-empty strong{color:#FF6B5A}
+.vb-fav-toast{position:fixed;bottom:230px;right:20px;background:#0f172a;color:#fff;padding:10px 16px;border-radius:12px;font-size:.85rem;font-weight:600;box-shadow:0 15px 40px -10px rgba(0,0,0,.4);z-index:99995;transform:translateX(120%);transition:transform .35s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:8px}
+.vb-fav-toast.show{transform:translateX(0)}
+.vb-fav-toast svg{width:16px;height:16px;color:#FF6B5A;fill:currentColor}
+:root[data-vb-theme="dark"] .vb-fav-btn{background:rgba(15,23,42,.85);color:#64748b}
+:root[data-vb-theme="dark"] .vb-fav-btn.active{background:rgba(15,23,42,.95)}
+:root[data-vb-theme="dark"] .vb-fav-drawer{background:#0f172a;color:#e5e7eb}
+:root[data-vb-theme="dark"] .vb-fav-tools{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+:root[data-vb-theme="dark"] .vb-fav-tools button{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);color:#cbd5e1}
+:root[data-vb-theme="dark"] .vb-fav-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+:root[data-vb-theme="dark"] .vb-fav-card .vfc-name{color:#f1f5f9}
+@media (prefers-reduced-motion: reduce){.vb-fav-btn,.vb-fav-toggle,.vb-fav-drawer,.vb-fav-card,.vb-fav-toast{transition:none!important;animation:none!important}}
+</style>
+<script id="vb-2026-favs-js">
+(function(){try{
+var KEY='vb-favs';
+function getFavs(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}}
+function saveFavs(f){try{localStorage.setItem(KEY,JSON.stringify(f))}catch(e){}}
+function favCount(){return Object.keys(getFavs()).length}
+function isFav(id){return !!getFavs()[id]}
+function toggleFav(id,meta){var f=getFavs();if(f[id])delete f[id];else f[id]=Object.assign({ts:Date.now()},meta||{});saveFavs(f);return !!f[id]}
+
+/* === TOAST === */
+function toast(text,added){
+ var t=document.getElementById('vb-fav-toast');
+ if(!t){t=document.createElement('div');t.id='vb-fav-toast';t.className='vb-fav-toast';document.body.appendChild(t)}
+ t.innerHTML=(added?'<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>')+'<span>'+text+'</span>';
+ t.classList.add('show');
+ clearTimeout(window._vbFavT);window._vbFavT=setTimeout(function(){t.classList.remove('show')},2200);
+  }
+
+/* === INJECTAR CORAZ\u00d3N EN CARDS === */
+function getCardId(card){return card.dataset.vbVetId||card.dataset.vetId||card.id||''}
+function getCardMeta(card){
+ var name=(card.querySelector('h2,h3,.vet-name,.title')||{}).textContent||'';
+ var zone=(card.dataset.zone||(card.querySelector('.zone,.barrio,.location')||{}).textContent)||'CABA';
+ return{name:String(name).trim().slice(0,60),zone:String(zone).trim().slice(0,30)};
+  }
+function injectHeart(card){
+ if(card.querySelector('.vb-fav-btn'))return;
+ var id=getCardId(card);if(!id)return;
+ var pos=window.getComputedStyle(card).position;
+ if(pos==='static')card.style.position='relative';
+ var b=document.createElement('button');b.type='button';b.className='vb-fav-btn';b.setAttribute('aria-label','Agregar a favoritos');b.dataset.id=id;
+ b.innerHTML='<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+ if(isFav(id))b.classList.add('active');
+ b.addEventListener('click',function(ev){
+  ev.stopPropagation();ev.preventDefault();
+  var meta=getCardMeta(card);
+  var active=toggleFav(id,meta);
+  b.classList.toggle('active',active);
+  b.setAttribute('aria-label',active?'Quitar de favoritos':'Agregar a favoritos');
+  toast(active?'Agregado a favoritos':'Quitado de favoritos',active);
+  updateCount();renderFavList();
+  });
+ card.appendChild(b);
+  }
+function scanCardsForHeart(){
+ document.querySelectorAll('article[id], [data-vb-vet-id], [data-vet-id], .vet-card').forEach(injectHeart);
+  }
+
+/* === FAB + DRAWER === */
+function buildFab(){
+ if(document.querySelector('.vb-fav-toggle'))return;
+ var b=document.createElement('button');b.type='button';b.className='vb-fav-toggle';b.setAttribute('aria-label','Abrir favoritos');b.title='Favoritos (F)';
+ b.innerHTML='<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="vb-fav-count" data-n="0">0</span>';
+ document.body.appendChild(b);
+ b.addEventListener('click',openDrawer);
+  }
+function buildDrawer(){
+ if(document.getElementById('vb-fav-drawer'))return;
+ var d=document.createElement('aside');d.id='vb-fav-drawer';d.className='vb-fav-drawer';d.setAttribute('aria-hidden','true');
+ d.innerHTML='<header class="vb-fav-head"><h2><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Mis favoritos</h2><button type="button" class="vb-fav-x" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></header>'+
+  '<div class="vb-fav-tools"><button type="button" id="vb-fav-export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar</button><button type="button" id="vb-fav-import"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importar</button><button type="button" id="vb-fav-clear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>Vaciar</button></div>'+
+  '<div class="vb-fav-list" id="vb-fav-list"></div>';
+ document.body.appendChild(d);
+ d.querySelector('.vb-fav-x').addEventListener('click',closeDrawer);
+ d.querySelector('#vb-fav-export').addEventListener('click',exportFavs);
+ d.querySelector('#vb-fav-import').addEventListener('click',importFavs);
+ d.querySelector('#vb-fav-clear').addEventListener('click',function(){if(confirm('\u00bfVaciar todos los favoritos?')){saveFavs({});updateCount();renderFavList();scanCardsForHeart();document.querySelectorAll('.vb-fav-btn.active').forEach(function(b){b.classList.remove('active')});toast('Favoritos vaciados',false)}});
+  }
+function openDrawer(){var d=document.getElementById('vb-fav-drawer');if(!d)return;renderFavList();d.classList.add('open');d.setAttribute('aria-hidden','false')}
+function closeDrawer(){var d=document.getElementById('vb-fav-drawer');if(d){d.classList.remove('open');d.setAttribute('aria-hidden','true')}}
+function updateCount(){var c=document.querySelector('.vb-fav-count');if(c){var n=favCount();c.textContent=n;c.setAttribute('data-n',n)}}
+function renderFavList(){
+ var list=document.getElementById('vb-fav-list');if(!list)return;
+ var f=getFavs();var ids=Object.keys(f).sort(function(a,b){return (f[b].ts||0)-(f[a].ts||0)});
+ if(!ids.length){list.innerHTML='<div class="vb-fav-empty"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><p>Todav\u00eda no tenes favoritos.<br>Toc\u00e1 el <strong>coraz\u00f3n</strong> en cualquier veterinaria para guardarla ac\u00e1.</p></div>';return}
+ list.innerHTML=ids.map(function(id){
+  var m=f[id];
+  return '<div class="vb-fav-card" data-id="'+id+'"><div class="vfc-name">'+(m.name||id)+'</div><div class="vfc-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>'+(m.zone||'CABA')+'</div><button type="button" class="vfc-remove" aria-label="Quitar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>';
+  }).join('');
+ list.querySelectorAll('.vb-fav-card').forEach(function(c){
+  var id=c.dataset.id;
+  c.addEventListener('click',function(e){
+   if(e.target.closest('.vfc-remove'))return;
+   var t=document.getElementById(id)||document.querySelector('[data-vb-vet-id="'+id+'"]');
+   if(t){closeDrawer();t.scrollIntoView({behavior:'smooth',block:'center'});t.style.outline='2px solid #FF6B5A';setTimeout(function(){t.style.outline=''},2000)}
+  });
+  c.querySelector('.vfc-remove').addEventListener('click',function(e){
+   e.stopPropagation();var f=getFavs();delete f[id];saveFavs(f);updateCount();renderFavList();
+   var hb=document.querySelector('.vb-fav-btn[data-id="'+id+'"]');if(hb)hb.classList.remove('active');
+   toast('Quitado de favoritos',false);
+  });
+  });
+  }
+
+/* === EXPORTAR / IMPORTAR === */
+function exportFavs(){
+ var data=JSON.stringify(getFavs(),null,2);
+ try{
+  var blob=new Blob([data],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vetba-favoritos-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(a.href)},500);
+  toast('Favoritos exportados',true);
+  }catch(e){console.warn(e)}
+  }
+function importFavs(){
+ var inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';
+ inp.addEventListener('change',function(){
+  var file=inp.files[0];if(!file)return;
+  var fr=new FileReader();
+  fr.onload=function(){
+   try{var data=JSON.parse(fr.result);if(typeof data!=='object'||Array.isArray(data))throw 0;
+    var cur=getFavs();Object.keys(data).forEach(function(k){cur[k]=data[k]});saveFavs(cur);
+    updateCount();renderFavList();scanCardsForHeart();
+    document.querySelectorAll('.vb-fav-btn').forEach(function(b){b.classList.toggle('active',isFav(b.dataset.id))});
+    toast('Importados '+Object.keys(data).length+' favoritos',true);
+  }catch(e){toast('Archivo inv\u00e1lido',false)}
+  };fr.readAsText(file);
+  });
+ inp.click();
+  }
+
+/* === SINCRONIZACION ENTRE PESTANAS === */
+window.addEventListener('storage',function(e){
+ if(e.key!==KEY)return;
+ updateCount();renderFavList();
+ document.querySelectorAll('.vb-fav-btn').forEach(function(b){b.classList.toggle('active',isFav(b.dataset.id))});
+  });
+
+/* === ATAJO TECLADO F === */
+document.addEventListener('keydown',function(e){
+ if(e.key==='f'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+  var t=e.target;var tag=(t.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='textarea'||t.isContentEditable)return;
+  e.preventDefault();
+  var d=document.getElementById('vb-fav-drawer');
+  if(d&&d.classList.contains('open'))closeDrawer();else openDrawer();
+  }
+  });
+
+/* === INICIALIZACION === */
+buildFab();buildDrawer();updateCount();
+setTimeout(scanCardsForHeart,400);
+var moFav=new MutationObserver(function(){clearTimeout(window._vbFavScan);window._vbFavScan=setTimeout(scanCardsForHeart,300)});
+moFav.observe(document.body,{childList:true,subtree:true});
+
+  }catch(e){console.warn('vb-favs:',e)}})();
+</script>
 </body></html>
