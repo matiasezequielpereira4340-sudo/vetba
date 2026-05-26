@@ -548,4 +548,102 @@ a[href^="tel:"]:hover{background:rgba(20,168,166,.22)!important;border-color:var
   });
   })();
 </script>
+<style id="vb-2026-modern">
+/* === TENDENCIAS 2025-2026: noise + fluid type + soft 3D + scroll-driven === */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+@supports (animation-timeline:scroll()){
+  header,.header{animation:vbHeaderShrink linear both;animation-timeline:scroll(root);animation-range:0 200px}
+  @keyframes vbHeaderShrink{to{background:rgba(11,27,43,.88);box-shadow:0 8px 32px -8px rgba(0,0,0,.45)}}
+  }
+h1,.hero h1{font-size:clamp(2rem,3vw + 1.5rem,4.6rem);letter-spacing:-.03em;line-height:1.02}
+h2{font-size:clamp(1.5rem,2vw + 1rem,2.6rem)}
+.featured-card,.lugar-card,[class*="featured-card"]{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;transform-style:preserve-3d}
+.featured-card:hover,.lugar-card:hover{transform:translateY(-6px) rotateX(2deg) rotateY(-1deg);box-shadow:0 30px 60px -20px rgba(14,124,123,.5),0 0 0 1px rgba(20,168,166,.25)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--vb-teal-500,#14A8A6)!important;outline-offset:3px;border-radius:10px}
+.stat,.stat-num,[class*="stat"]{font-variant-numeric:tabular-nums;font-feature-settings:"tnum","ss01"}
+.hero,section.hero{position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:-20%;z-index:-1;background:conic-gradient(from 180deg at 50% 50%,#14A8A622 0deg,transparent 90deg,#FF6B5B22 180deg,transparent 270deg,#14A8A622 360deg);filter:blur(80px);opacity:.6;animation:vbMesh 20s linear infinite}
+@keyframes vbMesh{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.vb-cmdk{position:fixed;inset:0;z-index:10000;background:rgba(11,27,43,.72);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+.vb-cmdk.open{display:flex;animation:vbFade .2s ease}
+@keyframes vbFade{from{opacity:0}to{opacity:1}}
+.vb-cmdk-box{width:min(640px,92vw);background:#0f2438;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.6)}
+.vb-cmdk input{width:100%;background:transparent;border:none;color:#fff;font-size:18px;padding:20px 22px;outline:none;font-family:var(--vb-fb,Inter,sans-serif)}
+.vb-cmdk-hint{padding:10px 22px;color:#8aa0b3;font-size:12px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;font-family:var(--vb-fm,monospace)}
+.vb-cmdk-hint kbd{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:11px}
+.vb-mag{transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+::selection{background:#14A8A6;color:#fff}
+.featured-card img,.lugar-card img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.featured-card:hover img,.lugar-card:hover img{transform:scale(1.06)}
+*{scrollbar-gutter:stable}
+.btn-cta,a[href*="sumar"],a[href*="wa.me"],a[href^="tel:"]{position:relative;overflow:hidden}
+.btn-cta::after,a[href*="sumar"]::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.25),transparent 40%);opacity:0;transition:opacity .25s ease;pointer-events:none}
+.btn-cta:hover::after,a[href*="sumar"]:hover::after{opacity:1}
+</style>
+<script>
+  (function(){
+      function ready(fn){if(document.readyState!=='loading')fn();else document.addEventListener('DOMContentLoaded',fn)}
+      ready(function(){
+            try{
+                    // Command palette Cmd/Ctrl+K
+                    var cmdk=document.createElement('div');
+                    cmdk.className='vb-cmdk';
+                    cmdk.innerHTML='<div class="vb-cmdk-box"><input placeholder="Buscar veterinaria, barrio, servicio..." aria-label="B\u00fasqueda r\u00e1pida"/><div class="vb-cmdk-hint"><span>Enter para buscar</span><span><kbd>Esc</kbd> para cerrar</span></div></div>';
+                    document.body.appendChild(cmdk);
+                    var cInput=cmdk.querySelector('input');
+                    function openCmdk(){cmdk.classList.add('open');setTimeout(function(){cInput.focus()},50)}
+                    function closeCmdk(){cmdk.classList.remove('open');cInput.value=''}
+                    document.addEventListener('keydown',function(e){
+                              if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openCmdk()}
+                              if(e.key==='Escape'&&cmdk.classList.contains('open'))closeCmdk()
+                    });
+                    cmdk.addEventListener('click',function(e){if(e.target===cmdk)closeCmdk()});
+                    cInput.addEventListener('keydown',function(e){
+                              if(e.key==='Enter'){
+                                          var v=this.value.trim();if(!v)return;
+                                          var main=document.querySelector('input[type="search"],input[placeholder*="Busc"],input[placeholder*="Nombre"]');
+                                          if(main){main.value=v;main.dispatchEvent(new Event('input',{bubbles:true}));main.scrollIntoView({behavior:'smooth',block:'center'})}
+                                          closeCmdk();
+                              }
+                    });
+                    // Magnetic effect en CTAs
+                    document.querySelectorAll('.btn-cta,a[href*="sumar"],button[class*="primary"]').forEach(function(btn){
+                              btn.classList.add('vb-mag');
+                              btn.addEventListener('mousemove',function(e){
+                                          var r=this.getBoundingClientRect();
+                                          var x=(e.clientX-r.left-r.width/2)*.18;
+                                          var y=(e.clientY-r.top-r.height/2)*.18;
+                                          this.style.transform='translate('+x+'px,'+y+'px)';
+                                          this.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+                                          this.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+                              });
+                              btn.addEventListener('mouseleave',function(){this.style.transform=''});
+                    });
+                    // View Transitions API en links internos
+                    if(document.startViewTransition){
+                              document.querySelectorAll('a[href^="#"],a[href^="/"]').forEach(function(a){
+                                          a.addEventListener('click',function(e){
+                                                        var href=this.getAttribute('href');
+                                                        if(href.startsWith('#')){
+                                                                        var target=document.querySelector(href);
+                                                                        if(target){e.preventDefault();document.startViewTransition(function(){target.scrollIntoView({behavior:'smooth'})})}
+                                                        }
+                                          });
+                              });
+                    }
+                    // Tilt 3D suave en stat cards
+                    document.querySelectorAll('[class*="stat"],.stat-card').forEach(function(s){
+                              s.addEventListener('mousemove',function(e){
+                                          var r=this.getBoundingClientRect();
+                                          var rx=((e.clientY-r.top)/r.height-.5)*-6;
+                                          var ry=((e.clientX-r.left)/r.width-.5)*6;
+                                          this.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-2px)';
+                              });
+                              s.addEventListener('mouseleave',function(){this.style.transform=''});
+                    });
+            }catch(e){console.warn('vb-modern:',e)}
+  });
+  })();
+</script>
 </body></html>
