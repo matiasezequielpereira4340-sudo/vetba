@@ -4,7 +4,7 @@
   "private": true,
   "description": "VetBA - directorio de veterinarias de CABA y GBA. Sitio estatico (index.html + data.json) con paginas SEO generadas.",
   "type": "module",
-  "engines": { "node": ">=18" },
+  "engines": { "node": "24.x" },
   "scripts": {
     "build:seo": "node scripts/generar-paginas.mjs",
     "build": "npm run build:seo",
