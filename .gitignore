@@ -1,0 +1,7 @@
+# Generado por `npm run build:seo` (Vercel lo genera en cada deploy)
+/veterinarias/
+/urgencias-24-horas/
+/ficha/
+/sitemap.xml
+node_modules/
+.DS_Store
