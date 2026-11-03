@@ -118,7 +118,11 @@ export function fusionar(a, b) {
     if (cur === undefined || cur === null || cur === '') out[k] = v;
     else if (Array.isArray(cur) && Array.isArray(v)) out[k] = [...new Set([...cur, ...v])];
   }
-  out.ids_fusionados = [...new Set([...(keep.ids_fusionados || []), drop.id, ...(drop.ids_fusionados || [])])];
+  // Un teléfono distinto no se pierde: queda como alternativo.
+  if (drop.telefono && keep.telefono && normalizarTelefono(drop.telefono).e164 !== normalizarTelefono(keep.telefono).e164) {
+    out.telefonos_alternativos = [...new Set([...(keep.telefonos_alternativos || []), drop.telefono, ...(drop.telefonos_alternativos || [])])];
+  }
+  out.ids_fusionados =[...new Set([...(keep.ids_fusionados || []), drop.id, ...(drop.ids_fusionados || [])])];
   out.slugs_anteriores = [...new Set([...(keep.slugs_anteriores || []), ...(drop.slugs_anteriores || []), drop.slug].filter(Boolean))];
   return { out, keep, drop };
 }
