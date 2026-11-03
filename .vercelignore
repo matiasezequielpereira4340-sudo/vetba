@@ -1,0 +1,7 @@
+# No se publican en producción
+admin-local.html
+data.backup.json
+docs/
+README.md
+.git/
+node_modules/

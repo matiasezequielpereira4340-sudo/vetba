@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>VetBA Admin (local)</title>
+<style>
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#0F172A;color:#E2E8F0;margin:0;padding:24px;line-height:1.5}
+main{max-width:560px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px;color:#38BDF8}
+p{color:#94A3B8}
+button{display:block;width:100%;min-height:48px;margin:0 0 10px;border:0;border-radius:12px;background:#0EA5E9;color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+button.sec{background:#1E293B;border:1px solid #334155}
+.stats{border-top:1px solid #334155;padding-top:12px;font-size:14px}
+.warn{background:#422006;color:#FDE68A;border-radius:10px;padding:10px 12px;font-size:14px}
+</style>
+</head>
+<body>
+<main>
+  <h1>VetBA Admin — outreach (solo uso local)</h1>
+  <p>Este archivo NO se publica: está excluido del deploy en <code>.vercelignore</code> y no figura en sitemap ni robots. Abrilo con un servidor local (<code>python3 -m http.server</code>) para que pueda leer <code>data.json</code>.</p>
+  <p class="warn">Ojo: los teléfonos de data.json son en su mayoría fijos. El link de WhatsApp se arma igual, pero solo funciona si ese número tiene WhatsApp. Mandá como máximo 25–30 mensajes por día para que no te bloqueen el número.</p>
+  <button type="button" id="csv">Descargar CSV (prioridad primero)</button>
+  <button type="button" class="sec" id="top25">Abrir top 25 en WhatsApp Web</button>
+  <button type="button" class="sec" id="copy">Copiar top 50 al portapapeles</button>
+  <div class="stats" id="stats">Cargando data.json…</div>
+</main>
+<script>
+const SITE = 'https://www.vetba.com.ar';
+let LUGARES = [];
+const normTel = (raw) => { let t = (raw || '').replace(/\D/g, ''); if (t.startsWith('54')) t = t.slice(2); if (t.startsWith('9')) t = t.slice(1); if (t.startsWith('0')) t = t.slice(1); if (t.startsWith('15')) t = t.slice(2); return '549' + t; };
+const PRIO = (x) => { let s = 0; if (x.horarios && x.horarios['24h']) s += 100; if (x.tipo === 'veterinaria') s += 50; if (x.rating) s += x.rating * 10; if (x.zona === 'CABA') s += 20; return s; };
+const reclamarUrl = (x) => SITE + '/?reclamar=' + encodeURIComponent(x.slug);
+const buildMsg = (x) => 'Hola! Te escribo de VetBA, el directorio de servicios para mascotas de CABA y GBA. ' + x.nombre + ' ya figura en el sitio y te dejo el link para que reclames tu ficha gratis y la actualices (horarios, WhatsApp, servicios): ' + reclamarUrl(x);
+const getList = () => LUGARES.filter((x) => normTel(x.telefono).length >= 12).sort((a, b) => PRIO(b) - PRIO(a));
+const waUrl = (x) => 'https://wa.me/' + (x.whatsapp || normTel(x.telefono)) + '?text=' + encodeURIComponent(buildMsg(x));
+
+fetch('data.json').then((r) => r.json()).then((d) => {
+  LUGARES = d;
+  const list = getList();
+  const v24 = list.filter((x) => x.horarios && x.horarios['24h']).length;
+  document.getElementById('stats').innerHTML = '<b>' + list.length + '</b> contactos con teléfono<br><b>' + v24 + '</b> veterinarias 24 h (prioridad máxima)';
+}).catch(() => { document.getElementById('stats').textContent = 'No se pudo leer data.json. ¿Lo abriste con un servidor local?'; });
+
+document.getElementById('csv').onclick = () => {
+  const header = ['#', 'Nombre', 'Tipo', 'Zona', 'Barrio', 'Rating', '24hs', 'Tel original', 'Tel WhatsApp (supuesto)', 'Link reclamar', 'WhatsApp link', 'Estado', 'Fecha contacto', 'Respuesta'];
+  const rows = getList().map((x, i) => [i + 1, x.nombre, x.tipo, x.zona, x.barrio || x.localidad, x.rating || '', x.horarios && x.horarios['24h'] ? 'Sí' : 'No', x.telefono, x.whatsapp || normTel(x.telefono), reclamarUrl(x), waUrl(x), '', '', '']);
+  const csv = [header, ...rows].map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'vetba-outreach-' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+document.getElementById('top25').onclick = () => {
+  if (!confirm('Se van a abrir 25 pestañas de WhatsApp Web. ¿Seguimos?')) return;
+  getList().slice(0, 25).forEach((x, i) => setTimeout(() => window.open(waUrl(x), '_blank'), i * 300));
+};
+document.getElementById('copy').onclick = () => {
+  const text = getList().slice(0, 50).map((x, i) => (i + 1) + '. ' + x.nombre + ' (' + (x.barrio || x.localidad) + ') · Tel: ' + x.telefono + ' · Reclamar: ' + reclamarUrl(x)).join('\n');
+  navigator.clipboard.writeText(text).then(() => alert('Top 50 copiado'));
+};
+</script>
+</body>
+</html>
