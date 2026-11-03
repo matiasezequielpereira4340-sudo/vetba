@@ -19,5 +19,8 @@
     "normalizar": "node scripts/normalizar-data.mjs",
     "normalizar:check": "node scripts/normalizar-data.mjs --check",
     "dev": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
   }
 }
