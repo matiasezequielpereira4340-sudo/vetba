@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recordatorio de vacunas para perros y gatos gratis — VetBA</title>
+<meta name="description" content="Cargá la última antirrábica, desparasitación y vacuna séptuple o triple felina de tu mascota y agendá las próximas en Google Calendar o en tu celular. Gratis y sin registrarte.">
+<link rel="canonical" href="https://www.vetba.com.ar/recordatorios">
+<meta name="theme-color" content="#0E7490">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VetBA">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://www.vetba.com.ar/recordatorios">
+<meta property="og:title" content="Recordatorio de vacunas gratis para tu mascota — VetBA">
+<meta property="og:description" content="Agendá la próxima antirrábica, desparasitación y vacuna de tu perro o gato en Google Calendar o en tu celular.">
+<meta property="og:image" content="https://www.vetba.com.ar/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Recordatorio de vacunas gratis — VetBA">
+<meta name="twitter:description" content="Agendá la próxima antirrábica, desparasitación y vacuna de tu perro o gato.">
+<meta name="twitter:image" content="https://www.vetba.com.ar/og.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+:root{--brand:#0E7490;--ink:#0F172A;--ink-2:#334155;--mute:#64748B;--bg:#F8FAFC;--line:#E2E8F0;--ok:#047857;--ok-bg:#ECFDF5;--bad:#B91C1C;--bad-bg:#FEF2F2;--warn:#92400E;--warn-bg:#FFFBEB;--wa:#128C7E;--r:14px}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+a{color:var(--brand)}
+button,input,select{font:inherit}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.logo{font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+h1{font-size:clamp(25px,6vw,34px);line-height:1.15;margin:20px 0 8px;letter-spacing:-.4px}
+h2{font-size:20px;margin:0 0 8px}
+.lead{color:var(--ink-2);margin:0 0 16px}
+.box{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 14px;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.disc{background:var(--warn-bg);border:1px solid #FDE68A;color:var(--warn);border-radius:12px;padding:12px 14px;font-weight:600;margin:0 0 14px}
+.grid{display:grid;gap:12px}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+label{display:block;font-weight:700;font-size:14px;margin:0 0 4px}
+input,select{width:100%;min-height:48px;border:1px solid #CBD5E1;border-radius:12px;padding:0 12px;background:#fff;color:var(--ink);font-size:16px}
+.hint{font-size:12.5px;color:var(--mute);margin-top:3px}
+.seg{display:flex;gap:8px}
+.seg label{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:1px solid #CBD5E1;border-radius:12px;cursor:pointer;font-size:16px}
+.seg input{width:auto;min-height:0}
+.seg label:has(input:checked){border-color:var(--brand);background:#ECFEFF;color:var(--brand)}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 16px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;font-size:15px}
+.b.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.b.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.b.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.b.sm{min-height:44px;font-size:14px;padding:0 12px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pet-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ev{display:grid;gap:6px;border-top:1px solid var(--line);padding:12px 0}
+.ev:first-of-type{border-top:0}
+.ev .when{font-size:18px;font-weight:800}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px}
+.tag.ok{background:var(--ok-bg);color:var(--ok)}
+.tag.late{background:var(--bad-bg);color:var(--bad)}
+.tag.nd{background:#F1F5F9;color:var(--mute)}
+.cards{display:grid;gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.card h3{margin:0 0 2px;font-size:16px}
+.meta{font-size:14px;color:var(--ink-2)}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin-top:8px}
+.state{border:1px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mute)}
+.note{font-size:13px;color:var(--mute)}
+.err{color:var(--bad);font-weight:600}
+footer{text-align:center;color:var(--mute);font-size:14px;padding:24px 16px 40px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">VetBA</a><a href="/" class="b sm">Buscar veterinarias</a></div></header>
+
+<main class="wrap">
+  <h1>Recordatorio de vacunas para tu mascota</h1>
+  <p class="lead">Cargá las últimas fechas y te armamos las próximas para agendar en Google Calendar o en el calendario de tu celular. Gratis y sin registrarte.</p>
+
+  <p class="disc" role="note">Las fechas son orientativas (refuerzos anuales y desparasitación cada 3 meses en adultos). El calendario de vacunación de tu mascota lo define tu veterinario, sobre todo en cachorros, gatitos, animales mayores o con enfermedades.</p>
+
+  <form class="box" id="form" novalidate>
+    <h2>Datos de tu mascota</h2>
+    <div class="grid">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" required maxlength="40" placeholder="Ej: Luna" autocomplete="off">
+      </div>
+      <div>
+        <span id="espLbl" style="display:block;font-weight:700;font-size:14px;margin:0 0 4px">Especie</span>
+        <div class="seg" role="radiogroup" aria-labelledby="espLbl">
+          <label><input type="radio" name="especie" value="perro" checked> Perro</label>
+          <label><input type="radio" name="especie" value="gato"> Gato</label>
+        </div>
+      </div>
+      <div>
+        <label for="rabia">Última antirrábica</label>
+        <input id="rabia" name="rabia" type="date">
+      </div>
+      <div>
+        <label for="despa">Última desparasitación</label>
+        <input id="despa" name="despa" type="date">
+      </div>
+      <div>
+        <label for="poli" id="poliLbl">Última vacuna séptuple</label>
+        <input id="poli" name="poli" type="date">
+        <div class="hint" id="poliHint">También llamada polivalente o quíntuple/séxtuple según la marca.</div>
+      </div>
+    </div>
+    <p class="err" id="formErr" role="alert" hidden></p>
+    <div class="row"><button class="b pri" type="submit">Calcular próximas fechas</button></div>
+    <p class="note">Si no sabés alguna fecha, dejala vacía. Los datos se guardan solo en este navegador.</p>
+  </form>
+
+  <div id="pets"></div>
+
+  <section class="box" aria-labelledby="h-cerca">
+    <h2 id="h-cerca">Veterinarias cerca tuyo para vacunar</h2>
+    <div class="grid" style="margin-bottom:10px">
+      <div>
+        <label for="zona">Tu barrio o localidad</label>
+        <select id="zona"><option value="">Elegí tu barrio</option></select>
+      </div>
+      <div style="display:flex;align-items:flex-end"><button class="b" type="button" id="geo" style="width:100%">Usar mi ubicación</button></div>
+    </div>
+    <div class="cards" id="vets"><div class="state">Elegí tu barrio para ver 3 veterinarias que vacunan.</div></div>
+    <p class="note">Calificaciones de Google. Llamá antes de ir para confirmar turno y precio.</p>
+  </section>
+</main>
+
+<footer><a href="/">VetBA</a> · <a href="/terminos.html">Términos</a> · <a href="/privacidad.html">Privacidad</a></footer>
+
+<script>
+const CONFIG = { WHATSAPP_CONTACTO: '5491160374306', DATA_URL: 'data.json', STORAGE_KEY: 'vetba_recordatorios_v1' };
+
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+function trackEvent(name, data) { try { window.va('event', { name: name, data: data || {} }); } catch (e) {} }
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const nf1 = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+/* ---------- almacenamiento (solo localStorage, a prueba de errores) ---------- */
+function loadPets() { try { const v = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+function savePets(p) { try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(p)); return true; } catch (e) { return false; } }
+let PETS = loadPets();
+
+/* ---------- fechas ---------- */
+const parseD = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const addMonths = (d, n) => { const r = new Date(d.getFullYear(), d.getMonth() + n, 1); const last = new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate(); r.setDate(Math.min(d.getDate(), last)); return r; };
+const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+const today = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+const fmt = (d) => d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+const fmtLargo = (d) => d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const ymd = (d) => d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+
+// Reglas orientativas para adultos (las define el veterinario).
+const REGLAS = [
+  { k: 'rabia', nombre: 'Vacuna antirrábica', meses: 12, txt: 'refuerzo anual' },
+  { k: 'despa', nombre: 'Desparasitación', meses: 3, txt: 'cada 3 meses' },
+  { k: 'poli', nombre: { perro: 'Vacuna séptuple', gato: 'Vacuna triple felina' }, meses: 12, txt: 'refuerzo anual' }
+];
+function eventos(p) {
+  const hoy = today();
+  return REGLAS.map((r) => {
+    const nombre = typeof r.nombre === 'string' ? r.nombre : r.nombre[p.especie];
+    const ult = parseD(p[r.k]);
+    if (!ult) return { k: r.k, nombre, sinDato: true };
+    const prox = addMonths(ult, r.meses);
+    const atrasada = prox < hoy;
+    const fecha = atrasada ? addDays(hoy, 1) : prox; // si está atrasada, se agenda para mañana
+    return { k: r.k, nombre, ult, prox, atrasada, fecha, regla: r.txt };
+  });
+}
+
+/* ---------- Google Calendar e .ics ---------- */
+function titulo(p, e) { return (e.atrasada ? 'Atrasada: ' : '') + e.nombre + ' de ' + p.nombre; }
+function detalle(p, e) {
+  return 'Recordatorio de VetBA. Última aplicación: ' + fmt(e.ult) + '. Fecha sugerida: ' + fmt(e.prox) + ' (' + e.regla + ').\n' +
+    'Fecha orientativa: el calendario lo define tu veterinario. Llamá para sacar turno.\nVeterinarias cerca: https://www.vetba.com.ar/';
+}
+function gcalLink(p, e) {
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: titulo(p, e), dates: ymd(e.fecha) + '/' + ymd(addDays(e.fecha, 1)), details: detalle(p, e) });
+  return 'https://calendar.google.com/calendar/render?' + q.toString();
+}
+const icsEsc = (s) => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+function icsFold(line) { // RFC 5545: líneas de hasta 75 octetos
+  const out = []; let cur = '';
+  for (const ch of line) { if (new TextEncoder().encode(cur + ch).length > 74) { out.push(cur); cur = ' ' + ch; } else cur += ch; }
+  out.push(cur); return out.join('\r\n');
+}
+function buildICS(pets) {
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//VetBA//Recordatorios de vacunas//ES', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:Vacunas de mis mascotas (VetBA)'];
+  pets.forEach((p) => eventos(p).filter((e) => !e.sinDato).forEach((e) => {
+    L.push('BEGIN:VEVENT',
+      'UID:' + e.k + '-' + (p.id || '') + '@vetba.com.ar',
+      'DTSTAMP:' + stamp,
+      'DTSTART;VALUE=DATE:' + ymd(e.fecha),
+      'DTEND;VALUE=DATE:' + ymd(addDays(e.fecha, 1)),
+      'SUMMARY:' + icsEsc(titulo(p, e)),
+      'DESCRIPTION:' + icsEsc(detalle(p, e)),
+      'TRANSP:TRANSPARENT',
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(e.atrasada ? titulo(p, e) + ': pedí turno hoy' : titulo(p, e) + ' en 3 días'), e.atrasada ? 'TRIGGER:PT9H' : 'TRIGGER:-P3D', 'END:VALARM',
+      'END:VEVENT');
+  }));
+  L.push('END:VCALENDAR');
+  return L.map(icsFold).join('\r\n') + '\r\n';
+}
+function downloadICS(pets, name) {
+  const blob = new Blob([buildICS(pets)], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  trackEvent('Descargar ics', { mascotas: String(pets.length) });
+}
+
+/* ---------- render mascotas ---------- */
+function renderPets() {
+  const box = $('#pets');
+  if (!PETS.length) { box.innerHTML = ''; return; }
+  const conEventos = PETS.filter((p) => eventos(p).some((e) => !e.sinDato));
+  box.innerHTML = PETS.map((p) => {
+    const evs = eventos(p);
+    return '<article class="box" id="pet-' + esc(p.id) + '">' +
+      '<div class="pet-h"><h2 style="margin:0">' + esc(p.nombre) + ' <small style="color:var(--mute);font-weight:600">(' + (p.especie === 'gato' ? 'gato' : 'perro') + ')</small></h2>' +
+      '<span><button class="b sm" type="button" data-edit="' + esc(p.id) + '">Editar</button> <button class="b sm" type="button" data-del="' + esc(p.id) + '">Borrar</button></span></div>' +
+      evs.map((e) => e.sinDato
+        ? '<div class="ev"><b>' + esc(e.nombre) + '</b><span class="tag nd">Sin fecha cargada</span></div>'
+        : '<div class="ev"><b>' + esc(e.nombre) + '</b>' +
+            (e.atrasada ? '<span><span class="tag late">Atrasada desde el ' + fmt(e.prox) + '</span></span><span class="note">Consultá a tu veterinario lo antes posible. El recordatorio queda para mañana.</span>'
+                        : '<span class="when">' + fmtLargo(e.prox) + '</span><span class="note">Última: ' + fmt(e.ult) + ' · ' + e.regla + '</span>') +
+            '<a class="b sm" href="' + esc(gcalLink(p, e)) + '" target="_blank" rel="noopener" data-gcal>Agregar a Google Calendar</a></div>'
+      ).join('') +
+      '</article>';
+  }).join('') +
+  (conEventos.length ? '<div class="box"><button class="b dark" type="button" id="icsAll" style="width:100%">Descargar .ics con todos los recordatorios</button><p class="note" style="margin:8px 0 0">Sirve para iPhone, Android y Outlook. Cada evento trae una alarma 3 días antes.</p></div>' : '');
+}
+document.addEventListener('click', (e) => {
+  const d = e.target.closest('[data-del]');
+  if (d) { if (confirm('¿Borrar esta mascota?')) { PETS = PETS.filter((p) => p.id !== d.dataset.del); savePets(PETS); renderPets(); } return; }
+  const ed = e.target.closest('[data-edit]');
+  if (ed) { const p = PETS.find((x) => x.id === ed.dataset.edit); if (p) fillForm(p); return; }
+  if (e.target.closest('#icsAll')) downloadICS(PETS.filter((p) => eventos(p).some((x) => !x.sinDato)), 'vacunas-mascotas-vetba.ics');
+  if (e.target.closest('[data-gcal]')) trackEvent('Google Calendar', {});
+  const t = e.target.closest('[data-track]');
+  if (t) trackEvent(t.dataset.track, { ficha: t.dataset.id + ':' + t.dataset.slug, origen: 'recordatorios' });
+});
+
+/* ---------- formulario ---------- */
+let editing = null;
+function especie() { return document.querySelector('input[name=especie]:checked').value; }
+function syncEspecie() {
+  const g = especie() === 'gato';
+  $('#poliLbl').textContent = g ? 'Última vacuna triple felina' : 'Última vacuna séptuple';
+  $('#poliHint').textContent = g ? 'Protege contra panleucopenia, rinotraqueítis y calicivirus.' : 'También llamada polivalente o quíntuple/séxtuple según la marca.';
+}
+document.querySelectorAll('input[name=especie]').forEach((r) => r.addEventListener('change', syncEspecie));
+function fillForm(p) {
+  editing = p.id;
+  $('#nombre').value = p.nombre; $('#rabia').value = p.rabia || ''; $('#despa').value = p.despa || ''; $('#poli').value = p.poli || '';
+  document.querySelector('input[name=especie][value=' + (p.especie === 'gato' ? 'gato' : 'perro') + ']').checked = true;
+  syncEspecie(); $('#form').scrollIntoView({ behavior: 'smooth' }); $('#nombre').focus();
+}
+const hoyISO = (() => { const t = today(); return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); })();
+['rabia', 'despa', 'poli'].forEach((k) => $('#' + k).max = hoyISO);
+$('#form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const err = $('#formErr');
+  const p = { id: editing || String(Date.now()), nombre: $('#nombre').value.trim(), especie: especie(), rabia: $('#rabia').value, despa: $('#despa').value, poli: $('#poli').value };
+  const fut = ['rabia', 'despa', 'poli'].find((k) => p[k] && p[k] > hoyISO);
+  if (!p.nombre) { err.textContent = 'Poné el nombre de tu mascota.'; err.hidden = false; return; }
+  if (!p.rabia && !p.despa && !p.poli) { err.textContent = 'Cargá al menos una fecha.'; err.hidden = false; return; }
+  if (fut) { err.textContent = 'Las fechas tienen que ser de hoy o anteriores (es la última vez que se aplicó).'; err.hidden = false; return; }
+  err.hidden = true;
+  const i = PETS.findIndex((x) => x.id === p.id);
+  if (i >= 0) PETS[i] = p; else PETS.push(p);
+  const ok = savePets(PETS);
+  editing = null; $('#form').reset(); syncEspecie();
+  renderPets();
+  if (!ok) $('#pets').insertAdjacentHTML('afterbegin', '<p class="disc">Tu navegador no permite guardar datos (modo privado). Los recordatorios se ven ahora pero no quedan guardados: agendalos antes de cerrar.</p>');
+  trackEvent('Recordatorio creado', { especie: p.especie });
+  const el = document.getElementById('pet-' + p.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ---------- veterinarias cerca ---------- */
+let DATA = [], CENT = [];
+const barrioDe = (r) => r.barrio !== undefined ? r.barrio : r.localidad;
+const score = (r) => { const v = +r['reseñas'] || 0, R = +r.rating || 0; return R ? (v * R + 20 * 4.4) / (v + 20) : 0; };
+function km(a, b) { const R = 6371, rad = Math.PI / 180, dLat = (b.lat - a.lat) * rad, dLng = (b.lng - a.lng) * rad; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
+function telHref(t) { const d = String(t || '').replace(/\D/g, ''); if (!d) return ''; return d.startsWith('54') ? 'tel:+' + d : 'tel:+54' + d.replace(/^0/, ''); }
+const vacunan = (r) => r.tipo === 'veterinaria' && (r.servicios || []).includes('vacunacion');
+
+function renderVets(origin, barrio) {
+  let list = DATA.filter(vacunan);
+  if (origin) list = list.map((r) => Object.assign({}, r, { _d: km(origin, r) })).sort((a, b) => a._d - b._d);
+  else list = list.filter((r) => barrioDe(r) === barrio).sort((a, b) => score(b) - score(a));
+  list = list.slice(0, 3);
+  $('#vets').innerHTML = list.length ? list.map((r) => {
+    const da = ' data-id="' + r.id + '" data-slug="' + esc(r.slug) + '"';
+    const t = telHref(r.telefono);
+    const w = r.whatsapp ? 'https://wa.me/' + String(r.whatsapp).replace(/\D/g, '') + '?text=' + encodeURIComponent('Hola, los encontré en VetBA, quería sacar turno para vacunar a mi mascota') : '';
+    return '<div class="card"><h3><a href="/?ficha=' + encodeURIComponent(r.slug) + '">' + esc(r.nombre) + '</a></h3>' +
+      '<div class="meta">' + esc(r.direccion) + (barrioDe(r) ? ' · ' + esc(barrioDe(r)) : '') + (r._d != null ? ' · a ' + (r._d < 1 ? Math.round(r._d * 1000) + ' m' : nf1.format(r._d) + ' km') : '') + '</div>' +
+      (+r.rating > 0 ? '<div class="meta">' + nf1.format(r.rating) + ' ★ (' + (r['reseñas'] || 0) + ' reseñas en Google)</div>' : '') +
+      '<div class="acts">' + (t ? '<a class="b pri sm" href="' + t + '" data-track="Llamar"' + da + '>Llamar</a>' : '') +
+      (w ? '<a class="b wa sm" href="' + w + '" target="_blank" rel="noopener" data-track="WhatsApp"' + da + '>WhatsApp</a>' : '') +
+      '<a class="b sm" target="_blank" rel="noopener" data-track="Como llegar"' + da + ' href="https://www.google.com/maps/dir/?api=1&destination=' + r.lat + ',' + r.lng + (r.placeId ? '&destination_place_id=' + encodeURIComponent(r.placeId) : '') + '">Cómo llegar</a></div></div>';
+  }).join('') : '<div class="state">No tenemos veterinarias que vacunen cargadas en ese barrio. Probá con "Usar mi ubicación".</div>';
+}
+fetch(CONFIG.DATA_URL).then((r) => { if (!r.ok) throw 0; return r.json(); }).then((d) => {
+  DATA = d;
+  const c = {};
+  DATA.filter(vacunan).forEach((r) => { const b = barrioDe(r); if (b) c[b] = (c[b] || 0) + 1; });
+  $('#zona').insertAdjacentHTML('beforeend', Object.keys(c).sort((a, b) => a.localeCompare(b, 'es')).map((b) => '<option>' + esc(b) + '</option>').join(''));
+  let saved = ''; try { saved = localStorage.getItem('vetba_barrio') || ''; } catch (e) {}
+  if (saved && c[saved]) { $('#zona').value = saved; renderVets(null, saved); }
+}).catch(() => { $('#vets').innerHTML = '<div class="state err">No pudimos cargar las veterinarias. Probá recargar la página.</div>'; });
+$('#zona').addEventListener('change', (e) => { if (!e.target.value) return; try { localStorage.setItem('vetba_barrio', e.target.value); } catch (x) {} renderVets(null, e.target.value); });
+$('#geo').addEventListener('click', () => {
+  if (!navigator.geolocation) { $('#vets').innerHTML = '<div class="state">Tu navegador no permite compartir la ubicación. Elegí tu barrio.</div>'; return; }
+  $('#vets').innerHTML = '<div class="state">Buscando tu ubicación…</div>';
+  navigator.geolocation.getCurrentPosition((p) => renderVets({ lat: p.coords.latitude, lng: p.coords.longitude }),
+    () => { $('#vets').innerHTML = '<div class="state">No pudimos obtener tu ubicación. Elegí tu barrio.</div>'; }, { timeout: 10000, maximumAge: 300000 });
+});
+
+syncEspecie();
+renderPets();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
