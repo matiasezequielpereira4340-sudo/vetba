@@ -4,10 +4,18 @@
   "private": true,
   "description": "VetBA - directorio de veterinarias de CABA y GBA. Sitio estatico (index.html + data.json) con paginas SEO generadas.",
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build:seo": "node scripts/generar-paginas.mjs",
     "build": "npm run build:seo",
+    "check:links": "node scripts/verificar-links.mjs",
+    "datos": "node scripts/validar-data.mjs && node scripts/slugs.mjs && node scripts/outreach.mjs",
+    "fuentes:descargar": "node scripts/fuentes/descargar.mjs barrios && node scripts/fuentes/descargar.mjs osm && node scripts/fuentes/descargar.mjs apify",
+    "fuentes:unir": "node scripts/fuentes/unir-fuentes.mjs && node scripts/validar-data.mjs --red && node scripts/fuentes/contactos-web.mjs && node scripts/slugs.mjs && node scripts/outreach.mjs",
+    "reporte": "node scripts/reporte-calidad.mjs reports/calidad-despues.md",
+    "materiales": "node scripts/generar-materiales.mjs",
     "normalizar": "node scripts/normalizar-data.mjs",
     "normalizar:check": "node scripts/normalizar-data.mjs --check",
     "dev": "python3 -m http.server 8080"

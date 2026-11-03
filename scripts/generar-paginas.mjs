@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = process.env.VETBA_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://www.vetba.com.ar';
 const WHATSAPP_CONTACTO = '5491160374306';
 const HOY = new Date().toISOString().slice(0, 10);
@@ -42,6 +42,10 @@ const nf1 = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 1, maximumFr
 const nf0 = new Intl.NumberFormat('es-AR');
 const score = (r) => { const v = +r['reseñas'] || 0, R = +r.rating || 0; return R ? (v * R + 20 * 4.4) / (v + 20) : 0; };
 const orden = (a, b) => ((b.plan === 'premium' ? 2 : b.plan === 'pro' ? 1 : 0) - (a.plan === 'premium' ? 2 : a.plan === 'pro' ? 1 : 0)) || score(b) - score(a);
+const VALIDADO = data.some((r) => r.telefono_e164);
+const USA_OSM = data.some((r) => (r.fuente || []).includes('osm'));
+// Teléfono para tel:/schema. Con data validada, un teléfono inválido no se publica como link.
+const telDe = (r) => r.telefono_e164 || (VALIDADO ? '' : telDe(r));
 const e164 = (t) => { const d = String(t || '').replace(/\D/g, ''); if (!d) return ''; return d.startsWith('54') ? '+' + d : '+54' + d.replace(/^0/, ''); };
 const mapsHref = (r) => 'https://www.google.com/maps/dir/?api=1&destination=' + r.lat + ',' + r.lng + (r.placeId ? '&destination_place_id=' + encodeURIComponent(r.placeId) : '');
 const waLink = (num, msg) => 'https://wa.me/' + String(num).replace(/\D/g, '') + (msg ? '?text=' + encodeURIComponent(msg) : '');
@@ -61,6 +65,7 @@ const REGION = (z) => (z === 'CABA' ? 'Ciudad Autónoma de Buenos Aires' : 'Buen
 
 const fichaUrl = (r) => SITE + '/ficha/' + r.slug;
 const barrioUrl = (b) => SITE + '/veterinarias/' + slugify(b);
+const partidoUrl = (p) => SITE + '/veterinarias/partido/' + slugify(p);
 
 /* ---------------- horarios ---------------- */
 function openingHoursSpec(r) {
@@ -158,7 +163,7 @@ ${body}
 <a class="b urg urg-fab" href="/?urgencia=1">Urgencia: veterinaria abierta ahora</a>
 <footer><div class="wrap">
 <p><a href="/">VetBA</a> · <a href="/veterinarias/">Veterinarias por barrio</a> · <a href="/urgencias-24-horas/">Urgencias 24 horas</a> · <a href="/recordatorios.html">Recordatorio de vacunas</a> · <a href="/terminos.html">Términos</a> · <a href="/privacidad.html">Privacidad</a></p>
-<p>Calificaciones y reseñas: Google. Los datos pueden cambiar: llamá antes de ir.</p>
+<p>Calificaciones y reseñas: Google. Los datos pueden cambiar: llamá antes de ir.${USA_OSM ? ' Datos de mapas © <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a> (licencia ODbL).' : ''}</p>
 </div></footer>
 <script>${JS}</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -173,7 +178,7 @@ function breadcrumbs(items) { // [[nombre, url|null], ...]
 }
 function actions(r, origen) {
   const da = ' data-id="' + r.id + '" data-slug="' + esc(r.slug) + '" data-origen="' + origen + '"';
-  const tel = e164(r.telefono);
+  const tel = telDe(r);
   return '<div class="acts">' +
     (tel ? '<a class="b call" href="tel:' + tel + '" data-track="Llamar"' + da + '>Llamar</a>' : '') +
     (r.whatsapp ? '<a class="b wa" href="' + esc(waLink(r.whatsapp, 'Hola, los encontré en VetBA, quería hacer una consulta')) + '" target="_blank" rel="noopener" data-track="WhatsApp"' + da + '>WhatsApp</a>' : '') +
@@ -197,7 +202,7 @@ function businessLD(r) {
     url: fichaUrl(r),
     address: { '@type': 'PostalAddress', streetAddress: r.direccion, addressLocality: b || r.zona, addressRegion: REGION(r.zona), addressCountry: 'AR' }
   };
-  if (r.telefono) o.telephone = e164(r.telefono);
+  if (telDe(r)) o.telephone = telDe(r);
   if (typeof r.lat === 'number') o.geo = { '@type': 'GeoCoordinates', latitude: r.lat, longitude: r.lng };
   if (r.placeId) o.hasMap = 'https://www.google.com/maps/place/?q=place_id:' + r.placeId;
   const oh = openingHoursSpec(r); if (oh) o.openingHoursSpecification = oh;
@@ -213,8 +218,12 @@ function write(rel, html) {
 /* ---------------- preparar datos ---------------- */
 for (const dir of ['veterinarias', 'urgencias-24-horas', 'ficha']) rmSync(path.join(ROOT, dir), { recursive: true, force: true });
 
+// Una localidad con el mismo nombre en dos partidos (p. ej. Loma Hermosa) tiene una página por partido.
+const partidosDe = {};
+for (const r of data) { const b = barrioDe(r); if (b) (partidosDe[b] = partidosDe[b] || new Set()).add(r.partido || r.zona); }
+const claveBarrio = (r) => { const b = barrioDe(r); if (!b) return null; return partidosDe[b].size > 1 ? b + ' (' + (r.partido || r.zona) + ')' : b; };
 const porBarrio = new Map();
-for (const r of data) { const b = barrioDe(r); if (!b) continue; if (!porBarrio.has(b)) porBarrio.set(b, []); porBarrio.get(b).push(r); }
+for (const r of data) { const b = claveBarrio(r); if (!b) continue; if (!porBarrio.has(b)) porBarrio.set(b, []); porBarrio.get(b).push(r); }
 const slugsBarrio = new Map();
 for (const b of porBarrio.keys()) { const s = slugify(b); if (slugsBarrio.has(s)) throw new Error('Slug de barrio duplicado: ' + s); slugsBarrio.set(s, b); }
 const centro = new Map([...porBarrio].map(([b, rs]) => { const g = rs.filter((r) => typeof r.lat === 'number'); return [b, { lat: g.reduce((a, r) => a + r.lat, 0) / g.length, lng: g.reduce((a, r) => a + r.lng, 0) / g.length }]; }));
@@ -239,7 +248,8 @@ for (const [b, rs] of porBarrio) {
   const title = (vets.length ? 'Veterinarias en ' + b : 'Peluquerías y pet shops en ' + b) + (n24 ? ' — urgencias 24 h' : '') + ' | VetBA';
   const desc = (vets.length ? plural(vets.length, 'veterinaria', 'veterinarias') + ' en ' + b : 'Servicios para mascotas en ' + b) + ' (' + zona + ')' + (n24 ? ', ' + n24 + ' con atención 24 horas' : '') + '. Teléfonos, direcciones, horarios y cómo llegar.' + (otros.length ? ' También peluquerías y pet shops.' : '');
   checkTitle(title, url);
-  const bc = breadcrumbs([['Inicio', SITE + '/'], ['Veterinarias', SITE + '/veterinarias'], [b, null]]);
+  const partidoB = rs[0].partido && rs.every((r) => r.partido === rs[0].partido) ? rs[0].partido : null;
+  const bc = breadcrumbs(partidoB ? [['Inicio', SITE + '/'], ['Veterinarias', SITE + '/veterinarias'], [partidoB, partidoUrl(partidoB)], [b, null]] : [['Inicio', SITE + '/'], ['Veterinarias', SITE + '/veterinarias'], [b, null]]);
   const lista = vets.length ? vets : otros;
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: h1, numberOfItems: rs.length, itemListElement: [...vets, ...otros].map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: fichaUrl(r), name: r.nombre })) };
   const body = bc.html +
@@ -257,6 +267,28 @@ for (const [b, rs] of porBarrio) {
   urls.push({ loc: url, pr: '0.8' });
 }
 
+/* ---------------- páginas por partido (GBA) ---------------- */
+const porPartido = new Map();
+for (const r of data) if (r.partido) { if (!porPartido.has(r.partido)) porPartido.set(r.partido, []); porPartido.get(r.partido).push(r); }
+for (const [p, rs] of porPartido) {
+  const url = partidoUrl(p);
+  const vets = rs.filter((r) => r.tipo === 'veterinaria').sort(orden), otros = rs.filter((r) => r.tipo !== 'veterinaria').sort(orden);
+  const n24 = rs.filter(es24).length;
+  const locs = {}; for (const r of rs) { const k = claveBarrio(r); if (k) locs[k] = (locs[k] || 0) + 1; }
+  const title = 'Veterinarias en el partido de ' + p + (n24 ? ' — urgencias 24 h' : '') + ' | VetBA';
+  checkTitle(title, url);
+  const bc = breadcrumbs([['Inicio', SITE + '/'], ['Veterinarias', SITE + '/veterinarias'], ['Partido de ' + p, null]]);
+  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Veterinarias en ' + p, numberOfItems: rs.length, itemListElement: [...vets, ...otros].map((r, i) => ({ '@type': 'ListItem', position: i + 1, url: fichaUrl(r), name: r.nombre })) };
+  const body = bc.html + '<h1>Veterinarias en el partido de ' + esc(p) + '</h1>' +
+    '<p class="lead">En VetBA hay ' + plural(rs.length, 'lugar', 'lugares') + ' para mascotas en ' + esc(p) + ': ' + plural(vets.length, 'veterinaria', 'veterinarias') + (otros.length ? ' y ' + plural(otros.length, 'peluquería o pet shop', 'peluquerías y pet shops') : '') + '.' + (n24 ? ' <b>' + plural(n24, 'atiende', 'atienden') + ' las 24 horas.</b>' : '') + ' Llamá antes de ir para confirmar horario.</p>' +
+    (Object.keys(locs).length ? '<h2>Por localidad</h2><div class="links">' + Object.keys(locs).sort((a, c) => a.localeCompare(c, 'es')).map((l) => '<a href="/veterinarias/' + slugify(l) + '">' + esc(l) + ' (' + locs[l] + ')</a>').join('') + '</div>' : '') +
+    (vets.length ? '<h2>Veterinarias</h2><div class="cards">' + vets.map((r) => card(r, 'partido')).join('') + '</div>' : '') +
+    (otros.length ? '<h2>Peluquerías, pet shops y laboratorios</h2><div class="cards">' + otros.map((r) => card(r, 'partido')).join('') + '</div>' : '') +
+    '<h2>Otros partidos</h2><div class="links">' + [...porPartido.keys()].filter((x) => x !== p).map((x) => '<a href="/veterinarias/partido/' + slugify(x) + '">' + esc(x) + '</a>').join('') + '</div>';
+  write('veterinarias/partido/' + slugify(p) + '/index.html', page({ title, desc: plural(rs.length, 'lugar', 'lugares') + ' para mascotas en el partido de ' + p + ': veterinarias' + (n24 ? ' (' + n24 + ' de 24 horas)' : '') + ', peluquerías y pet shops con teléfono, horario y cómo llegar.', canonical: url, body, jsonld: [bc.ld, itemList] }));
+  urls.push({ loc: url, pr: '0.8' });
+}
+
 /* ---------------- índice de barrios ---------------- */
 {
   const url = SITE + '/veterinarias';
@@ -264,6 +296,7 @@ for (const [b, rs] of porBarrio) {
   const porZona = {};
   for (const b of [...porBarrio.keys()].sort((a, c) => a.localeCompare(c, 'es'))) (porZona[zonaDeBarrio(b)] = porZona[zonaDeBarrio(b)] || []).push(b);
   const body = bc.html + '<h1>Veterinarias por barrio en CABA y GBA</h1><p class="lead">Elegí tu barrio o localidad para ver veterinarias, peluquerías y pet shops con teléfono, dirección y cómo llegar.</p>' +
+    (porPartido.size ? '<h2>Por partido</h2><div class="links">' + [...porPartido.keys()].sort((a, c) => a.localeCompare(c, 'es')).map((p) => '<a href="/veterinarias/partido/' + slugify(p) + '">' + esc(p) + ' (' + porPartido.get(p).length + ')</a>').join('') + '</div>' : '') +
     Object.keys(porZona).sort().map((z) => '<h2>' + esc(z) + '</h2><div class="links">' + porZona[z].map((b) => '<a href="/veterinarias/' + slugify(b) + '">' + esc(b) + ' (' + porBarrio.get(b).length + ')</a>').join('') + '</div>').join('');
   write('veterinarias/index.html', page({ title: 'Veterinarias por barrio en CABA y GBA | VetBA', desc: 'Listado de veterinarias por barrio y localidad de CABA y GBA: ' + porBarrio.size + ' barrios con teléfono, dirección y horarios.', canonical: url, body, jsonld: [bc.ld] }));
 }
@@ -303,7 +336,7 @@ for (const [z, rs] of Object.entries(zonas24)) {
 const PREC = { consulta: 'Consulta', antirrabica: 'Vacuna antirrábica', castracion_gato: 'Castración gato', castracion_perro: 'Castración perro' };
 const ARR = (a) => (Array.isArray(a) ? a : []);
 for (const r of data) {
-  const b = barrioDe(r), url = fichaUrl(r);
+  const b = claveBarrio(r), url = fichaUrl(r);
   const lugar = b || r.zona;
   let title = r.nombre + ' — ' + (TIPO[r.tipo] || r.tipo) + ' en ' + lugar + ' | VetBA';
   if (titulos.has(title)) title = r.nombre + ' (' + r.direccion + ') — ' + (TIPO[r.tipo] || r.tipo) + ' en ' + lugar + ' | VetBA';
@@ -321,8 +354,8 @@ for (const r of data) {
   const body = bc.html +
     '<h1>' + esc(r.nombre) + '</h1>' +
     '<div class="tags"><span class="tag">' + esc(TIPO[r.tipo] || r.tipo) + '</span>' + (esPago(r) ? '<span class="tag">✓ Verificado</span>' : '') + '</div>' +
-    '<p class="lead" style="margin-top:10px">' + esc(TIPO[r.tipo] || r.tipo) + ' en <b>' + esc(r.direccion) + '</b>' + (b ? ', ' + esc(b) : '') + ' (' + esc(r.zona) + ').' +
-      (r.telefono ? ' Teléfono: <a href="tel:' + e164(r.telefono) + '" data-track="Llamar" data-id="' + r.id + '" data-slug="' + esc(r.slug) + '" data-origen="ficha-seo">' + esc(r.telefono) + '</a>.' : '') +
+    '<p class="lead" style="margin-top:10px">' + esc(TIPO[r.tipo] || r.tipo) + (r.direccion ? ' en <b>' + esc(r.direccion) + '</b>' : '') + (b ? ', ' + esc(b) : '') + ' (' + esc(r.zona) + ').' +
+      (telDe(r) ? ' Teléfono: <a href="tel:' + telDe(r) + '" data-track="Llamar" data-id="' + r.id + '" data-slug="' + esc(r.slug) + '" data-origen="ficha-seo">' + esc(r.telefono) + '</a>.' : '') +
       (+r.rating > 0 ? ' Calificación en Google: <b>' + nf1.format(r.rating) + ' ★</b> (' + nf0.format(r['reseñas'] || 0) + ' reseñas).' : '') + '</p>' +
     actions(r, 'ficha-seo') +
     '<div class="box"><b>Horario</b><br>' + horarioHTML(r) +
@@ -345,8 +378,8 @@ writeFileSync(path.join(ROOT, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF
   urls.map((u) => '<url><loc>' + u.loc + '</loc><lastmod>' + HOY + '</lastmod><priority>' + u.pr + '</priority></url>').join('\n') + '\n</urlset>\n');
 writeFileSync(path.join(ROOT, 'robots.txt'), 'User-agent: *\nAllow: /\nDisallow: /scripts/\n\nSitemap: ' + SITE + '/sitemap.xml\n');
 
-const nB = porBarrio.size, nZ = Object.keys(zonas24).length, nF = data.length;
-console.log(`Páginas generadas: ${nB} barrios + ${nZ} zonas de urgencia + ${nF} fichas + 2 índices = ${nB + nZ + nF + 2}`);
+const nB = porBarrio.size, nZ = Object.keys(zonas24).length, nF = data.length, nP = porPartido.size;
+console.log(`Páginas generadas: ${nB} barrios + ${nP} partidos + ${nZ} zonas de urgencia + ${nF} fichas + 2 índices = ${nB + nP + nZ + nF + 2}`);
 console.log(`sitemap.xml: ${urls.length} URLs`);
 const sinBarrio = data.filter((r) => !barrioDe(r)).length;
 if (sinBarrio) console.log(`Aviso: ${sinBarrio} registros sin barrio (tienen ficha, pero no aparecen en páginas de barrio). Ver: node scripts/normalizar-data.mjs --check`);

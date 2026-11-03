@@ -300,6 +300,7 @@ dialog.full{width:100%;max-width:100%;height:100%;max-height:100%;border-radius:
       </div>
       <div class="f-more">
         <select id="fZona" aria-label="Zona"><option value="">Todas las zonas</option></select>
+        <select id="fPartido" aria-label="Partido" hidden><option value="">Todos los partidos</option></select>
         <select id="fBarrio" aria-label="Barrio o localidad"><option value="">Todos los barrios</option></select>
         <select id="fServicio" aria-label="Servicio"><option value="">Cualquier servicio</option></select>
         <select id="fEspecialidad" aria-label="Especialidad" hidden><option value="">Especialidad</option></select>
@@ -438,7 +439,7 @@ dialog.full{width:100%;max-width:100%;height:100%;max-height:100%;border-radius:
         <div class="barrios-links" id="fBarrios"></div>
       </div>
     </div>
-    <div class="f-bottom">© <span id="year">2026</span> VetBA. Calificaciones y reseñas: Google. VetBA no presta servicios veterinarios.</div>
+    <div class="f-bottom">© <span id="year">2026</span> VetBA. Calificaciones y reseñas: Google.<span id="osmAttr" hidden> Datos de mapas © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">colaboradores de OpenStreetMap</a> (licencia ODbL).</span> VetBA no presta servicios veterinarios.</div>
   </div>
 </footer>
 
@@ -504,6 +505,9 @@ function telHref(t) {
   if (d.startsWith('54')) return 'tel:+' + d;
   return 'tel:+54' + d.replace(/^0/, '');
 }
+// Si data.json ya pasó por scripts/validar-data.mjs se usa telefono_e164 (y un teléfono inválido no muestra Llamar).
+let VALIDADO = false;
+const telDe = (r) => r.telefono_e164 ? 'tel:' + r.telefono_e164 : (VALIDADO ? '' : telHref(r.telefono));
 // WhatsApp SOLO si el registro tiene el campo `whatsapp` (un fijo no es WhatsApp).
 function waHref(r, msg) { return r.whatsapp ? waLink(r.whatsapp, msg) : ''; }
 function mapsHref(r) {
@@ -589,7 +593,7 @@ const badgeEstado = (r) => { const e = estadoHorario(r); return '<span class="st
 
 /* ---------- estado ---------- */
 let DATA = [];
-const F = { q: '', tipo: '', zona: '', barrio: '', servicio: '', abierto: false, h24: false, cerca: false, especialidad: '', pago: '', extra: '' };
+const F = { q: '', tipo: '', zona: '', partido: '', barrio: '', servicio: '', abierto: false, h24: false, cerca: false, especialidad: '', pago: '', extra: '' };
 let USER = null; // {lat,lng,label}
 let shown = CONFIG.PAGE_SIZE;
 let lastList = [];
@@ -608,6 +612,7 @@ function load() {
     .then((d) => {
       if (!Array.isArray(d)) throw new Error('formato');
       DATA = d.filter((r) => r && r.nombre);
+      VALIDADO = DATA.some((r) => r.telefono_e164);
       init();
     })
     .catch((e) => {
@@ -626,6 +631,7 @@ function init() {
   applyURL();
   render();
   renderFooterBarrios();
+  $('#osmAttr').hidden = !DATA.some((r) => (r.fuente || []).includes('osm'));
   buildUrgBarrios();
 }
 
@@ -670,6 +676,8 @@ function buildFilters() {
   $('#tipoChips').innerHTML = Object.keys(TIPOS).filter((t) => tipos[t]).map((t) =>
     '<button class="chip" type="button" aria-pressed="false" data-tipo="' + t + '">' + TIPOS_PL[t] + ' (' + tipos[t] + ')</button>').join('');
   opts('#fZona', uniq(DATA.map((r) => r.zona)).sort());
+  const partidos = uniq(DATA.map((r) => r.partido)).sort((a, b) => a.localeCompare(b, 'es'));
+  if (partidos.length) { opts('#fPartido', partidos); $('#fPartido').hidden = false; }
   fillBarrios();
   const servs = count(DATA.flatMap((r) => r.servicios || []));
   opts('#fServicio', Object.keys(servs).sort((a, b) => servs[b] - servs[a]), (s) => servLabel(s) + ' (' + servs[s] + ')');
@@ -693,15 +701,15 @@ function buildFilters() {
     else F[c.dataset.f] = !F[c.dataset.f];
     update();
   });
-  const bind = (sel, key) => $(sel).addEventListener('change', (e) => { F[key] = e.target.value; if (key === 'zona') { F.barrio = ''; fillBarrios(); } update(); });
-  bind('#fZona', 'zona'); bind('#fBarrio', 'barrio'); bind('#fServicio', 'servicio');
+  const bind = (sel, key) => $(sel).addEventListener('change', (e) => { F[key] = e.target.value; if (key === 'zona' || key === 'partido') { F.barrio = ''; fillBarrios(); } update(); });
+  bind('#fZona', 'zona'); bind('#fPartido', 'partido'); bind('#fBarrio', 'barrio'); bind('#fServicio', 'servicio');
   bind('#fEspecialidad', 'especialidad'); bind('#fPago', 'pago'); bind('#fExtra', 'extra');
-  $('#clearF').addEventListener('click', () => { Object.assign(F, { q: '', tipo: '', zona: '', barrio: '', servicio: '', abierto: false, h24: false, cerca: false, especialidad: '', pago: '', extra: '' }); $('#heroQ').value = ''; $$('.f-more select').forEach((s) => s.value = ''); fillBarrios(); update(); });
+  $('#clearF').addEventListener('click', () => { Object.assign(F, { q: '', tipo: '', zona: '', partido: '', barrio: '', servicio: '', abierto: false, h24: false, cerca: false, especialidad: '', pago: '', extra: '' }); $('#heroQ').value = ''; $$('.f-more select').forEach((s) => s.value = ''); fillBarrios(); update(); });
   $('#moreBtn').addEventListener('click', () => { shown += CONFIG.PAGE_SIZE; render(false); });
 }
 function fillBarrios() {
   const el = $('#fBarrio');
-  const src = DATA.filter((r) => !F.zona || r.zona === F.zona);
+  const src = DATA.filter((r) => (!F.zona || r.zona === F.zona) && (!F.partido || r.partido === F.partido));
   const c = count(src.map(barrioDe).filter(Boolean));
   el.innerHTML = '<option value="">Todos los barrios</option>' + Object.keys(c).sort((a, b) => a.localeCompare(b, 'es')).map((b) => '<option value="' + esc(b) + '">' + esc(b) + ' (' + c[b] + ')</option>').join('');
   el.value = F.barrio;
@@ -712,6 +720,7 @@ function filtered() {
   let list = DATA.filter((r) => {
     if (F.tipo && r.tipo !== F.tipo) return false;
     if (F.zona && r.zona !== F.zona) return false;
+    if (F.partido && r.partido !== F.partido) return false;
     if (F.barrio && barrioDe(r) !== F.barrio) return false;
     if (F.servicio && !(r.servicios || []).includes(F.servicio)) return false;
     if (F.especialidad && !(r.especialidades || []).includes(F.especialidad)) return false;
@@ -720,7 +729,7 @@ function filtered() {
     if (F.h24 && !es24(r)) return false;
     if (F.abierto && !estadoHorario(r).abierto) return false;
     if (words.length) {
-      const hay = norm([r.nombre, r.direccion, barrioDe(r), r.zona, TIPOS[r.tipo], (r.servicios || []).map(servLabel).join(' ')].join(' '));
+      const hay = norm([r.nombre, r.direccion, barrioDe(r), r.partido, r.zona, TIPOS[r.tipo], (r.servicios || []).map(servLabel).join(' ')].join(' '));
       if (!words.every((w) => hay.includes(w))) return false;
     }
     return true;
@@ -734,8 +743,8 @@ function syncFilterUI() {
     const on = c.dataset.tipo ? F.tipo === c.dataset.tipo : !!F[c.dataset.f];
     c.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
-  $('#fZona').value = F.zona; $('#fBarrio').value = F.barrio; $('#fServicio').value = F.servicio;
-  const active = F.q || F.tipo || F.zona || F.barrio || F.servicio || F.abierto || F.h24 || F.cerca || F.especialidad || F.pago || F.extra;
+  $('#fZona').value = F.zona; $('#fPartido').value = F.partido; $('#fBarrio').value = F.barrio; $('#fServicio').value = F.servicio;
+  const active = F.q || F.tipo || F.zona || F.partido || F.barrio || F.servicio || F.abierto || F.h24 || F.cerca || F.especialidad || F.pago || F.extra;
   $('#clearF').hidden = !active;
 }
 function update() { shown = CONFIG.PAGE_SIZE; render(); writeURL(); }
@@ -743,18 +752,18 @@ function update() { shown = CONFIG.PAGE_SIZE; render(); writeURL(); }
 /* ---------- URL (?q=&tipo=&barrio=&abierto=1&ficha=slug) ---------- */
 function applyURL() {
   const p = new URLSearchParams(location.search);
-  ['q', 'tipo', 'zona', 'barrio', 'servicio'].forEach((k) => { if (p.get(k)) F[k] = p.get(k); });
+  ['q', 'tipo', 'zona', 'partido', 'barrio', 'servicio'].forEach((k) => { if (p.get(k)) F[k] = p.get(k); });
   if (p.get('abierto') === '1') F.abierto = true;
   if (p.get('h24') === '1') F.h24 = true;
   if (F.q) $('#heroQ').value = F.q;
   if (F.zona) fillBarrios();
   const slug = p.get('ficha') || p.get('reclamar');
-  if (slug) { const r = DATA.find((x) => x.slug === slug); if (r) openFicha(r, { reclamar: !!p.get('reclamar') }); }
+  if (slug) { const r = DATA.find((x) => x.slug === slug) || DATA.find((x) => (x.slugs_anteriores || []).includes(slug)); if (r) openFicha(r, { reclamar: !!p.get('reclamar') }); }
   if (p.get('urgencia') === '1') openUrg();
 }
 function writeURL() {
   const p = new URLSearchParams();
-  ['q', 'tipo', 'zona', 'barrio', 'servicio'].forEach((k) => { if (F[k]) p.set(k, F[k]); });
+  ['q', 'tipo', 'zona', 'partido', 'barrio', 'servicio'].forEach((k) => { if (F[k]) p.set(k, F[k]); });
   if (F.abierto) p.set('abierto', '1');
   if (F.h24) p.set('h24', '1');
   const s = p.toString();
@@ -764,7 +773,7 @@ function writeURL() {
 /* ---------- tarjetas ---------- */
 function actionsHTML(r, origen, big) {
   const cls = big ? ' big' : '';
-  const t = telHref(r.telefono), w = waHref(r, 'Hola, los encontré en VetBA, ' + (origen === 'urgencia' ? 'tengo una urgencia con mi mascota' : 'quería hacer una consulta'));
+  const t = telDe(r), w = waHref(r, 'Hola, los encontré en VetBA, ' + (origen === 'urgencia' ? 'tengo una urgencia con mi mascota' : 'quería hacer una consulta'));
   const da = ' data-id="' + r.id + '" data-slug="' + esc(r.slug) + '" data-origen="' + origen + '"';
   return '<div class="acts">' +
     (t ? '<a class="b call' + cls + '" href="' + t + '" data-track="Llamar"' + da + '>' + svg('phone') + 'Llamar</a>' : '') +
@@ -781,7 +790,7 @@ function cardHTML(r, origen) {
   return '<article class="card' + (esPago(r) ? ' pro' : '') + '">' +
     '<div class="tags"><span class="tag t-' + esc(r.tipo) + '">' + esc(TIPOS[r.tipo] || r.tipo) + '</span>' + (esPago(r) ? '<span class="tag ver">✓ Verificado</span>' : '') + badgeEstado(r) + '</div>' +
     '<h3><button type="button" data-ficha="' + r.id + '">' + esc(r.nombre) + '</button></h3>' +
-    '<div class="meta">' + esc(r.direccion) + (b ? ' · ' + esc(b) : '') + (r._d != null && (F.cerca || origen === 'urgencia') ? ' · <b>a ' + fmtKm(r._d) + '</b>' : '') + '</div>' +
+    '<div class="meta">' + esc(r.direccion || '') + (b ? ' · ' + esc(b) : '') + (r.partido && r.partido !== b ? ', ' + esc(r.partido) : '') + (r._d != null && (F.cerca || origen === 'urgencia') ? ' · <b>a ' + fmtKm(r._d) + '</b>' : '') + '</div>' +
     (ratingHTML(r) ? '<div class="meta">' + ratingHTML(r) + '</div>' : '') +
     actionsHTML(r, origen) +
     '</article>';

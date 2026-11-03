@@ -4,15 +4,847 @@
   "buildCommand": "npm run build:seo",
   "outputDirectory": ".",
   "redirects": [
-    { "source": "/veterinarias-:barrio", "destination": "/veterinarias/:barrio", "permanent": true }
+    {
+      "source": "/veterinarias-:barrio",
+      "destination": "/veterinarias/:barrio",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/amores-perros-peluqueria-canina-accesorios-vestimenta-envios-cortes-raza-154",
+      "destination": "/ficha/amores-perros-peluqueria-canina-accesorios-vestimenta",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/amulen-132",
+      "destination": "/ficha/amulen",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/animal-care-8",
+      "destination": "/ficha/animal-care",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/animal-point-peluqueria-canina-148",
+      "destination": "/ficha/animal-point-peluqueria-canina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/animed-10",
+      "destination": "/ficha/animed",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/asistencia-vet-guayaquil-13",
+      "destination": "/ficha/asistencia-vet-guayaquil",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/avellaneda-veterinary-center-68",
+      "destination": "/ficha/avellaneda-veterinary-center",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/azul-veterinaria-131",
+      "destination": "/ficha/azul-veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/baires-pet-shop-tienda-de-mascotas-122",
+      "destination": "/ficha/baires-pet-shop-tienda-de-mascotas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/benpet-61",
+      "destination": "/ficha/benpet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/bonaire-petshop-veterinaria-peluqueria-canina-y-felina-ecografias-kinesiologia-cirugias-analisis-clinicos-electrocardiograma-alimentos-medicamentos-151",
+      "destination": "/ficha/bonaire-petshop-veterinaria-peluqueria-canina-y-felina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/boutique-canina-del-fundador-133",
+      "destination": "/ficha/boutique-canina-del-fundador",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/candy-pet-shop-peluqueria-canina-120",
+      "destination": "/ficha/candy-pet-shop-y-peluqueria-canina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/casper-pet-store-cabrera-126",
+      "destination": "/ficha/casper-pet-store-cabrera",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/casper-pet-store-guemes-2987-119",
+      "destination": "/ficha/casper-pet-store-guemes-2987",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/casper-pet-store-junin-113",
+      "destination": "/ficha/casper-pet-store-junin",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/casper-pet-store-las-heras-115",
+      "destination": "/ficha/casper-pet-store-las-heras",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/casper-pet-store-plaza-almagro-152",
+      "destination": "/ficha/casper-pet-store-plaza-almagro",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/central-veterinaria-tigre-98",
+      "destination": "/ficha/central-veterinaria-tigre",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-medico-vet-almagro-23",
+      "destination": "/ficha/centro-medico-vet-almagro",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-medico-vet-buenos-aires-34",
+      "destination": "/ficha/centro-medico-vet-buenos-aires",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-medico-veterinario-tigre-99",
+      "destination": "/ficha/centro-medico-veterinario-tigre",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-vet-centenario-40",
+      "destination": "/ficha/centro-vet-centenario",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-vet-dr-roberto-fara-3",
+      "destination": "/ficha/centro-vet-dr-roberto-fara",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-veterinario-moron-88",
+      "destination": "/ficha/centro-veterinario-moron",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-veterinario-trusoni-100",
+      "destination": "/ficha/centro-veterinario-trusoni",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/cevemed-7",
+      "destination": "/ficha/cevemed",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/chikis-peluqueria-64",
+      "destination": "/ficha/chikis-peluqueria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/cima-centro-medico-vet-36",
+      "destination": "/ficha/cima-centro-medico-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-vet-ayelen-5",
+      "destination": "/ficha/clinica-vet-ayelen",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-vet-dr-gonzalez-33",
+      "destination": "/ficha/clinica-vet-dr-gonzalez",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-vet-pet-danbar-44",
+      "destination": "/ficha/clinica-vet-y-pet-danbar",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-vet-recoleta-16",
+      "destination": "/ficha/clinica-vet-recoleta",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-veterinaria-gutierrez-70",
+      "destination": "/ficha/clinica-veterinaria-gutierrez",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-veterinaria-lomas-83",
+      "destination": "/ficha/clinica-veterinaria-lomas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-veterinaria-pet-s-127",
+      "destination": "/ficha/clinica-veterinaria-pet-s",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/colon-veterinary-hospital-80",
+      "destination": "/ficha/colon-veterinary-hospital",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/combinacion-mascotas-veterinaria-pet-shop-123",
+      "destination": "/ficha/combinacion-mascotas-veterinaria-pet-shop",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/como-perros-y-gatos-51",
+      "destination": "/ficha/como-perros-y-gatos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/consultorio-vet-dra-ana-victoria-andres-79",
+      "destination": "/ficha/consultorio-vet-dra-ana-victoria-andres",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/consultorio-veterinario-nehuen-104",
+      "destination": "/ficha/consultorio-veterinario-nehuen",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/cvo-centro-vet-olivos-42",
+      "destination": "/ficha/cvo-centro-vet-olivos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/danke-veterinary-clinic-85",
+      "destination": "/ficha/danke-veterinary-clinic",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/dcm-pet-shop-veterinaria-peluqueria-156",
+      "destination": "/ficha/dcm-pet-shop-veterinaria-peluqueria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/dcm-pet-shop-veterinaria-y-peluqueria-144",
+      "destination": "/ficha/dcm-pet-shop-veterinaria-y-peluqueria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/del-sol-clinica-vet-11",
+      "destination": "/ficha/del-sol-clinica-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/dogaholic-63",
+      "destination": "/ficha/dogaholic",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/el-perro-de-cullan-155",
+      "destination": "/ficha/el-perro-de-cullan",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/espacio-mascotas-140",
+      "destination": "/ficha/espacio-mascotas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/experiencia-guau-65",
+      "destination": "/ficha/experiencia-guau",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/fixvet-24-96",
+      "destination": "/ficha/fixvet-24",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/glam-xl-grooming-60",
+      "destination": "/ficha/glam-xl-grooming",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/happy-pet-accesorios-venta-mayorista-de-productos-para-mascotas",
+      "destination": "/ficha/happy-pet-accesorios-venta-mayorista-de-productos-para",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hernan-porfirio-4",
+      "destination": "/ficha/hernan-porfirio",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hospital-veterinario-avellaneda-71",
+      "destination": "/ficha/hospital-veterinario-avellaneda",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hospital-veterinario-m-a-p-a-75",
+      "destination": "/ficha/hospital-veterinario-m-a-p-a",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hospital-veterinario-municipal-avellaneda-69",
+      "destination": "/ficha/hospital-veterinario-municipal-avellaneda",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hospital-veterinario-santa-catalina-77",
+      "destination": "/ficha/hospital-veterinario-santa-catalina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/hospital-veterinario-uba-37",
+      "destination": "/ficha/hospital-veterinario-uba",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/julieta-veterinary-hospital-31",
+      "destination": "/ficha/julieta-veterinary-hospital",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/la-corte-peluqueria-58",
+      "destination": "/ficha/la-corte-peluqueria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/la-quinta-pata-14",
+      "destination": "/ficha/la-quinta-pata",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/laboratorio-dr-rapela-67",
+      "destination": "/ficha/laboratorio-dr-rapela",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/laboratorio-rapela-analisis-vet-66",
+      "destination": "/ficha/laboratorio-rapela-analisis-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/lanus-veterinary-hospital-73",
+      "destination": "/ficha/lanus-veterinary-hospital",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/leocan-1",
+      "destination": "/ficha/leocan",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/lomas-del-sur-veterinaria-87",
+      "destination": "/ficha/lomas-del-sur-veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/mascotamania-47",
+      "destination": "/ficha/mascotamania",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/maxcotas-55",
+      "destination": "/ficha/maxcotas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/mis-mascotas-54",
+      "destination": "/ficha/mis-mascotas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/movil-vet-103",
+      "destination": "/ficha/movil-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/mr-dog-veterinaria-y-pet-shop-117",
+      "destination": "/ficha/mr-dog-veterinaria-y-pet-shop",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/mundo-animal-san-cristobal-veterinaria-138",
+      "destination": "/ficha/mundo-animal-san-cristobal-veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/my-vet-s-avellaneda-72",
+      "destination": "/ficha/my-vet-s-avellaneda",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/palermo-pet-store-49",
+      "destination": "/ficha/palermo-pet-store",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/patitas-market-53",
+      "destination": "/ficha/patitas-market",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/paws-pet-market-52",
+      "destination": "/ficha/paws-pet-market",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pehuen-clinica-veterinaria-93",
+      "destination": "/ficha/pehuen-clinica-veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluditos-59",
+      "destination": "/ficha/peluditos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluqueria-canina-el-cane-57",
+      "destination": "/ficha/peluqueria-canina-el-cane",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluqueria-canina-patas-pelos-pet-shop",
+      "destination": "/ficha/peluqueria-canina-patas-y-pelos-pet-shop",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluqueria-canina-y-veterinaria-san-cristobal-136",
+      "destination": "/ficha/peluqueria-canina-y-veterinaria-san-cristobal",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluqueria-y-pet-shop-peluditos-143",
+      "destination": "/ficha/peluqueria-y-pet-shop-peluditos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/peluqueria-y-petshop-fullmaskotas-147",
+      "destination": "/ficha/peluqueria-y-petshop-fullmaskotas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/perrunis-by-meli-62",
+      "destination": "/ficha/perrunis-by-meli",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-house-styling-salon-121",
+      "destination": "/ficha/pet-house-styling-salon",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-shop-don-gato-56",
+      "destination": "/ficha/pet-shop-don-gato",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-shop-jeni-146",
+      "destination": "/ficha/pet-shop-jeni",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-shop-san-telmo-149",
+      "destination": "/ficha/pet-shop-san-telmo",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-shop-universo-canino-145",
+      "destination": "/ficha/pet-shop-universo-canino",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-society-pet-shop-peluqueria-canina-134",
+      "destination": "/ficha/pet-society-pet-shop-y-peluqueria-canina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/pet-zone-129",
+      "destination": "/ficha/pet-zone",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/petba-pet-shop-veterinaria-peluqueria-canina-av-belgrano-1737-114",
+      "destination": "/ficha/petba-pet-shop-veterinaria-peluqueria-canina-av-belgrano",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/petit-pet-shop-callao-116",
+      "destination": "/ficha/petit-pet-shop-callao",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/petit-pets-boutique-vet",
+      "destination": "/ficha/petit-pets-boutique-y-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/petspot-153",
+      "destination": "/ficha/petspot",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/proveter-ramos-mejia-95",
+      "destination": "/ficha/proveter-ramos-mejia",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/puppis-veterinaria-peluqueria-y-pet-shop-2",
+      "destination": "/ficha/puppis-veterinaria-peluqueria-y-pet-shop-caba",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/puppyshop-139",
+      "destination": "/ficha/puppyshop",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/quilmes-veterinary-center-82",
+      "destination": "/ficha/quilmes-veterinary-center",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/quilmes-veterinary-hospital-78",
+      "destination": "/ficha/quilmes-veterinary-hospital",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/sima-pet-bs-as-86",
+      "destination": "/ficha/sima-pet-bs-as",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/sm-vet-27",
+      "destination": "/ficha/sm-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/south-veterinary-clinic-28",
+      "destination": "/ficha/south-veterinary-clinic",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/super-patitas-50",
+      "destination": "/ficha/super-patitas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/the-animal-center-21",
+      "destination": "/ficha/the-animal-center",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vet-almagro-24",
+      "destination": "/ficha/vet-almagro",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vet-center-dr-diego-diaz-46",
+      "destination": "/ficha/vet-center-dr-diego-diaz",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vet-krauss-48",
+      "destination": "/ficha/vet-krauss",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vet-san-marcos-39",
+      "destination": "/ficha/vet-san-marcos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-24hs-siv-38",
+      "destination": "/ficha/veterinaria-24hs-siv",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-3-de-febrero-102",
+      "destination": "/ficha/veterinaria-3-de-febrero",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-azara-109",
+      "destination": "/ficha/veterinaria-azara",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-azcuenaga-17",
+      "destination": "/ficha/veterinaria-azcuenaga",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-blinka-135",
+      "destination": "/ficha/veterinaria-blinka",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-brisa-43",
+      "destination": "/ficha/veterinaria-brisa",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-bubble-111",
+      "destination": "/ficha/veterinaria-bubble",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-clinica-barracas-107",
+      "destination": "/ficha/veterinaria-clinica-barracas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-cortis-sede-principal-137",
+      "destination": "/ficha/veterinaria-cortis-sede-principal",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-del-labrador-26",
+      "destination": "/ficha/veterinaria-del-labrador",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-dr-stella-76",
+      "destination": "/ficha/veterinaria-dr-stella",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-dra-carrizo-94",
+      "destination": "/ficha/veterinaria-dra-carrizo",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-evet-24hs-106",
+      "destination": "/ficha/veterinaria-evet-24hs",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-gustavo-herrera-25",
+      "destination": "/ficha/veterinaria-gustavo-herrera",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-honorio-12",
+      "destination": "/ficha/veterinaria-honorio",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-invet-24hs-moron-92",
+      "destination": "/ficha/veterinaria-invet-24hs-moron",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-isidro-45",
+      "destination": "/ficha/veterinaria-isidro",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-linares-29",
+      "destination": "/ficha/veterinaria-linares",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-m-a-p-a-lanus-oeste-74",
+      "destination": "/ficha/veterinaria-m-a-p-a-lanus-oeste",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-mainus-84",
+      "destination": "/ficha/veterinaria-mainus",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-malawi-142",
+      "destination": "/ficha/veterinaria-malawi",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-mascotas-barracas-110",
+      "destination": "/ficha/veterinaria-mascotas-barracas",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-naon-30",
+      "destination": "/ficha/veterinaria-naon",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-panda-32",
+      "destination": "/ficha/veterinaria-panda",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-patagonia-en-recoleta-118",
+      "destination": "/ficha/veterinaria-patagonia-en-recoleta",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-peluqueria-san-cristobal-141",
+      "destination": "/ficha/peluqueria-canina-y-veterinaria-san-cristobal",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-petshopping-homeopatia-peluqueria-canina-112",
+      "destination": "/ficha/veterinaria-petshopping-homeopatia-peluqueria-canina",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-ramos-mejia-97",
+      "destination": "/ficha/veterinaria-ramos-mejia",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-s-b-6",
+      "destination": "/ficha/veterinaria-s-y-b",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-snoopy-125",
+      "destination": "/ficha/veterinaria-snoopy",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-talita-19",
+      "destination": "/ficha/veterinaria-talita",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-tierra-animal-91",
+      "destination": "/ficha/veterinaria-tierra-animal",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-tweety-ecografias-81",
+      "destination": "/ficha/veterinaria-tweety-ecografias",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-uriburu-18",
+      "destination": "/ficha/veterinaria-uriburu",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-whippet-9",
+      "destination": "/ficha/veterinaria-whippet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-y-medicamentos-para-mascotas-faunatikos-128",
+      "destination": "/ficha/veterinaria-y-medicamentos-para-mascotas-faunatikos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-y-peluqueria-farmacota-la-farmacia-de-tu-mascota-124",
+      "destination": "/ficha/veterinaria-y-peluqueria-farmacota-la-farmacia-de-tu-mascota",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-y-pet-shop-los-canarios-de-balvanera-asociacion-argentina-de-canaricultura-roller-130",
+      "destination": "/ficha/veterinaria-y-pet-shop-los-canarios-de-balvanera-asociacion",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinaria-y-petshop-animals-150",
+      "destination": "/ficha/veterinaria-y-petshop-animals",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-24-horas-berazategui-105",
+      "destination": "/ficha/veterinary-24-horas-berazategui",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-center-montes-de-oca-108",
+      "destination": "/ficha/veterinary-center-montes-de-oca",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-center-paunero-22",
+      "destination": "/ficha/veterinary-center-paunero",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-north-moron-90",
+      "destination": "/ficha/veterinary-north-moron",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-pet-shop-vq-2",
+      "destination": "/ficha/veterinary-pet-shop-vq",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-ribera-101",
+      "destination": "/ficha/veterinary-ribera",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/veterinary-small-animal-89",
+      "destination": "/ficha/veterinary-small-animal",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vetline-20",
+      "destination": "/ficha/vetline",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vetmood-41",
+      "destination": "/ficha/vetmood",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/vip-veterinaria-petcare-15",
+      "destination": "/ficha/vip-veterinaria-petcare",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/wellvet-35",
+      "destination": "/ficha/wellvet",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/vendor/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/data.json", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "Permissions-Policy", "value": "geolocation=(self), camera=(), microphone=()" }
-    ] }
+    {
+      "source": "/vendor/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/data.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), camera=(), microphone=()"
+        }
+      ]
+    }
   ]
 }

@@ -13,7 +13,7 @@
 //  - Solo completa campos vacíos; nunca pisa un dato existente.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { leerJSON, escribirData, normalizarTelefono } from '../lib/datos.mjs';
 
@@ -76,6 +76,7 @@ export function extraer(html, base) {
   return out;
 }
 
+async function main() {
 const data = leerJSON(P('data.json'));
 const conWeb = data.filter((r) => r.web);
 const log = [];
@@ -108,3 +109,6 @@ mkdirSync(P('reports'), { recursive: true });
 writeFileSync(P('reports', 'contactos-web.md'), '# Contactos desde webs propias\n\nRegistros con web: ' + conWeb.length + '\n\n' + log.map(([r, m]) => '- #' + r.id + ' ' + r.nombre + ' (' + r.web + '): ' + m).join('\n') + '\n');
 if (!CHECK) escribirData(P('data.json'), data);
 console.log('Registros con web: ' + conWeb.length + ' | con datos nuevos: ' + log.filter(([, m]) => m.startsWith('nuevo')).length);
+}
+// Solo corre si se invoca directamente (importarlo para tests no toca data.json).
+if (import.meta.url === pathToFileURL(process.argv[1] || '').href) await main();

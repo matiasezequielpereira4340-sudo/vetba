@@ -8,3 +8,8 @@ node_modules/
 
 # Cache de pedidos a Nominatim / sitios web (se regenera)
 /cache/
+
+# Base comercial y materiales: se regeneran con npm run datos / npm run materiales.
+# El repo es público: no se versionan.
+/contactos/
+/materiales/

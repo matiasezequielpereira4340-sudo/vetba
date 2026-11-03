@@ -298,7 +298,7 @@ function renderVets(origin, barrio) {
   list = list.slice(0, 3);
   $('#vets').innerHTML = list.length ? list.map((r) => {
     const da = ' data-id="' + r.id + '" data-slug="' + esc(r.slug) + '"';
-    const t = telHref(r.telefono);
+    const t = r.telefono_e164 ? 'tel:' + r.telefono_e164 : (DATA.some((x) => x.telefono_e164) ? '' : telHref(r.telefono));
     const w = r.whatsapp ? 'https://wa.me/' + String(r.whatsapp).replace(/\D/g, '') + '?text=' + encodeURIComponent('Hola, los encontré en VetBA, quería sacar turno para vacunar a mi mascota') : '';
     return '<div class="card"><h3><a href="/?ficha=' + encodeURIComponent(r.slug) + '">' + esc(r.nombre) + '</a></h3>' +
       '<div class="meta">' + esc(r.direccion) + (barrioDe(r) ? ' · ' + esc(barrioDe(r)) : '') + (r._d != null ? ' · a ' + (r._d < 1 ? Math.round(r._d * 1000) + ' m' : nf1.format(r._d) + ' km') : '') + '</div>' +
