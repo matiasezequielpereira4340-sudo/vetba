@@ -21,7 +21,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { leerJSON, escribirData, norm, barrioDe, metros, normalizarTelefono, clasificar, sonDuplicados, fusionar, nombresParecidos, parsearOpeningHours } from './lib/datos.mjs';
+import { leerJSON, escribirData, norm, barrioDe, metros, normalizarTelefono, clasificar, sonDuplicados, fusionar, nombresParecidos, parsearOpeningHours, partidoPorLocalidad } from './lib/datos.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const P = (...x) => path.join(ROOT, ...x);
@@ -32,7 +32,7 @@ const hoy = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 let data = leerJSON(P('data.json'));
 const totalInicial = data.length;
-const log = { reclas: [], fusiones: [], revisar: [], telInvalidos: [], barrio: [], pendientesBarrio: 0, horariosOSM: 0, errores: [] };
+const log = { reclas: [], fusiones: [], revisar: [], telInvalidos: [], barrio: [], partido: [], partidoRevisar: [], pendientesBarrio: 0, horariosOSM: 0, errores: [] };
 
 /* ---------------- OSM: tags crudos si existen (sources/osm-*.json) ---------------- */
 const osmElems = [];
@@ -138,8 +138,20 @@ for (const r of data) {
     const loc = a.suburb || a.city_district || a.town || a.city || a.village || null;
     const partido = limpiarPartido(a.county || a.state_district);
     if (loc && loc !== antes) { log.barrio.push({ id: r.id, nombre: r.nombre, antes, despues: loc, fuente: 'Nominatim' }); r.barrio = loc; }
-    if (partido) r.partido = partido;
+    if (partido) { r.partido = partido; r.partido_fuente = 'nominatim'; delete r.partido_revisar; }
   }
+}
+
+/* ---------------- 2b. partido por localidad (sin internet) ----------------
+   Para los registros de GBA que todavía no tienen partido. No pisa uno existente. */
+for (const r of data) {
+  if (r.zona === 'CABA') continue;
+  if (r.partido) { if (r.partido_revisar) log.partidoRevisar.push({ id: r.id, nombre: r.nombre, partido: r.partido, motivo: r.partido_revisar }); continue; }
+  const p = partidoPorLocalidad(barrioDe(r));
+  if (!p) { log.errores.push('#' + r.id + ' ' + r.nombre + ': sin partido (localidad "' + (barrioDe(r) || '') + '" no está en la tabla)'); continue; }
+  r.partido = p.partido; r.partido_fuente = 'localidad';
+  if (p.revisar) { r.partido_revisar = p.revisar; log.partidoRevisar.push({ id: r.id, nombre: r.nombre, partido: p.partido, motivo: p.revisar }); }
+  log.partido.push({ id: r.id, nombre: r.nombre, barrio: barrioDe(r), partido: p.partido });
 }
 
 /* ---------------- salida ---------------- */
@@ -152,11 +164,13 @@ Generado por \`scripts/validar-data.mjs${RED ? ' --red' : ''}\` el ${new Date().
 | | |
 |---|---:|
 | Registros al empezar | ${totalInicial} |
-| Reclasificados (tipo) | ${log.reclas.length} |
+| Reclasificados (tipo) en esta corrida | ${log.reclas.length} |
 | Fusionados (salen) | ${log.fusiones.length} |
 | Duplicados dudosos (revisar a mano) | ${log.revisar.length} |
 | Teléfonos inválidos | ${log.telInvalidos.length} |
 | Barrios corregidos por coordenadas | ${log.barrio.length} |
+| Partido asignado por localidad (GBA) | ${log.partido.length} |
+| Partido a revisar (localidad repartida) | ${log.partidoRevisar.length} |
 | Barrio/partido pendiente (falta correr con --red) | ${log.pendientesBarrio} |
 | Horarios tomados de OSM | ${log.horariosOSM} |
 | Registros al terminar | ${data.length} |
@@ -176,11 +190,17 @@ ${log.telInvalidos.map((t) => '- #' + t.id + ' ' + t.nombre + ' — "' + t.telef
 ## Barrios corregidos
 ${log.barrio.map((b) => '- #' + b.id + ' ' + b.nombre + ': ' + (b.antes || '(vacío)') + ' → ' + b.despues + ' (' + b.fuente + ')').join('\n') || '- Ninguno' + (RED ? '' : ' (no se corrió con --red)')}
 
+## Partido asignado por localidad
+${log.partido.map((x) => '- #' + x.id + ' ' + x.nombre + ': ' + x.barrio + ' → ' + x.partido).join('\n') || '- Ninguno (ya tenían partido)'}
+
+## Partido a revisar
+${log.partidoRevisar.map((x) => '- #' + x.id + ' ' + x.nombre + ': ' + x.partido + ' (' + x.motivo + ')').join('\n') || '- Ninguno'}
+
 ## Errores / avisos
 ${log.errores.map((e) => '- ' + e).join('\n') || '- Ninguno'}
 `;
 
-const huboCambios = log.reclas.length || log.fusiones.length || log.barrio.length || log.horariosOSM;
+const huboCambios = log.reclas.length || log.fusiones.length || log.barrio.length || log.partido.length || log.horariosOSM;
 mkdirSync(P('reports'), { recursive: true });
 if (log.reclas.length) writeFileSync(P('reports', 'reclasificados.csv'), csv(log.reclas.map((x) => ({ id: x.id, nombre: x.nombre, tipo_antes: x.antes, tipo_despues: x.despues, regla: x.regla, nota: x.nota })), ['id', 'nombre', 'tipo_antes', 'tipo_despues', 'regla', 'nota']).replace(/^\n$/, ''));
 if (huboCambios || !existsSync(P('reports', 'validacion.md'))) writeFileSync(P('reports', 'validacion.md'), md);
@@ -190,5 +210,5 @@ if (!CHECK) {
   if (!existsSync(bk)) copyFileSync(P('data.json'), bk);
   escribirData(P('data.json'), data);
 }
-console.log(`Registros: ${totalInicial} -> ${data.length} | reclasificados ${log.reclas.length} | fusionados ${log.fusiones.length} | revisar ${log.revisar.length} | tel inválidos ${log.telInvalidos.length} | barrios corregidos ${log.barrio.length} | pendientes de --red ${log.pendientesBarrio}`);
+console.log(`Registros: ${totalInicial} -> ${data.length} | reclasificados ${log.reclas.length} | fusionados ${log.fusiones.length} | revisar ${log.revisar.length} | tel inválidos ${log.telInvalidos.length} | barrios corregidos ${log.barrio.length} | partido por localidad ${log.partido.length} | pendientes de --red ${log.pendientesBarrio}`);
 if (log.errores.length) console.log('Avisos:\n  ' + log.errores.join('\n  '));

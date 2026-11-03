@@ -201,3 +201,30 @@ export const PARTIDOS = {
   'Vicente López': null, // completo: se busca por partido
   'San Isidro': null,
 };
+
+/* ------------------------------------------------------------------
+   Partido por localidad (sin internet). Solo localidades que pertenecen
+   a UN partido. Las que se reparten entre dos van a LOCALIDAD_AMBIGUA:
+   se asigna el partido más probable y queda marcado para revisar.
+   Con --red, Nominatim pisa este valor con el que da por coordenadas.
+   ------------------------------------------------------------------ */
+export const LOCALIDAD_PARTIDO = {
+  'Vicente López': 'Vicente López', 'Olivos': 'Vicente López', 'Florida': 'Vicente López', 'Munro': 'Vicente López', 'La Lucila': 'Vicente López', 'Carapachay': 'Vicente López', 'Villa Martelli': 'Vicente López', 'Villa Adelina': 'Vicente López', 'Florida Oeste': 'Vicente López',
+  'San Isidro': 'San Isidro', 'Martínez': 'San Isidro', 'Acassuso': 'San Isidro', 'Beccar': 'San Isidro', 'Boulogne': 'San Isidro', 'Boulogne Sur Mer': 'San Isidro',
+  'San Martín': 'General San Martín', 'José León Suárez': 'General San Martín', 'Villa Ballester': 'General San Martín', 'San Andrés': 'General San Martín', 'Villa Maipú': 'General San Martín', 'Billinghurst': 'General San Martín', 'Villa Lynch': 'General San Martín', 'Chilavert': 'General San Martín', 'Villa Libertad': 'General San Martín', 'Villa Chacabuco': 'General San Martín', 'Villa Zagala': 'General San Martín',
+  'Caseros': 'Tres de Febrero', 'Ciudadela': 'Tres de Febrero', 'Santos Lugares': 'Tres de Febrero', 'Sáenz Peña': 'Tres de Febrero', 'Martín Coronado': 'Tres de Febrero', 'El Palomar': 'Tres de Febrero', 'Villa Bosch': 'Tres de Febrero', 'Pablo Podestá': 'Tres de Febrero',
+  'Avellaneda': 'Avellaneda', 'Lanús': 'Lanús', 'Quilmes': 'Quilmes', 'Quilmes Oeste': 'Quilmes', 'Lomas de Zamora': 'Lomas de Zamora', 'Berazategui': 'Berazategui', 'La Plata': 'La Plata',
+  'Morón': 'Morón', 'Ramos Mejía': 'La Matanza', 'San Miguel': 'San Miguel',
+  'Tigre': 'Tigre', 'San Fernando': 'San Fernando', 'Virreyes': 'San Fernando',
+};
+// Localidad repartida entre dos partidos -> [más probable, motivo].
+export const LOCALIDAD_AMBIGUA = {
+  'Gerli': ['Avellaneda', 'Gerli se reparte entre Avellaneda y Lanús'],
+  'Loma Hermosa': ['General San Martín', 'Loma Hermosa se reparte entre General San Martín y Tres de Febrero'],
+};
+export function partidoPorLocalidad(loc) {
+  const k = norm(loc);
+  for (const [l, p] of Object.entries(LOCALIDAD_PARTIDO)) if (norm(l) === k) return { partido: p, revisar: null };
+  for (const [l, [p, m]] of Object.entries(LOCALIDAD_AMBIGUA)) if (norm(l) === k) return { partido: p, revisar: m };
+  return null;
+}

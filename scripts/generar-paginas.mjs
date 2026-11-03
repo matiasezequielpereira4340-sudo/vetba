@@ -163,7 +163,7 @@ ${body}
 <a class="b urg urg-fab" href="/?urgencia=1">Urgencia: veterinaria abierta ahora</a>
 <footer><div class="wrap">
 <p><a href="/">VetBA</a> · <a href="/veterinarias/">Veterinarias por barrio</a> · <a href="/urgencias-24-horas/">Urgencias 24 horas</a> · <a href="/recordatorios.html">Recordatorio de vacunas</a> · <a href="/terminos.html">Términos</a> · <a href="/privacidad.html">Privacidad</a></p>
-<p>Calificaciones y reseñas: Google. Los datos pueden cambiar: llamá antes de ir.${USA_OSM ? ' Datos de mapas © <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a> (licencia ODbL).' : ''}</p>
+<p>Calificaciones y reseñas: Google. Los datos pueden cambiar: llamá antes de ir.${USA_OSM ? ' Parte de los datos de establecimientos: © <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a> (licencia ODbL).' : ''}</p>
 </div></footer>
 <script>${JS}</script>
 <script defer src="/_vercel/insights/script.js"></script>

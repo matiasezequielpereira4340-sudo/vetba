@@ -16,7 +16,7 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 | coordenadas | 264 | 100% |
 | rating | 262 | 99% |
 | barrio | 223 | 84% |
-| partido | 0 | 0% |
+| partido | 64 | 24% |
 
 "horario por día" = campo `horarios` normalizado (incluye los 24 h). El texto de Google sin días no cuenta.
 
@@ -43,7 +43,19 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 | Partido | Registros |
 |---|---:|
 | CABA (no aplica) | 200 |
-| (sin dato) | 64 |
+| La Plata | 16 |
+| Avellaneda | 5 |
+| La Matanza | 5 |
+| Lanús | 5 |
+| Lomas de Zamora | 5 |
+| Morón | 5 |
+| Quilmes | 5 |
+| San Isidro | 5 |
+| Tigre | 4 |
+| Vicente López | 4 |
+| San Fernando | 3 |
+| Berazategui | 1 |
+| San Miguel | 1 |
 
 ## Por barrio / localidad
 
@@ -163,36 +175,35 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 | Métrica | Antes | Después | Δ |
 |---|---:|---:|---:|
 | Total de registros | 265 | 264 | -1 |
-| Reclasificados (tipo) | — | 29 | |
-| Fusionados (duplicados) | — | 1 | |
-| Agregados (zonas nuevas) | — | 0 | |
+| Registros GBA | 64 | 64 | +0 |
+| Con partido (GBA) | 0 | 64 | +64 |
+| Horario por día | 22 | 22 | +0 |
+| Email | 0 | 0 | +0 |
+| WhatsApp confirmado | 0 | 0 | +0 |
+| Web | 0 | 0 | +0 |
 | Teléfono válido (E.164) | 256 | 255 | -1 |
-| Horario por día | 22 | 22 | 0 |
-| WhatsApp confirmado | 0 | 0 | 0 |
-| Email | 0 | 0 | 0 |
-| Web | 0 | 0 | 0 |
-| Con barrio válido | 224 | 223 | -1 |
-| Con partido (GBA) | 0 | 0 | 0 |
-### Por tipo
+| Fuente OSM | 0 | 0 | +0 |
 
-| | Antes | Después | Δ |
-|---|---:|---:|---:|
-| laboratorio | 2 | 2 | 0 |
-| peluqueria | 44 | 36 | -8 |
-| petshop | 35 | 53 | +18 |
-| veterinaria | 184 | 173 | -11 |
-### Por zona
+### Registros por partido (GBA)
 
-| | Antes | Después | Δ |
-|---|---:|---:|---:|
-| CABA | 201 | 200 | -1 |
-| GBA Norte | 16 | 16 | 0 |
-| GBA Oeste | 11 | 11 | 0 |
-| GBA Sur | 37 | 37 | 0 |
-### Por partido (GBA)
+| Partido | Antes | Después |
+|---|---:|---:|
+| La Plata | 0 | 16 |
+| San Isidro | 0 | 5 |
+| Avellaneda | 0 | 5 |
+| Lanús | 0 | 5 |
+| Quilmes | 0 | 5 |
+| Lomas de Zamora | 0 | 5 |
+| Morón | 0 | 5 |
+| La Matanza | 0 | 5 |
+| Vicente López | 0 | 4 |
+| Tigre | 0 | 4 |
+| San Fernando | 0 | 3 |
+| Berazategui | 0 | 1 |
+| San Miguel | 0 | 1 |
+| (sin dato) | 64 | 0 |
+| General San Martín | 0 | 0 |
+| Tres de Febrero | 0 | 0 |
 
-| | Antes | Después | Δ |
-|---|---:|---:|---:|
-| (sin dato) | 64 | 64 | 0 |
 
-**Por qué no se movieron horario, WhatsApp, email, web, barrio, partido ni las zonas nuevas:** necesitan OpenStreetMap/Overpass, Nominatim, Buenos Aires Data, las webs de cada lugar y (opcional) Apify, y esos dominios están bloqueados por la política de red del entorno. Los scripts están listos: `npm run fuentes:descargar && npm run fuentes:unir`.
+**Qué sigue sin moverse y por qué:** horario por día, email, WhatsApp, web y las zonas nuevas (General San Martín, Tres de Febrero y más registros de Vicente López / San Isidro) dependen de overpass-api.de, nominatim.openstreetmap.org, cdn.buenosaires.gob.ar y las webs de cada lugar. En la corrida del 03/11/2026 (2.ª sesión) el proxy del entorno siguió respondiendo 403 a todos esos dominios. El partido de los 64 registros de GBA se asignó sin internet a partir de la localidad (`partido_fuente: "localidad"`); #71 (Gerli) queda marcado para revisar.
