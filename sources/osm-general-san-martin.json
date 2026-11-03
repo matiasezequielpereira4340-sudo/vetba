@@ -1,0 +1,738 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-03T17:08:02Z",
+  "timestamp_areas_base": "2026-11-03T11:13:55Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 4600585370,
+   "lat": -34.5762664,
+   "lon": -58.5394862,
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:housenumber": "2191",
+    "addr:postcode": "B1650BQA",
+    "addr:street": "91 - San Lorenzo",
+    "amenity": "veterinary",
+    "level": "0",
+    "name": "Clinica Verinaria Maggiolo",
+    "operator": "Dr. Javier Farina",
+    "source": "Reconocimiento Cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4600812384,
+   "lat": -34.5753149,
+   "lon": -58.5330969,
+   "tags": {
+    "addr:street": "79 - 25 de Mayo",
+    "amenity": "veterinary",
+    "level": "0",
+    "name": "Cota's 24hs Veterinaría",
+    "source": "Reconocimiento Cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4604993103,
+   "lat": -34.5752014,
+   "lon": -58.566341,
+   "tags": {
+    "addr:street": "Avenida 125 - Eva Perón",
+    "amenity": "veterinary",
+    "name": "Veterinaría",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4614798369,
+   "lat": -34.5583142,
+   "lon": -58.5435473,
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:housenumber": "2739",
+    "addr:province": "Buenos Aires",
+    "addr:street": "84 - Intendente Casares",
+    "name": "Catdog Pet Shop",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4614798371,
+   "lat": -34.5587184,
+   "lon": -58.5440242,
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "84 - Intendente Casares",
+    "name": "Husky",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4614798380,
+   "lat": -34.5631427,
+   "lon": -58.5416914,
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "Diagonal 73",
+    "amenity": "veterinary",
+    "name": "Veterinaria",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4614798381,
+   "lat": -34.563252,
+   "lon": -58.5417133,
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "Diagonal 73",
+    "name": "Mundo Mascota",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4615045396,
+   "lat": -34.5696185,
+   "lon": -58.5482903,
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "91 - San Lorenzo",
+    "level": "0",
+    "name": "Peluquería Canina Estilon",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4615218446,
+   "lat": -34.5541652,
+   "lon": -58.5583005,
+   "tags": {
+    "addr:street": "112 - Vicente López",
+    "name": "La Mascota de su Casa",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4615218465,
+   "lat": -34.553229,
+   "lon": -58.5556914,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Madagascar",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4616417708,
+   "lat": -34.5524863,
+   "lon": -58.5562626,
+   "tags": {
+    "addr:street": "112 - Vicente López",
+    "amenity": "veterinary",
+    "name": "La Huella",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4616726786,
+   "lat": -34.559691,
+   "lon": -58.5499511,
+   "tags": {
+    "addr:street": "86 - Leandro N. Alem",
+    "name": "My Sweet Friends",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4616728371,
+   "lat": -34.5464583,
+   "lon": -58.5504732,
+   "tags": {
+    "addr:city": "Villa Ballester",
+    "addr:housenumber": "2281",
+    "addr:street": "114 - Carlos María de Alvear",
+    "amenity": "veterinary",
+    "name": "T&T Consultorio Veterinario",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4617080405,
+   "lat": -34.5496429,
+   "lon": -58.5448473,
+   "tags": {
+    "addr:street": "49 Catamarca",
+    "name": "Black Dog Peluquería Canina",
+    "shop": "pet_grooming",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4619144820,
+   "lat": -34.5089247,
+   "lon": -58.5787821,
+   "tags": {
+    "addr:city": "José León Suarez",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "25 - Manuel de Sarratea",
+    "amenity": "veterinary",
+    "name": "Sarratea"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4619144835,
+   "lat": -34.5101578,
+   "lon": -58.577275,
+   "tags": {
+    "addr:city": "José León Suarez",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "25 - Manuel de Sarratea",
+    "name": "Viverito Sarratea",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4619144837,
+   "lat": -34.5112029,
+   "lon": -58.576086,
+   "tags": {
+    "addr:city": "José León Suarez",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "25 - Manuel de Sarratea",
+    "name": "Forrajería",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4621026665,
+   "lat": -34.556758,
+   "lon": -58.5598953,
+   "tags": {
+    "addr:housenumber": "3500",
+    "addr:street": "110 - José Hernández",
+    "name": "Hueso's",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4621456553,
+   "lat": -34.5727509,
+   "lon": -58.5442706,
+   "tags": {
+    "brand": "Royal Canin",
+    "contact:phone": "+54 11 4753 0279",
+    "level": "0",
+    "name": "Planet Shop",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4626323220,
+   "lat": -34.5813013,
+   "lon": -58.5411426,
+   "tags": {
+    "addr:street": "Avenida 101 - Doctor Ricardo Balbín",
+    "name": "MarketCan",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4627059041,
+   "lat": -34.5899926,
+   "lon": -58.5569903,
+   "tags": {
+    "addr:street": "56 - 1 de Mayo",
+    "amenity": "veterinary",
+    "name": "Clinica Veterinaria Tropezon",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4797318410,
+   "lat": -34.591757,
+   "lon": -58.5249233,
+   "tags": {
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4825962121,
+   "lat": -34.5454824,
+   "lon": -58.5492533,
+   "tags": {
+    "addr:city": "Villa Ballester",
+    "addr:housenumber": "2133",
+    "addr:postcode": "1653",
+    "addr:street": "114 - Carlos María de Alvear",
+    "amenity": "veterinary",
+    "name": "Argos",
+    "opening_hours": "Mo-Fr 09:30-13:00, 17:00-20:00; Sa 09:30-14:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9778528538,
+   "lat": -34.5394553,
+   "lon": -58.5645849,
+   "tags": {
+    "name": "Amma",
+    "shop": "pet_grooming"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10666264235,
+   "lat": -34.5790474,
+   "lon": -58.5370217,
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:country": "AR",
+    "addr:housenumber": "3847",
+    "addr:postcode": "B1650CEO",
+    "addr:street": "48 - Moreno",
+    "level": "0",
+    "name": "Centro Mascota 2",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11261605141,
+   "lat": -34.5910738,
+   "lon": -58.5319096,
+   "tags": {
+    "addr:city": "Villa Lynch",
+    "addr:postcode": "B1650",
+    "addr:street": "22 - Rodríguez Peña",
+    "level": "0",
+    "name": "Pata Pata",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11477688633,
+   "lat": -34.5664984,
+   "lon": -58.543803,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Veterinaria Maiten"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11673360734,
+   "lat": -34.5943952,
+   "lon": -58.537718,
+   "tags": {
+    "addr:city": "Villa Lynch",
+    "addr:housenumber": "5071",
+    "addr:postcode": "B1650",
+    "addr:street": "22 - Rodríguez Peña",
+    "amenity": "veterinary",
+    "name": "Hospital Veterinario Pasteur",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 11836401863,
+   "lat": -34.5848693,
+   "lon": -58.5581171,
+   "tags": {
+    "level": "0",
+    "name": "FarmaPet City",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12269078046,
+   "lat": -34.5632217,
+   "lon": -58.5589297,
+   "tags": {
+    "addr:housenumber": "4152",
+    "addr:street": "95 - San Lorenzo",
+    "amenity": "veterinary",
+    "check_date": "2024-10-19",
+    "name": "Centro veterinario San Martín",
+    "opening_hours": "Mo-Fr 09:00-13:00,15:30-20:00; Sa 10:00-15:00; Su off",
+    "website": "https://www.centroveterinariosm.com.ar/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12674031820,
+   "lat": -34.5773731,
+   "lon": -58.530568,
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:housenumber": "1696",
+    "addr:postcode": "B1650",
+    "addr:street": "79 - 25 de Mayo",
+    "amenity": "veterinary",
+    "contact:phone": "+54 11 4713 4414;+54 11 4713 9339",
+    "level": "0",
+    "name": "Punto Vet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12706370172,
+   "lat": -34.5733064,
+   "lon": -58.529195,
+   "tags": {
+    "name": "Las Huellitas",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12740121192,
+   "lat": -34.5797405,
+   "lon": -58.5399333,
+   "tags": {
+    "name": "Roller",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12845368736,
+   "lat": -34.5794504,
+   "lon": -58.5355606,
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:housenumber": "1809",
+    "addr:postcode": "B1650",
+    "addr:street": "91 - General San Martín",
+    "level": "0",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12993308477,
+   "lat": -34.585292,
+   "lon": -58.51865,
+   "tags": {
+    "check_date": "2026-08-07",
+    "level": "0",
+    "name": "Nutrican",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13650559459,
+   "lat": -34.5631013,
+   "lon": -58.5567123,
+   "tags": {
+    "check_date": "2026-03-15",
+    "name": "Nutrican",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "way",
+   "id": 463970665,
+   "center": {
+    "lat": -34.5486616,
+    "lon": -58.5293572
+   },
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "23 - 4 de Febrero",
+    "building": "yes",
+    "name": "Outlet Pet Shop",
+    "shop": "pet",
+    "source": "Reconocimiento Cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 464810240,
+   "center": {
+    "lat": -34.5792912,
+    "lon": -58.5346113
+   },
+   "tags": {
+    "addr:street": "89 - Intendente Alberto Manuel Campos",
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Clínica Veterinaría San Martín",
+    "source": "Reconocimiento Cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 466426713,
+   "center": {
+    "lat": -34.5322832,
+    "lon": -58.5738857
+   },
+   "tags": {
+    "building": "yes",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 466717383,
+   "center": {
+    "lat": -34.5672438,
+    "lon": -58.5513989
+   },
+   "tags": {
+    "addr:city": "San Andrés",
+    "addr:country": "AR",
+    "addr:housenumber": "3802",
+    "addr:province": "Buenos Aires",
+    "addr:street": "Diagonal 78 - Leandro N. Alem",
+    "amenity": "veterinary",
+    "building:part": "yes",
+    "check_date": "2026-01-15",
+    "name": "El Rinón de la Mascotas",
+    "opening_hours": "Mo-Fr 08:30-12:30,16:00-19:00; Sa 08:30-15:00; Su off",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 466971957,
+   "center": {
+    "lat": -34.5509425,
+    "lon": -58.5601854
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Natural Life",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467293839,
+   "center": {
+    "lat": -34.5569088,
+    "lon": -58.5713704
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Alimentos para Mascotas",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467293850,
+   "center": {
+    "lat": -34.5553933,
+    "lon": -58.5589161
+   },
+   "tags": {
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Charly Veterinario",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467314978,
+   "center": {
+    "lat": -34.5352539,
+    "lon": -58.5767161
+   },
+   "tags": {
+    "addr:city": "José León Suarez",
+    "addr:country": "AR",
+    "addr:province": "Buenos Aires",
+    "addr:street": "Diagonal 69 José León Suárez",
+    "building": "yes",
+    "name": "Rock & Dog Peluquería Canina",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467491820,
+   "center": {
+    "lat": -34.5642673,
+    "lon": -58.5465712
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Aires",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468020810,
+   "center": {
+    "lat": -34.5622321,
+    "lon": -58.5407557
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Las Huellitas",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468159439,
+   "center": {
+    "lat": -34.5620069,
+    "lon": -58.5988342
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Forrajería",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1153340366,
+   "center": {
+    "lat": -34.5735216,
+    "lon": -58.5347541
+   },
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:housenumber": "2107",
+    "addr:postcode": "B1650",
+    "addr:street": "79 - Ayacucho",
+    "amenity": "veterinary",
+    "building": "yes",
+    "building:levels": "1",
+    "contact:facebook": "https://www.facebook.com/people/MVet-Veterinaria/100067420545843",
+    "contact:mobile": "+54 11 4027 4654",
+    "contact:phone": "+54 11 4752 5917",
+    "name": "MVet"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1158807319,
+   "center": {
+    "lat": -34.5737728,
+    "lon": -58.533294
+   },
+   "tags": {
+    "addr:city": "General San Martín",
+    "addr:housenumber": "2030",
+    "addr:postcode": "B1650",
+    "addr:street": "77 - Saavedra",
+    "amenity": "veterinary",
+    "building": "yes",
+    "building:levels": "2",
+    "check_date": "2026-09-03",
+    "contact:phone": "+54 11 4752 4313;+54 11 4754 5942",
+    "name": "America"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1178711668,
+   "center": {
+    "lat": -34.5882531,
+    "lon": -58.5575812
+   },
+   "tags": {
+    "addr:city": "Villa Lynch",
+    "addr:housenumber": "2399",
+    "addr:postcode": "B1650IXC",
+    "addr:street": "133 - Hilario de Almeyra",
+    "amenity": "veterinary",
+    "contact:phone": "+54 11 4512 7031",
+    "name": "Zoonosis",
+    "opening_hours": "Mo-Fr 07:00-14:00",
+    "operator": "Municipalidad de San Martín",
+    "operator:type": "government",
+    "source:url": "https://mapa.sanmartin.gov.ar/l/zoonosis/"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1264385470,
+   "center": {
+    "lat": -34.5664905,
+    "lon": -58.5145921
+   },
+   "tags": {
+    "addr:city": "Villa Maipú",
+    "addr:housenumber": "1265",
+    "addr:postcode": "B1650",
+    "addr:street": "Avenida 44 - Presidente Arturo Umberto Illia",
+    "building": "yes",
+    "building:levels": "1",
+    "name": "Mascota Central",
+    "shop": "pet"
+   }
+  }
+ ],
+ "vetba": {
+  "partido": "General San Martín",
+  "descargado": "2026-11-03T17:09:08.989Z",
+  "consulta": "[out:json][timeout:120];\narea[\"boundary\"=\"administrative\"][\"admin_level\"=\"5\"][\"name\"~\"^(Partido de )?General San Martín$\"]->.p;\n(\n  nwr(area.p)[\"amenity\"=\"veterinary\"];\n  nwr(area.p)[\"shop\"=\"pet\"];\n  nwr(area.p)[\"shop\"=\"pet_grooming\"];\n);\nout center tags;",
+  "licencia": "ODbL — © colaboradores de OpenStreetMap"
+ }
+}

@@ -21,7 +21,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { leerJSON, escribirData, norm, barrioDe, metros, normalizarTelefono, clasificar, sonDuplicados, fusionar, nombresParecidos, parsearOpeningHours, partidoPorLocalidad } from './lib/datos.mjs';
+import { leerJSON, escribirData, norm, barrioDe, metros, normalizarTelefono, clasificar, sonDuplicados, fusionar, nombresParecidos, parsearOpeningHours, partidoPorLocalidad, PARTIDOS } from './lib/datos.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const P = (...x) => path.join(ROOT, ...x);
@@ -118,6 +118,13 @@ async function nominatim(lat, lng) {
   mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(j));
   return j;
 }
+const ALIAS_LOCALIDAD = {
+  'Ciudad del Libertador General San Martín': 'San Martín', 'General San Martín': 'San Martín',
+  'Villa Ballester Noreste': 'Villa Ballester', 'Villa Ballester Noroeste': 'Villa Ballester',
+  'Villa San Andrés': 'San Andrés', 'José León Suarez': 'José León Suárez', 'Villa José León Suárez': 'José León Suárez',
+  'Martínez Oeste': 'Martínez', 'Lomas de San Isidro': 'San Isidro', 'Beccar': 'Béccar',
+};
+const LOCALIDADES_CONOCIDAS = new Set([...Object.values(PARTIDOS).flat().filter(Boolean), 'Olivos', 'Florida', 'Florida Oeste', 'Munro', 'La Lucila', 'Villa Martelli', 'Carapachay', 'Villa Adelina', 'Martínez', 'Acassuso', 'Béccar', 'Boulogne Sur Mer', 'San Isidro'].map(norm));
 const limpiarPartido = (s) => String(s || '').replace(/^Partido de\s+/i, '').trim() || null;
 
 const geoCABA = existsSync(P('sources', 'barrios-caba.geojson')) ? leerJSON(P('sources', 'barrios-caba.geojson')) : null;
@@ -135,7 +142,13 @@ for (const r of data) {
     try { j = await nominatim(r.lat, r.lng); } catch (e) { log.errores.push('#' + r.id + ' ' + e.message); }
     if (!j) { if (!antes || !r.partido) log.pendientesBarrio++; continue; }
     const a = j.address || {};
-    const loc = a.suburb || a.city_district || a.town || a.city || a.village || null;
+    // Localidad como la usa la gente: primero city/town/village (Martínez, no "Martínez Oeste");
+    // suburb solo si no hay ciudad (Vicente López: Olivos, Florida, Munro).
+    let loc = a.city || a.town || a.village || a.suburb || a.city_district || null;
+    loc = ALIAS_LOCALIDAD[loc] || loc;
+    // Si el registro ya tenía una localidad conocida (lista de PARTIDOS o addr:city de OSM), se respeta.
+    const conocida = antes && LOCALIDADES_CONOCIDAS.has(norm(ALIAS_LOCALIDAD[antes] || antes));
+    if (conocida) loc = ALIAS_LOCALIDAD[antes] || antes;
     const partido = limpiarPartido(a.county || a.state_district);
     if (loc && loc !== antes) { log.barrio.push({ id: r.id, nombre: r.nombre, antes, despues: loc, fuente: 'Nominatim' }); r.barrio = loc; }
     if (partido) { r.partido = partido; r.partido_fuente = 'nominatim'; delete r.partido_revisar; }

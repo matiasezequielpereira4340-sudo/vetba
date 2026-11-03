@@ -1,23 +1,23 @@
 # Validación de data.json
 
-Generado por `scripts/validar-data.mjs` el 2026-11-03.
+Generado por `scripts/validar-data.mjs --red` el 2026-11-03.
 
 | | |
 |---|---:|
-| Registros al empezar | 264 |
-| Reclasificados (tipo) en esta corrida | 0 |
+| Registros al empezar | 446 |
+| Reclasificados (tipo) en esta corrida | 1 |
 | Fusionados (salen) | 0 |
 | Duplicados dudosos (revisar a mano) | 2 |
-| Teléfonos inválidos | 5 |
-| Barrios corregidos por coordenadas | 0 |
-| Partido asignado por localidad (GBA) | 64 |
-| Partido a revisar (localidad repartida) | 1 |
-| Barrio/partido pendiente (falta correr con --red) | 105 |
+| Teléfonos inválidos | 7 |
+| Barrios corregidos por coordenadas | 203 |
+| Partido asignado por localidad (GBA) | 0 |
+| Partido a revisar (localidad repartida) | 0 |
+| Barrio/partido pendiente (falta correr con --red) | 0 |
 | Horarios tomados de OSM | 0 |
-| Registros al terminar | 264 |
+| Registros al terminar | 446 |
 
 ## Reclasificados
-Detalle en `reports/reclasificados.csv` (los 29 de la primera corrida; las siguientes no reclasificaron nada). Cuando un registro deja de ser "veterinaria" se le quitan *consultas* y *vacunación*: el relevamiento original se los asignó a todas las veterinarias sin verificar.
+Detalle en `reports/reclasificados.csv`. Cuando un registro deja de ser "veterinaria" se le quitan *consultas* y *vacunación*: el relevamiento original se los asignó a todas las veterinarias sin verificar.
 
 ## Fusiones
 - Ninguna
@@ -32,78 +32,220 @@ Detalle en `reports/reclasificados.csv` (los 29 de la primera corrida; las sigui
 - #234 Dame La Pata - Pet shop y Peluqueria — "+54 48288668": 8 dígitos nacionales (se esperan 10)
 - #235 Luly Vet Veterinaria y Pet Shop — "+54 21428363": 8 dígitos nacionales (se esperan 10)
 - #263 Veterinaria TIPPY — "+54 75636873": 8 dígitos nacionales (se esperan 10)
+- #357 Puppis — "+54 810 220 2345": característica inválida (81)
+- #440 Puppis — "+54 810 220 2345": característica inválida (81)
 
 ## Barrios corregidos
-- Ninguno (no se corrió con --red)
+- #36 CIMA Centro Médico Vet.: Floresta → Vélez Sarsfield (polígono BA Data)
+- #38 Veterinaria 24hs SIV: Floresta → Monte Castro (polígono BA Data)
+- #61 BENPET: Palermo → Villa Crespo (polígono BA Data)
+- #65 Experiencia Guau: Colegiales → Belgrano (polígono BA Data)
+- #70 Clínica Veterinaria Gutiérrez: Avellaneda → Dock Sud (Nominatim)
+- #71 Hospital Veterinario Avellaneda: Gerli → Piñeyro (Nominatim)
+- #73 Lanús Veterinary Hospital: Lanús → Lanús Oeste (Nominatim)
+- #74 Veterinaria M.A.P.A. Lanús Oeste: Lanús → Lanús Oeste (Nominatim)
+- #75 Hospital Veterinario M.A.P.A: Lanús → Lanús Este (Nominatim)
+- #76 Veterinaria Dr. Stella: Lanús → Lanús Este (Nominatim)
+- #77 Hospital Veterinario Santa Catalina: Lanús → Lanús Este (Nominatim)
+- #113 Casper Pet Store Junín: Barrio Norte → Recoleta (polígono BA Data)
+- #116 Petit Pet Shop Callao: Barrio Norte → Recoleta (polígono BA Data)
+- #117 Mr Dog Veterinaria y Pet Shop: Barrio Norte → Recoleta (polígono BA Data)
+- #118 Veterinaria Patagonia en Recoleta.: Barrio Norte → Recoleta (polígono BA Data)
+- #119 Casper Pet Store Güemes 2987: Barrio Norte → Recoleta (polígono BA Data)
+- #125 Veterinaria Snoopy: Barrio Norte → Recoleta (polígono BA Data)
+- #154 Amores Perros Peluquería Canina Accesorios Vestimenta Envios Cortes Raza: Barrio Norte → Recoleta (polígono BA Data)
+- #176 Piscu Pet Shop: (vacío) → Almagro (polígono BA Data)
+- #178 Almagro Pet: Boedo → Almagro (polígono BA Data)
+- #180 CliVeCo: Villa Crespo → Almagro (polígono BA Data)
+- #182 Pupys Pet Shop y Peluquería Canina: Boedo → Almagro (polígono BA Data)
+- #183 Veterinaria McScota: Caballito → Almagro (polígono BA Data)
+- #184 Centro Veterinario Dorrego Pet Shop Peluqueria Canina: (vacío) → Chacarita (polígono BA Data)
+- #186 Al Toque Perro Pet shop: (vacío) → Villa Ortúzar (polígono BA Data)
+- #187 Pet's Club. "El club de las Mascotas": (vacío) → Villa del Parque (polígono BA Data)
+- #188 +Cotas Pet shop: (vacío) → Villa Santa Rita (polígono BA Data)
+- #189 ZONA Pet Veterinaria: (vacío) → Chacarita (polígono BA Data)
+- #190 CLUB MASCOTAS PETSHOP BAÑO Y PELUQUERÍA CANINA: (vacío) → Villa General Mitre (polígono BA Data)
+- #191 TotalPet Chacarita: (vacío) → Chacarita (polígono BA Data)
+- #192 Veterinaria Rumah: (vacío) → Villa General Mitre (polígono BA Data)
+- #193 Peluquería Canina LOVE: Floresta → Villa Santa Rita (polígono BA Data)
+- #194 Patitas Y Patotas Pet Shop: Boedo → Parque Patricios (polígono BA Data)
+- #195 El Parque Pet Shop y veterinaria: (vacío) → Parque Patricios (polígono BA Data)
+- #196 8 Patitas Pet Shop: (vacío) → Parque Patricios (polígono BA Data)
+- #198 Peluquería Canina: San Cristóbal → Parque Patricios (polígono BA Data)
+- #199 Asamblea Pet Shop: (vacío) → Parque Chacabuco (polígono BA Data)
+- #201 Veteba: (vacío) → Barracas (polígono BA Data)
+- #202 Veterinaria Cobo Vet: (vacío) → Nueva Pompeya (polígono BA Data)
+- #203 Pet Shop Firulais Farmacia veterinaria: (vacío) → Villa Soldati (polígono BA Data)
+- #205 Veterinaria tiendapuppy, peluquería canina.: Flores → Parque Chacabuco (polígono BA Data)
+- #207 Peluquería Canina PELU DOGS: (vacío) → Parque Avellaneda (polígono BA Data)
+- #208 Peluquería Canina Marie Pets: (vacío) → Parque Avellaneda (polígono BA Data)
+- #209 Pet's Shop Remolones: Flores → Floresta (polígono BA Data)
+- #211 Como Perro y Gato floresta: Floresta → Vélez Sarsfield (polígono BA Data)
+- #212 Veterinaria El Parque Lacarra: (vacío) → Parque Avellaneda (polígono BA Data)
+- #214 Pet Shop Vallese: (vacío) → Flores (polígono BA Data)
+- #215 Peluquería Canina "Toys": (vacío) → Flores (polígono BA Data)
+- #216 VETERINARIA SHREK: (vacío) → Caballito (polígono BA Data)
+- #219 Veterinaria Pet Shop: Boedo → Balvanera (polígono BA Data)
+- #220 LETVET: (vacío) → Parque Chacabuco (polígono BA Data)
+- #222 Consultorio Veterinario: Flores → Caballito (polígono BA Data)
+- #224 Lo de Fidel (Veterinaria): (vacío) → Flores (polígono BA Data)
+- #225 VETERINARIA FARMAVET: (vacío) → Villa General Mitre (polígono BA Data)
+- #230 Veterinaria Pacalú: (vacío) → Villa Crespo (polígono BA Data)
+- #231 Peluquería Canina Patas & Pelos Pet Shop: (vacío) → Caballito (polígono BA Data)
+- #234 Dame La Pata - Pet shop y Peluqueria: Barrio Norte → Balvanera (polígono BA Data)
+- #237 Pet shop Peluquería Canina "Don Fleco": (vacío) → Chacarita (polígono BA Data)
+- #241 Las Razas Vet: (vacío) → Palermo (polígono BA Data)
+- #242 Animal Friends: Barrio Norte → Palermo (polígono BA Data)
+- #245 PET SHOP Del Parque: Flores → Parque Chacabuco (polígono BA Data)
+- #246 Pet Shop El bulldog - Huellitas: (vacío) → Parque Chacabuco (polígono BA Data)
+- #250 Bubbels Pet Shop y Peluquería Canina: (vacío) → Flores (polígono BA Data)
+- #251 Bruna Belleza Canina: (vacío) → Flores (polígono BA Data)
+- #254 La Nueva Esquina: (vacío) → Villa General Mitre (polígono BA Data)
+- #255 Happy Pet Accesorios - Venta Mayorista de Productos para mascotas: (vacío) → Chacarita (polígono BA Data)
+- #256 Puppis Veterinaria, Peluqueria y Pet Shop: (vacío) → Colegiales (polígono BA Data)
+- #257 PET'S FOOD: Agronomía → Villa del Parque (polígono BA Data)
+- #258 Puppy Shop: (vacío) → Balvanera (polígono BA Data)
+- #261 Pet Shop y Clínica Veterinaria Mascotas de la Abadía: (vacío) → Palermo (polígono BA Data)
+- #262 A Cara de Perro: Colegiales → Palermo (polígono BA Data)
+- #263 Veterinaria TIPPY: (vacío) → Palermo (polígono BA Data)
+- #264 DOG WASH: (vacío) → Palermo (polígono BA Data)
+- #265 Puppis Veterinaria, Peluquería y Pet Shop: (vacío) → Palermo (polígono BA Data)
+- #266 Clinica Verinaria Maggiolo: General San Martín → San Martín (Nominatim)
+- #267 Cota's 24hs Veterinaría: (vacío) → San Martín (Nominatim)
+- #268 Veterinaría: (vacío) → Villa Juan Martín de Pueyrredón (Nominatim)
+- #274 La Mascota de su Casa: (vacío) → Villa General José Tomás Guido (Nominatim)
+- #275 Madagascar: (vacío) → Villa General Juan Gregorio de Las Heras (Nominatim)
+- #276 La Huella: (vacío) → Villa General José Tomás Guido (Nominatim)
+- #277 My Sweet Friends: (vacío) → Villa General Juan Gregorio de Las Heras (Nominatim)
+- #279 Black Dog Peluquería Canina: (vacío) → Villa Ballester (Nominatim)
+- #280 Sarratea: José León Suarez → José León Suárez (Nominatim)
+- #281 Viverito Sarratea: José León Suarez → José León Suárez (Nominatim)
+- #282 Forrajería: José León Suarez → José León Suárez (Nominatim)
+- #283 Hueso's: (vacío) → Villa General Juan Gregorio de Las Heras (Nominatim)
+- #284 Planet Shop: (vacío) → Villa Yapeyú (Nominatim)
+- #285 MarketCan: (vacío) → San Martín (Nominatim)
+- #286 Clinica Veterinaria Tropezon: (vacío) → Villa Ayacucho (Nominatim)
+- #288 Veterinaria Planeta Animal: (vacío) → Municipio de Embarcación (Nominatim)
+- #289 Amma: (vacío) → Villa Ballester (Nominatim)
+- #290 Centro Mascota 2: General San Martín → San Martín (Nominatim)
+- #292 Veterinaria Maiten: (vacío) → San Andrés (Nominatim)
+- #294 FarmaPet City: (vacío) → Villa Libertad (Nominatim)
+- #295 Centro veterinario San Martín: (vacío) → Villa General Juan Gregorio de Las Heras (Nominatim)
+- #296 Punto Vet: General San Martín → San Martín (Nominatim)
+- #297 Las Huellitas: (vacío) → Villa Maipú (Nominatim)
+- #298 Roller: (vacío) → San Martín (Nominatim)
+- #299 Nutrican: (vacío) → Villa Chacabuco (Nominatim)
+- #300 Nutrican: (vacío) → Villa General Juan Gregorio de Las Heras (Nominatim)
+- #302 Clínica Veterinaría San Martín: (vacío) → San Martín (Nominatim)
+- #304 Natural Life: (vacío) → Villa General José Tomás Guido (Nominatim)
+- #305 Alimentos para Mascotas: (vacío) → Villa General José Tomás Guido (Nominatim)
+- #306 Charly Veterinario: (vacío) → Villa General José Tomás Guido (Nominatim)
+- #307 Rock & Dog Peluquería Canina: José León Suarez → José León Suárez (Nominatim)
+- #308 Aires: (vacío) → San Andrés (Nominatim)
+- #309 Las Huellitas: (vacío) → Villa Marqués Alejandro María de Aguado (Nominatim)
+- #310 Forrajería: (vacío) → Villa Ciudad Jardín El Libertador (Nominatim)
+- #311 MVet: General San Martín → San Martín (Nominatim)
+- #312 America: General San Martín → San Martín (Nominatim)
+- #315 Eukanuba: (vacío) → San Isidro (Nominatim)
+- #316 Veterinaria: (vacío) → Acassuso (Nominatim)
+- #317 Veterinaria La Rotonda: (vacío) → Acassuso (Nominatim)
+- #319 Veterinaria San Carlos: (vacío) → Martínez (Nominatim)
+- #320 Veterinaria KNes: (vacío) → Martínez (Nominatim)
+- #321 Pet Shop Huellitas: (vacío) → Martínez (Nominatim)
+- #324 Selpy Pet: (vacío) → Martínez (Nominatim)
+- #325 Veterinaria Eduardo: (vacío) → Martínez (Nominatim)
+- #328 Veterinaria: (vacío) → Martínez (Nominatim)
+- #331 Candy Pet Shop: (vacío) → Martínez (Nominatim)
+- #332 Perro Al Agua: (vacío) → Villa Adelina (Nominatim)
+- #333 Mr. Dog: (vacío) → Villa Adelina (Nominatim)
+- #334 Amici: (vacío) → Béccar (Nominatim)
+- #336 Por Más Vida: Beccar → Béccar (Nominatim)
+- #337 Dog and Cat: (vacío) → Béccar (Nominatim)
+- #338 Sunrise: Beccar → Béccar (Nominatim)
+- #339 Flying Paw: (vacío) → Martínez (Nominatim)
+- #340 Hocicos: (vacío) → Acassuso (Nominatim)
+- #341 Royal Canin: (vacío) → San Isidro (Nominatim)
+- #342 Raffus: (vacío) → San Isidro (Nominatim)
+- #343 Encalada Vet&Pet: (vacío) → San Isidro (Nominatim)
+- #347 Simba Vet: (vacío) → Béccar (Nominatim)
+- #348 Lucky: Beccar → Béccar (Nominatim)
+- #349 San Agustín: (vacío) → Béccar (Nominatim)
+- #350 Pet Company: (vacío) → Béccar (Nominatim)
+- #353 CuruPet Martinez: (vacío) → Martínez (Nominatim)
+- #356 Drovenort: (vacío) → San Isidro (Nominatim)
+- #358 Vetland Baires: (vacío) → Villa Adelina (Nominatim)
+- #359 Perland San Isidro: (vacío) → Boulogne Sur Mer (Nominatim)
+- #360 Centro Médico Veterinario La Horqueta: (vacío) → Boulogne Sur Mer (Nominatim)
+- #361 Vet Pro: (vacío) → Martínez (Nominatim)
+- #362 Citypet: (vacío) → Béccar (Nominatim)
+- #365 Cinovita: (vacío) → Martínez (Nominatim)
+- #366 Pelos y Patas: (vacío) → Martínez (Nominatim)
+- #369 Centro Medico Veterinario: (vacío) → Villa Adelina (Nominatim)
+- #370 Centro Medico Veterinaria: (vacío) → Boulogne Sur Mer (Nominatim)
+- #372 Forrajería Anton: (vacío) → San Isidro (Nominatim)
+- #373 CVI: (vacío) → Boulogne Sur Mer (Nominatim)
+- #374 África: (vacío) → San Isidro (Nominatim)
+- #375 Lourdes: (vacío) → Santos Lugares (Nominatim)
+- #376 Peluquería canina lila: (vacío) → Martín Coronado (Nominatim)
+- #377 Wapp: (vacío) → Santos Lugares (Nominatim)
+- #378 Veterinaría Lavalle: (vacío) → Loma Hermosa (Nominatim)
+- #379 Cuatro Patas: (vacío) → Caseros (Nominatim)
+- #380 Hocikos: (vacío) → Caseros (Nominatim)
+- #381 La Chicha: (vacío) → Caseros (Nominatim)
+- #382 Gasmar: (vacío) → Pablo Podestá (Nominatim)
+- #383 ProPlan: (vacío) → Sáenz Peña (Nominatim)
+- #384 Arturo: (vacío) → Loma Hermosa (Nominatim)
+- #386 Centro Veterinario Ameghino: (vacío) → Sáenz Peña (Nominatim)
+- #387 Super Pet's: (vacío) → Santos Lugares (Nominatim)
+- #390 Veterinaria Ciudad Jardín: (vacío) → Ciudad Jardín Lomas del Palomar (Nominatim)
+- #391 Damaroma: (vacío) → Ciudad Jardín Lomas del Palomar (Nominatim)
+- #392 Cata Mascotas: (vacío) → Ciudadela (Nominatim)
+- #393 Don Boston: (vacío) → Santos Lugares (Nominatim)
+- #394 Centro Veterinario: (vacío) → Villa Bosch (Nominatim)
+- #395 Pet Shop Baloo: (vacío) → Villa Bosch (Nominatim)
+- #396 Neyen: (vacío) → Pablo Podestá (Nominatim)
+- #397 Wapp: (vacío) → Caseros (Nominatim)
+- #398 Fernández Moreno: (vacío) → Sáenz Peña (Nominatim)
+- #399 Ciudadela: (vacío) → Ciudadela (Nominatim)
+- #401 Animalis: (vacío) → Villa Martelli (Nominatim)
+- #402 LaTienda de Mascotas: La  Lucila → La Lucila (Nominatim)
+- #403 Veterinaria: (vacío) → Olivos (Nominatim)
+- #404 Perro al Agua: (vacío) → Munro (Nominatim)
+- #405 Timón y Pumba: (vacío) → Florida Oeste (Nominatim)
+- #406 El Arca: (vacío) → Villa Martelli (Nominatim)
+- #407 Consultorio Veterinario: (vacío) → Munro (Nominatim)
+- #410 Los Marcos: (vacío) → Olivos (Nominatim)
+- #411 Old Prince: (vacío) → Olivos (Nominatim)
+- #413 Veterinaria: (vacío) → Olivos (Nominatim)
+- #415 Puppis: Vicente López → Florida (Nominatim)
+- #416 Veterinaria de la Quinta: Vicente López → Florida (Nominatim)
+- #418 Consultorio Veterinario: (vacío) → Florida (Nominatim)
+- #419 Pulguitas: (vacío) → Vicente López (Nominatim)
+- #420 Puppy Food: (vacío) → Florida (Nominatim)
+- #424 Animal Shop: (vacío) → Florida (Nominatim)
+- #427 San Roque: Vicente Lopez → Vicente López (Nominatim)
+- #428 Otto: (vacío) → Florida (Nominatim)
+- #430 Distribuidora Carapachay: (vacío) → Villa Adelina (Nominatim)
+- #432 Veterinaria del Este: (vacío) → Florida (Nominatim)
+- #433 Mascocenter: (vacío) → Olivos (Nominatim)
+- #434 Veterinaria Mundo Animal: (vacío) → Florida (Nominatim)
+- #437 Malaika: (vacío) → Florida (Nominatim)
+- #439 Puppis: (vacío) → Florida Oeste (Nominatim)
+- #440 Puppis: Vicente López → La Lucila (Nominatim)
+- #441 Mapanis: (vacío) → Florida Oeste (Nominatim)
+- #442 Nuevo Sol: (vacío) → Villa Martelli (Nominatim)
+- #443 Madagascar: (vacío) → Munro (Nominatim)
+- #444 Mascota Point: (vacío) → Munro (Nominatim)
+- #445 Clínica Veterinaria VIDA: (vacío) → Olivos (Nominatim)
+- #446 Veterinaria Mascotamania: Vicente López → Florida (Nominatim)
+- #447 Canguro: (vacío) → Florida (Nominatim)
 
 ## Partido asignado por localidad
-- #41 VETmood: Vicente López → Vicente López
-- #42 CVO Centro Vet. Olivos: Olivos → Vicente López
-- #43 Veterinaria Brisa: Olivos → Vicente López
-- #44 Clínica Vet. & Pet Danbar: Vicente López → Vicente López
-- #45 Veterinaria Isidro: San Isidro → San Isidro
-- #46 Vet. Center Dr. Diego Diaz: San Isidro → San Isidro
-- #47 Mascotamanía: San Isidro → San Isidro
-- #48 Vet Krauss: San Isidro → San Isidro
-- #68 Avellaneda Veterinary Center: Avellaneda → Avellaneda
-- #69 Hospital Veterinario Municipal Avellaneda: Avellaneda → Avellaneda
-- #70 Clínica Veterinaria Gutiérrez: Avellaneda → Avellaneda
-- #71 Hospital Veterinario Avellaneda: Gerli → Avellaneda
-- #72 My Vet's Avellaneda: Avellaneda → Avellaneda
-- #73 Lanús Veterinary Hospital: Lanús → Lanús
-- #74 Veterinaria M.A.P.A. Lanús Oeste: Lanús → Lanús
-- #75 Hospital Veterinario M.A.P.A: Lanús → Lanús
-- #76 Veterinaria Dr. Stella: Lanús → Lanús
-- #77 Hospital Veterinario Santa Catalina: Lanús → Lanús
-- #78 Quilmes Veterinary Hospital: Quilmes → Quilmes
-- #79 Consultorio Vet. Dra. Ana Victoria Andrés: Quilmes → Quilmes
-- #80 Colón Veterinary Hospital: Quilmes Oeste → Quilmes
-- #81 Veterinaria Tweety Ecografías: Quilmes → Quilmes
-- #82 Quilmes Veterinary Center: Quilmes → Quilmes
-- #83 Clínica Veterinaria Lomas: Lomas de Zamora → Lomas de Zamora
-- #84 Veterinaria Mainus: Lomas de Zamora → Lomas de Zamora
-- #85 Danke Veterinary Clinic: Lomas de Zamora → Lomas de Zamora
-- #86 SIMA-PET Bs As: Lomas de Zamora → Lomas de Zamora
-- #87 Lomas del Sur Veterinaria: Lomas de Zamora → Lomas de Zamora
-- #88 Centro Veterinario Morón: Morón → Morón
-- #89 Veterinary Small Animal: Morón → Morón
-- #90 Veterinary North Morón: Morón → Morón
-- #91 Veterinaria Tierra Animal: Morón → Morón
-- #92 Veterinaria Invet 24hs Morón: Morón → Morón
-- #93 Pehuén Clínica Veterinaria: Ramos Mejía → La Matanza
-- #94 Veterinaria Dra. Carrizo: Ramos Mejía → La Matanza
-- #95 ProVeter Ramos Mejía: Ramos Mejía → La Matanza
-- #96 FixVet 24: Ramos Mejía → La Matanza
-- #97 Veterinaria Ramos Mejía: Ramos Mejía → La Matanza
-- #98 Central Veterinaria Tigre: Tigre → Tigre
-- #99 Centro Médico Veterinario Tigre: Tigre → Tigre
-- #100 Centro Veterinario Trusoni: Tigre → Tigre
-- #101 Veterinary Ribera: Tigre → Tigre
-- #102 Veterinaria 3 de Febrero: San Fernando → San Fernando
-- #103 Móvil Vet: San Fernando → San Fernando
-- #104 Consultorio Veterinario Nehuén: Virreyes → San Fernando
-- #105 Veterinary 24 Horas Berazategui: Berazategui → Berazategui
-- #106 Veterinaria EVET 24hs: San Miguel → San Miguel
-- #157 ROYAL PET - PELUQUERIA CANINA: San Isidro → San Isidro
-- #158 Veterinaria Madagascar: La Plata → La Plata
-- #159 ANIMALES Barberia Peluqueria: La Plata → La Plata
-- #160 360 Mascota: La Plata → La Plata
-- #161 Pet's Shop Animal's: La Plata → La Plata
-- #162 Clínica Veterinaria Fénix: La Plata → La Plata
-- #163 Clinica Veterinaria La Plata 10 y 58: La Plata → La Plata
-- #164 Veterinaria Trudy's: La Plata → La Plata
-- #165 Veterinaria Bastet: La Plata → La Plata
-- #166 Veterinaria Mon: La Plata → La Plata
-- #167 Veterinaria AD: La Plata → La Plata
-- #168 Veterinaria La Grand-Rue: La Plata → La Plata
-- #169 Veterinaria Malta: La Plata → La Plata
-- #170 Veterinaria El Trébol: La Plata → La Plata
-- #171 PeluVet- Peluqueria Canina- Veterinaria-PetShop: La Plata → La Plata
-- #172 Fiel Tienda Animal y Peluqueria Canina: La Plata → La Plata
-- #173 Pet shop / peluquería canina: La Plata → La Plata
+- Ninguno (ya tenían partido)
 
 ## Partido a revisar
-- #71 Hospital Veterinario Avellaneda: Avellaneda (Gerli se reparte entre Avellaneda y Lanús)
+- Ninguno
 
 ## Errores / avisos
-- Ninguno
+- #185 no cae en ningún barrio de CABA (¿zona mal cargada?)
+- #253 no cae en ningún barrio de CABA (¿zona mal cargada?)

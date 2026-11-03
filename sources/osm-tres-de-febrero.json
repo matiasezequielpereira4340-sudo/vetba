@@ -1,0 +1,407 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-03T17:02:50Z",
+  "timestamp_areas_base": "2026-11-03T11:13:55Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 1239469641,
+   "lat": -34.6002063,
+   "lon": -58.5470833,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Lourdes",
+    "operator": "0"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4487717090,
+   "lat": -34.5879015,
+   "lon": -58.5926716,
+   "tags": {
+    "addr:housenumber": "6981",
+    "addr:street": "954 - Avenida Presidente Juan Domingo Perón",
+    "name": "Peluquería canina lila",
+    "phone": "+54 11 2852-9631",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4561974667,
+   "lat": -34.5994487,
+   "lon": -58.5450065,
+   "tags": {
+    "addr:street": "425 - Rodríguez Peña",
+    "name": "Wapp",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4621408947,
+   "lat": -34.586819,
+   "lon": -58.5887378,
+   "tags": {
+    "fixme": "name?",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4621476680,
+   "lat": -34.5866888,
+   "lon": -58.5881547,
+   "tags": {
+    "fixme": "name?",
+    "noname": "yes",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4625773831,
+   "lat": -34.5659497,
+   "lon": -58.5944033,
+   "tags": {
+    "addr:street": "900 - General Juan Lavalle",
+    "amenity": "veterinary",
+    "name": "Veterinaría Lavalle",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4625888074,
+   "lat": -34.6022227,
+   "lon": -58.5613879,
+   "tags": {
+    "addr:housenumber": "4687",
+    "addr:street": "542 - Doctor Amadeo Sabattini",
+    "check_date": "2026-01-11",
+    "name": "Cuatro Patas",
+    "opening_hours": "Mo-Fr 09:00-13:00,16:00-19:00; Sa 09:00-13:00; Su off",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4626083420,
+   "lat": -34.6003289,
+   "lon": -58.5618138,
+   "tags": {
+    "addr:street": "643 - Avenida del Libertador General José de San Martín",
+    "name": "Hocikos",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4626529978,
+   "lat": -34.6013658,
+   "lon": -58.5608053,
+   "tags": {
+    "addr:street": "538 - Wenceslao de Tata",
+    "name": "La Chicha",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4626575437,
+   "lat": -34.578226,
+   "lon": -58.6055231,
+   "tags": {
+    "name": "Gasmar",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4627400920,
+   "lat": -34.6008874,
+   "lon": -58.5299205,
+   "tags": {
+    "addr:street": "416 - Florentino Ameghino",
+    "name": "ProPlan",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4630158367,
+   "lat": -34.5668374,
+   "lon": -58.6082168,
+   "tags": {
+    "name": "Arturo",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5900953046,
+   "lat": -34.602814,
+   "lon": -58.5405429,
+   "tags": {
+    "addr:city": "Santos Lugares",
+    "addr:housenumber": "3275",
+    "addr:postcode": "B1676AEA",
+    "addr:street": "434 - Alpatacal",
+    "amenity": "veterinary",
+    "contact:phone": "+54 11 4712-5758",
+    "name": "Clínica veterinaria Santos Lugares"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5922543162,
+   "lat": -34.5989999,
+   "lon": -58.5479007,
+   "tags": {
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8298861973,
+   "lat": -34.6005419,
+   "lon": -58.5305179,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Centro Veterinario Ameghino",
+    "phone": "+54 9 11 2200-1500"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11646584107,
+   "lat": -34.5957175,
+   "lon": -58.5485278,
+   "tags": {
+    "name": "Super Pet's",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11658009372,
+   "lat": -34.6012296,
+   "lon": -58.5384242,
+   "tags": {
+    "addr:city": "Santos Lugares",
+    "addr:country": "AR",
+    "addr:housenumber": "1312",
+    "addr:postcode": "B1676",
+    "addr:province": "Buenos Aires",
+    "addr:street": "417 - Manuel Estrada",
+    "name": "Roma",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11658009407,
+   "lat": -34.5971243,
+   "lon": -58.5414205,
+   "tags": {
+    "addr:city": "Sáenz Peña",
+    "addr:street": "425 - Rodríguez Peña",
+    "name": "Maskota's",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12144510385,
+   "lat": -34.5912377,
+   "lon": -58.591531,
+   "tags": {
+    "addr:housenumber": "2212",
+    "addr:street": "Diagonal 102 - Libertad",
+    "amenity": "veterinary",
+    "check_date": "2024-08-29",
+    "name": "Veterinaria Ciudad Jardín",
+    "opening_hours": "Mo-Fr 09:00-13:00,15:00-19:00; Sa 09:00-13:00; Su off"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12145935240,
+   "lat": -34.5915483,
+   "lon": -58.5906907,
+   "tags": {
+    "check_date": "2024-08-29",
+    "name": "Damaroma",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13484753537,
+   "lat": -34.6478739,
+   "lon": -58.5381393,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Cata Mascotas",
+    "phone": "+54 11 4657-0694"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13676886257,
+   "lat": -34.5953,
+   "lon": -58.5475448,
+   "tags": {
+    "level": "0",
+    "name": "Don Boston",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467502790,
+   "center": {
+    "lat": -34.587649,
+    "lon": -58.5710107
+   },
+   "tags": {
+    "addr:street": "559 - Luis María Bosch",
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Centro Veterinario",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "way",
+   "id": 468031948,
+   "center": {
+    "lat": -34.5818935,
+    "lon": -58.5812617
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Pet Shop Baloo",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468093879,
+   "center": {
+    "lat": -34.5770502,
+    "lon": -58.6069718
+   },
+   "tags": {
+    "building": "yes",
+    "name": "Neyen",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468125843,
+   "center": {
+    "lat": -34.5735332,
+    "lon": -58.6121432
+   },
+   "tags": {
+    "building": "yes",
+    "fixme": "name",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468148466,
+   "center": {
+    "lat": -34.5948495,
+    "lon": -58.5611332
+   },
+   "tags": {
+    "addr:street": "643 - Avenida del Libertador General José de San Martín",
+    "building": "yes",
+    "name": "Wapp",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre cartográfico realizado por Kaart en 2016."
+   }
+  },
+  {
+   "type": "way",
+   "id": 468408054,
+   "center": {
+    "lat": -34.5959335,
+    "lon": -58.534627
+   },
+   "tags": {
+    "amenity": "veterinary",
+    "building": "yes",
+    "building:levels": "2",
+    "name": "Fernández Moreno"
+   }
+  },
+  {
+   "type": "way",
+   "id": 468482550,
+   "center": {
+    "lat": -34.5675117,
+    "lon": -58.6073653
+   },
+   "tags": {
+    "building": "yes",
+    "fixme": "name",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 476135509,
+   "center": {
+    "lat": -34.640323,
+    "lon": -58.5476907
+   },
+   "tags": {
+    "addr:street": "137 - Avenida Rivadavia",
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Ciudadela"
+   }
+  },
+  {
+   "type": "way",
+   "id": 699532080,
+   "center": {
+    "lat": -34.6087874,
+    "lon": -58.5620496
+   },
+   "tags": {
+    "amenity": "veterinary",
+    "building": "yes"
+   }
+  }
+ ],
+ "vetba": {
+  "partido": "Tres de Febrero",
+  "descargado": "2026-11-03T17:00:00Z",
+  "consulta": "nwr(area Partido de Tres de Febrero)[amenity=veterinary|shop=pet|shop=pet_grooming]; out center tags",
+  "licencia": "ODbL — © colaboradores de OpenStreetMap"
+ }
+}

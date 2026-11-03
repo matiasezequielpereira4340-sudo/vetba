@@ -1,0 +1,1084 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-03T17:00:49Z",
+  "timestamp_areas_base": "2026-11-03T11:13:55Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "node",
+   "id": 4340572308,
+   "lat": -34.4707508,
+   "lon": -58.5082678,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "Eukanuba",
+    "phone": "+54 11 4747-5335",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4581700064,
+   "lat": -34.4797516,
+   "lon": -58.503583,
+   "tags": {
+    "addr:street": "Intendente Alfaro",
+    "amenity": "veterinary",
+    "name": "Veterinaria",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4581700075,
+   "lat": -34.4796023,
+   "lon": -58.5038928,
+   "tags": {
+    "addr:housenumber": "870",
+    "addr:postcode": "B1641",
+    "addr:street": "Eduardo Costa",
+    "amenity": "veterinary",
+    "check_date:opening_hours": "2024-09-17",
+    "name": "Veterinaria La Rotonda",
+    "opening_hours:signed": "no",
+    "phone": "+54 11 4793-8978",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4590025692,
+   "lat": -34.479457,
+   "lon": -58.5055493,
+   "tags": {
+    "addr:city": "Acassuso",
+    "addr:postcode": "B1641",
+    "addr:street": "Perú",
+    "name": "Puro Amor",
+    "phone": "+54 11 4742-2521",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4590275779,
+   "lat": -34.488696,
+   "lon": -58.5224912,
+   "tags": {
+    "addr:street": "Dardo Rocha",
+    "amenity": "veterinary",
+    "name": "Veterinaria San Carlos",
+    "opening_hours": "Mo-Fr 09:00-13:00,15:00-18:00; Sa 09:00-13:00",
+    "phone": "+54 11 4792-4645",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4591825359,
+   "lat": -34.5031698,
+   "lon": -58.5303758,
+   "tags": {
+    "addr:street": "Hipólito Yrigoyen",
+    "amenity": "veterinary",
+    "name": "Veterinaria KNes",
+    "phone": "+54 11 4717-4305",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4591825413,
+   "lat": -34.4988089,
+   "lon": -58.5207656,
+   "tags": {
+    "addr:street": "Hipólito Yrigoyen",
+    "name": "Pet Shop Huellitas",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4591949098,
+   "lat": -34.4923288,
+   "lon": -58.510994,
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:street": "Beruti",
+    "name": "Como Perro y Gato",
+    "opening_hours": "Mo-Sa 09:00-20:00; Su off",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4591949105,
+   "lat": -34.4918816,
+   "lon": -58.511518,
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:street": "Diagonal Salta",
+    "amenity": "veterinary",
+    "name": "Dharma",
+    "phone": "+54 11 4793-5831",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4592713341,
+   "lat": -34.4978625,
+   "lon": -58.5199482,
+   "tags": {
+    "addr:housenumber": "1902",
+    "addr:street": "Avenida Sir Alexander Fleming",
+    "amenity": "veterinary",
+    "check_date": "2024-02-16",
+    "name": "Selpy Pet",
+    "opening_hours": "Mo-Fr 09:00-19:00; Sa 09:00-15:00; Su off",
+    "payment:cabal": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:maestro": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "source": "Reconocimiento terrestre por Kaart 2016",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4593031180,
+   "lat": -34.4961643,
+   "lon": -58.514403,
+   "tags": {
+    "amenity": "veterinary",
+    "check_date:opening_hours": "2025-04-27",
+    "name": "Veterinaria Eduardo",
+    "opening_hours": "Mo-Sa 09:30-12:30,16:30-19:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4593110225,
+   "lat": -34.4940348,
+   "lon": -58.5101733,
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:street": "Hipólito Yrigoyen",
+    "delivery": "yes",
+    "name": "El Calafate",
+    "phone": "+54 11 4798-9175",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4593598328,
+   "lat": -34.4869139,
+   "lon": -58.5022147,
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:housenumber": "1619",
+    "addr:postcode": "B1640",
+    "addr:street": "Avenida Santa Fe",
+    "name": "Drovenort",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4599047159,
+   "lat": -34.4929786,
+   "lon": -58.5074187,
+   "tags": {
+    "addr:street": "Hipólito Yrigoyen",
+    "amenity": "veterinary",
+    "fixme": "nombre",
+    "name": "Veterinaria",
+    "opening_hours": "Mo-Fr 10:00-13:00,04:00-19:00; Sa 10:00-14:00; Su 10:00-13:00",
+    "phone": "+54 11 4793-9333",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4599061172,
+   "lat": -34.4909236,
+   "lon": -58.5032086,
+   "tags": {
+    "addr:city": "Martinez",
+    "addr:postcode": "1640",
+    "addr:street": "Hipólito Yrigoyen",
+    "name": "Mundo Animal",
+    "opening_hours": "closed",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4599090336,
+   "lat": -34.4839441,
+   "lon": -58.5037349,
+   "tags": {
+    "addr:city": "Acassuso",
+    "addr:housenumber": "1300",
+    "addr:postcode": "B1641",
+    "addr:street": "Avenida Santa Fe",
+    "check_date": "2025-11-29",
+    "email": "info@drovenort.com.ar",
+    "name": "Drovenort",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+54 11 4798 6856",
+    "shop": "pet",
+    "website": "https://drovenort.com.ar/sucursales/",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4604947165,
+   "lat": -34.4963746,
+   "lon": -58.5066844,
+   "tags": {
+    "addr:street": "Edison",
+    "name": "Candy Pet Shop",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4616798218,
+   "lat": -34.5125468,
+   "lon": -58.5413515,
+   "tags": {
+    "addr:street": "Avenida de Mayo",
+    "name": "Perro Al Agua",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4617200969,
+   "lat": -34.5148126,
+   "lon": -58.5420228,
+   "tags": {
+    "addr:street": "Avenida de Mayo",
+    "amenity": "veterinary",
+    "name": "Mr. Dog",
+    "source": "Reconocimiento cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4625757302,
+   "lat": -34.4667653,
+   "lon": -58.5201596,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "1002",
+    "addr:postcode": "B1642",
+    "addr:street": "Avenida Centenario",
+    "opening_hours": "closed",
+    "shop": "pet",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4627805735,
+   "lat": -34.4616576,
+   "lon": -58.5262168,
+   "tags": {
+    "addr:housenumber": "1799",
+    "addr:postcode": "B1643",
+    "addr:street": "Avenida Centenario",
+    "check_date": "2025-08-20",
+    "name": "Amici",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4636208023,
+   "lat": -34.4763776,
+   "lon": -58.5302088,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "602",
+    "addr:postcode": "B1642",
+    "addr:street": "Avenida Andrés Rolón",
+    "amenity": "veterinary",
+    "name": "Centro Médico Veterinario Dr. Planas",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4638956620,
+   "lat": -34.4706947,
+   "lon": -58.5473827,
+   "tags": {
+    "addr:city": "Beccar",
+    "addr:postcode": "B1643",
+    "name": "Por Más Vida",
+    "phone": "+54 11 4723-8618",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4638956655,
+   "lat": -34.4691265,
+   "lon": -58.5441751,
+   "tags": {
+    "addr:street": "José Ingenieros",
+    "delivery": "yes",
+    "name": "Dog and Cat",
+    "phone": "+54 11 4723-0208",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4644576441,
+   "lat": -34.4742462,
+   "lon": -58.5558502,
+   "tags": {
+    "addr:city": "Beccar",
+    "addr:postcode": "B1643",
+    "addr:street": "Avenida Sucre",
+    "check_date": "2024-02-14",
+    "name": "Sunrise",
+    "payment:cabal": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:maestro": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "+54 11 4747-5005",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4649244066,
+   "lat": -34.4876966,
+   "lon": -58.5013262,
+   "tags": {
+    "addr:housenumber": "1223",
+    "addr:street": "Avenida Santa Fe",
+    "check_date": "2025-04-26",
+    "description": "Traslado internacional de mascotas",
+    "email": "info@flyingpaw.com.ar",
+    "name": "Flying Paw",
+    "phone": "+54 11 2325-6302",
+    "shop": "pet",
+    "source": "local knowledge",
+    "website": "https://www.flyingpaw.com.ar/",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4675597198,
+   "lat": -34.469657,
+   "lon": -58.5221271,
+   "tags": {
+    "addr:street": "Monseñor Alberti",
+    "amenity": "veterinary",
+    "phone": "+54 11 4742-7462",
+    "source": "Reconocimiento terrestre por Kaart 2016.",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4675627247,
+   "lat": -34.4745683,
+   "lon": -58.5120819,
+   "tags": {
+    "addr:housenumber": "48",
+    "addr:postcode": "B1642",
+    "addr:street": "Avenida Santa Fe",
+    "brand": "San Isidro",
+    "check_date": "2026-07-26",
+    "name": "Hocicos",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4677079816,
+   "lat": -34.4698854,
+   "lon": -58.509004,
+   "tags": {
+    "addr:street": "Martín y Omar",
+    "amenity": "veterinary",
+    "name": "Royal Canin",
+    "source": "Actualizaciones en Argentina. Reconocimiento cartográfico 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4677324800,
+   "lat": -34.4709419,
+   "lon": -58.5138508,
+   "tags": {
+    "addr:street": "Cosme Beccar",
+    "name": "Raffus",
+    "shop": "pet",
+    "source": "Actualizaciones en Argentina. Reconocimiento cartográfico 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4678722357,
+   "lat": -34.493632,
+   "lon": -58.5516747,
+   "tags": {
+    "addr:street": "Blanco Encalada",
+    "name": "Encalada Vet&Pet",
+    "opening_hours": "closed",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4678722367,
+   "lat": -34.4934814,
+   "lon": -58.5518836,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "85",
+    "addr:postcode": "B1609",
+    "addr:street": "Almirante Blanco Encalada",
+    "amenity": "veterinary",
+    "check_date": "2024-09-17",
+    "name": "Dr. Smolny",
+    "phone": "+54 11 4765 4229",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4678916539,
+   "lat": -34.4698958,
+   "lon": -58.5149709,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "132",
+    "addr:postcode": "B1642",
+    "addr:street": "Almirante Brown",
+    "name": "Beethoven",
+    "shop": "pet",
+    "source": "Actualizaciones en Argentina. Reconocimiento cartográfico 2016 por KG."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4687734336,
+   "lat": -34.492978,
+   "lon": -58.5467898,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "3002",
+    "addr:postcode": "B1642",
+    "addr:street": "Anatole France",
+    "amenity": "veterinary",
+    "name": "El Jockey",
+    "source": "Actualizaciones en Argentina. Reconocimiento terrestre por #Kaart 2016."
+   }
+  },
+  {
+   "type": "node",
+   "id": 4691078474,
+   "lat": -34.4529449,
+   "lon": -58.5269573,
+   "tags": {
+    "addr:housenumber": "18214",
+    "addr:street": "Avenida del Libertador",
+    "amenity": "veterinary",
+    "check_date": "2023-09-26",
+    "name": "Simba Vet",
+    "phone": "+54 11 4742-7795",
+    "source": "Actualizaciones en Argentina. Reconocimiento terrestre por #Kaart 2016.",
+    "survey:date": "2022-07-21",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5303972741,
+   "lat": -34.4727071,
+   "lon": -58.5509091,
+   "tags": {
+    "addr:city": "Beccar",
+    "addr:housenumber": "2470",
+    "addr:postcode": "B1643",
+    "addr:street": "José Ingenieros",
+    "delivery": "yes",
+    "name": "Lucky",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6781685408,
+   "lat": -34.4763578,
+   "lon": -58.5591063,
+   "tags": {
+    "amenity": "veterinary",
+    "name": "San Agustín"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8914390701,
+   "lat": -34.4595601,
+   "lon": -58.529479,
+   "tags": {
+    "addr:housenumber": "2114",
+    "addr:postcode": "1643",
+    "addr:street": "Avenida Centenario",
+    "check_date": "2026-06-19",
+    "delivery": "yes",
+    "name": "Pet Company",
+    "opening_hours": "Mo-Sa 09:00-20:00; Su off",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+54 11 4742-6880",
+    "shop": "pet",
+    "survey:date": "2022-09-08",
+    "website": "https://www.petcompanyweb.com.ar/",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9183529330,
+   "lat": -34.4720517,
+   "lon": -58.5157626,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "41",
+    "addr:postcode": "B1642",
+    "addr:street": "Alsina",
+    "check_date": "2026-08-13",
+    "dog": "yes",
+    "name": "Mascotamania",
+    "opening_hours": "Mo-Fr 09:00-17:00; Sa 09:00-14:00; Su off",
+    "phone": "+54 11 4747 3518",
+    "shop": "pet",
+    "survey:date": "2022-09-15"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9867016157,
+   "lat": -34.4612818,
+   "lon": -58.5303432,
+   "tags": {
+    "addr:city": "Beccar",
+    "addr:housenumber": "279",
+    "addr:postcode": "B1643",
+    "addr:street": "Juan B. Justo",
+    "amenity": "veterinary",
+    "check_date": "2024-03-22",
+    "dog": "leashed",
+    "name": "Centro Veterinario Dr. Diego E. Diaz",
+    "phone": "+54 11 4747-6452",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9867016160,
+   "lat": -34.46192,
+   "lon": -58.5317417,
+   "tags": {
+    "addr:city": "Béccar",
+    "addr:housenumber": "411",
+    "addr:postcode": "B1643",
+    "addr:street": "Juan B. Justo",
+    "check_date": "2026-08-18",
+    "contact:instagram": "https://www.instagram.com/forrajeriaelcuervook",
+    "delivery": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "El Cuervo",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "shop": "pet",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9892402550,
+   "lat": -34.4806162,
+   "lon": -58.5050798,
+   "tags": {
+    "addr:city": "Acassuso",
+    "addr:housenumber": "101",
+    "addr:postcode": "B1641",
+    "addr:street": "Intendente Alfaro",
+    "check_date": "2025-01-30",
+    "dog": "yes",
+    "name": "CuruPet Acassuso",
+    "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-14:00; Su off",
+    "phone": "+54 11 4733-9300",
+    "shop": "pet",
+    "website": "https://curupet.com.ar/",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9906778418,
+   "lat": -34.4869618,
+   "lon": -58.5059957,
+   "tags": {
+    "addr:housenumber": "207",
+    "addr:street": "Saenz Valiente",
+    "branch": "Martínez",
+    "check_date": "2026-08-05",
+    "name": "CuruPet Martinez",
+    "shop": "pet",
+    "website": "https://curupet.com.ar/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9989629738,
+   "lat": -34.4894293,
+   "lon": -58.4852487,
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:housenumber": "131544",
+    "addr:postcode": "1640",
+    "addr:street": "Avenida del Libertador",
+    "name": "Puppis",
+    "shop": "pet"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10027549817,
+   "lat": -34.4699158,
+   "lon": -58.516566,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "603",
+    "addr:postcode": "B1642",
+    "addr:street": "Avenida Centenario",
+    "amenity": "veterinary",
+    "delivery": "yes",
+    "name": "Laima",
+    "opening_hours": "Mo-Fr 09:30-19:00; Sa 10:00-14:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+54 11 4492-6460",
+    "survey:date": "2022-09-15",
+    "website": "https://www.veterinarialaima.com.ar/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10028468218,
+   "lat": -34.4661629,
+   "lon": -58.5210645,
+   "tags": {
+    "amenity": "veterinary",
+    "delivery": "yes",
+    "name": "Drovenort",
+    "opening_hours": "Mo-Fr 09:30-18:00; Sa 09:30-15:00",
+    "phone": "+54 11 4747-4773",
+    "survey:date": "2023-03-24",
+    "website": "https://drovenort.com.ar/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10128997002,
+   "lat": -34.4960357,
+   "lon": -58.5571327,
+   "tags": {
+    "addr:city": "Boulogne Sur Mer",
+    "addr:housenumber": "194",
+    "addr:postcode": "B1609",
+    "addr:street": "Valentín Vergara",
+    "check_date": "2026-06-28",
+    "delivery": "yes",
+    "name": "Puppis",
+    "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-20:00; Su 10:00-20:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+54 810 220 2345",
+    "shop": "pet",
+    "source": "Reconocimiento cartográfico 2016 por KG",
+    "website": "https://www.puppis.com.ar/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10230958020,
+   "lat": -34.5114935,
+   "lon": -58.5325315,
+   "tags": {
+    "addr:housenumber": "2611",
+    "addr:street": "Avenida Fondo de la Legua",
+    "amenity": "veterinary",
+    "check_date": "2023-12-05",
+    "contact:facebook": "https://www.facebook.com/Vetland.Baires",
+    "contact:whatsapp": "+541131414940",
+    "name": "Vetland Baires",
+    "phone": "+54 11 4708-0020"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11188865760,
+   "lat": -34.4963493,
+   "lon": -58.5521461,
+   "tags": {
+    "addr:housenumber": "2649",
+    "addr:street": "Colectora Panamericana Este",
+    "amenity": "veterinary",
+    "check_date": "2023-09-13",
+    "email": "petland.sanisidro@hotmail.com",
+    "name": "Perland San Isidro",
+    "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-14:00",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+54 11 4735-4282",
+    "source": "local knowledge",
+    "website": "https://www.veterinariasebastian.com",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11665201354,
+   "lat": -34.4793198,
+   "lon": -58.5710158,
+   "tags": {
+    "amenity": "veterinary",
+    "check_date": "2024-02-26",
+    "name": "Centro Médico Veterinario La Horqueta",
+    "opening_hours": "Mo-Fr 09:00-19:00; Sa 09:00-14:00; Su off"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12258680032,
+   "lat": -34.4955471,
+   "lon": -58.497583,
+   "tags": {
+    "addr:housenumber": "2674",
+    "addr:street": "Avenida Santa Fe",
+    "amenity": "veterinary",
+    "check_date": "2024-10-17",
+    "name": "Vet Pro",
+    "opening_hours": "24/7",
+    "phone": "+54 11 4055-5325",
+    "website": "https://www.vetproveterinaria.com.ar"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13073169690,
+   "lat": -34.4796182,
+   "lon": -58.5701267,
+   "tags": {
+    "addr:housenumber": "2187",
+    "addr:street": "Almirante Blanco Encalada",
+    "amenity": "veterinary",
+    "check_date": "2025-08-15",
+    "name": "Citypet",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "website": "https://citypet.com.ar",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13443924011,
+   "lat": -34.4532711,
+   "lon": -58.5290126,
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "506",
+    "addr:postcode": "B1643",
+    "addr:street": "Avenida Uruguay",
+    "amenity": "veterinary",
+    "name": "Animal Town"
+   }
+  },
+  {
+   "type": "way",
+   "id": 464025045,
+   "center": {
+    "lat": -34.4949986,
+    "lon": -58.5211872
+   },
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:housenumber": "1564",
+    "addr:postcode": "B1640",
+    "addr:street": "Avenida Sir Alexander Fleming",
+    "building": "yes",
+    "check_date": "2024-11-12",
+    "dog": "yes",
+    "name": "Puppis",
+    "opening_hours": "Mo-Sa 08:00-20:30; Su 10:00-20:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016;survey",
+    "website": "https://www.puppis.com.ar/",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 464118365,
+   "center": {
+    "lat": -34.4981053,
+    "lon": -58.5199232
+   },
+   "tags": {
+    "addr:housenumber": "1943",
+    "addr:street": "Avenida Sir Alexander Fleming",
+    "building": "yes",
+    "building:levels": "2",
+    "check_date": "2025-10-28",
+    "name": "Cinovita",
+    "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:00-13:00; Su off",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016",
+    "website": "https://www.cinovita.com.ar"
+   }
+  },
+  {
+   "type": "way",
+   "id": 464171217,
+   "center": {
+    "lat": -34.4908518,
+    "lon": -58.5035672
+   },
+   "tags": {
+    "addr:street": "Hipólito Yrigoyen",
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Pelos y Patas",
+    "source": "Reconocimiento terrestre por Kaart 2016"
+   }
+  },
+  {
+   "type": "way",
+   "id": 465555157,
+   "center": {
+    "lat": -34.4975948,
+    "lon": -58.5087918
+   },
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:housenumber": "900",
+    "addr:postcode": "B1640",
+    "addr:street": "Edison",
+    "amenity": "veterinary",
+    "building": "yes",
+    "building:levels": "1",
+    "name": "Centro Médico Veterinario Martínez",
+    "source": "Reconocimiento terrestre por Kaart 2016",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "way",
+   "id": 465558521,
+   "center": {
+    "lat": -34.5049945,
+    "lon": -58.5259482
+   },
+   "tags": {
+    "addr:city": "Martínez",
+    "addr:housenumber": "2519",
+    "addr:postcode": "B1640",
+    "addr:street": "Edison",
+    "building": "yes",
+    "check_date": "2024-11-12",
+    "delivery": "yes",
+    "dog": "yes",
+    "name": "Puppis",
+    "opening_hours": "Mo-Sa 08:00-20:30; Su 10:00-20:00",
+    "payment:cabal": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:maestro": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016",
+    "website": "https://www.puppis.com.ar"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467026699,
+   "center": {
+    "lat": -34.5165071,
+    "lon": -58.542672
+   },
+   "tags": {
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Centro Medico Veterinario"
+   }
+  },
+  {
+   "type": "way",
+   "id": 467304267,
+   "center": {
+    "lat": -34.5192961,
+    "lon": -58.5601757
+   },
+   "tags": {
+    "addr:street": "Avenida Bernardo Ader",
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "Centro Medico Veterinaria",
+    "source": "Reconocimiento cartográfico 2016 por KG"
+   }
+  },
+  {
+   "type": "way",
+   "id": 473446989,
+   "center": {
+    "lat": -34.4727896,
+    "lon": -58.5136794
+   },
+   "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "161",
+    "addr:postcode": "B1642",
+    "addr:street": "Avenida Centenario",
+    "amenity": "veterinary",
+    "building": "yes",
+    "check_date": "2026-03-06",
+    "dog": "yes",
+    "name": "Puppis",
+    "opening_hours": "Mo-Fr 08:00-20:30; Sa 09:00-20:30; Su 10:00-20:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:nfc": "yes",
+    "payment:nfc_mobile_payments": "yes",
+    "website": "https://www.puppis.com.ar/",
+    "wheelchair": "limited"
+   }
+  },
+  {
+   "type": "way",
+   "id": 473454202,
+   "center": {
+    "lat": -34.4720971,
+    "lon": -58.5249572
+   },
+   "tags": {
+    "addr:street": "Don Bosco",
+    "building": "yes",
+    "delivery": "yes",
+    "name": "Forrajería Anton",
+    "phone": "+54 11 4743-2166",
+    "shop": "pet",
+    "source": "Reconocimiento terrestre por Kaart 2016.",
+    "wheelchair": "yes"
+   }
+  },
+  {
+   "type": "way",
+   "id": 474917557,
+   "center": {
+    "lat": -34.4988516,
+    "lon": -58.5434337
+   },
+   "tags": {
+    "addr:housenumber": "555",
+    "addr:street": "Avenida Fondo de la Legua",
+    "amenity": "veterinary",
+    "building": "commercial",
+    "name": "CVI",
+    "source": "Reconocimiento terrestre 2016 por Kaart.",
+    "survey:date": "2022-07-30",
+    "website": "https://www.vetintegral.com.ar/"
+   }
+  },
+  {
+   "type": "way",
+   "id": 932236004,
+   "center": {
+    "lat": -34.4726633,
+    "lon": -58.5253716
+   },
+   "tags": {
+    "amenity": "veterinary",
+    "building": "yes",
+    "name": "África",
+    "phone": "+54 11 4742-3118"
+   }
+  }
+ ],
+ "vetba": {
+  "partido": "San Isidro",
+  "descargado": "2026-11-03T17:00:00Z",
+  "consulta": "nwr(area Partido de San Isidro)[amenity=veterinary|shop=pet|shop=pet_grooming]; out center tags",
+  "licencia": "ODbL — © colaboradores de OpenStreetMap"
+ }
+}

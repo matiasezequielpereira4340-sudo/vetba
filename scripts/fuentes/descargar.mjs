@@ -44,12 +44,20 @@ async function osm() {
     const q = `[out:json][timeout:120];
 area["boundary"="administrative"]["admin_level"="5"]["name"~"^(Partido de )?${partido}$"]->.p;
 (
-  nwr(area.p)["amenity"="veterinary"];
-  nwr(area.p)["shop"="pet"];
-  nwr(area.p)["shop"="pet_grooming"];
+  nwr(area.p)["amenity"="veterinary"](-35.3,-59.3,-34.1,-57.7);
+  nwr(area.p)["shop"="pet"](-35.3,-59.3,-34.1,-57.7);
+  nwr(area.p)["shop"="pet_grooming"](-35.3,-59.3,-34.1,-57.7);
 );
 out center tags;`;
-    const r = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(q) });
+    // OVERPASS_URL permite usar otro endpoint (p. ej. http:// si el proxy corta el TLS). Reintenta ante 429/5xx.
+    const OVERPASS = process.env.OVERPASS_URL || 'https://overpass-api.de/api/interpreter';
+    let r;
+    for (let i = 0; i < 6; i++) {
+      try { r = await fetch(OVERPASS, { method: 'POST', headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(q) }); } catch (e) { r = { ok: false, status: e.message }; }
+      if (r.ok) break;
+      console.log(partido + ' -> HTTP ' + r.status + ', reintento ' + (i + 1) + '/6 en 40 s');
+      await new Promise((res) => setTimeout(res, 40000));
+    }
     if (!r.ok) { console.log(partido + ' -> HTTP ' + r.status); process.exitCode = 1; continue; }
     const j = await r.json();
     j.vetba = { partido, descargado: new Date().toISOString(), consulta: q, licencia: 'ODbL — © colaboradores de OpenStreetMap' };

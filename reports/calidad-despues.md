@@ -6,17 +6,17 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 
 | Métrica | Registros | % |
 |---|---:|---:|
-| total | 264 | 100% |
-| telefono | 260 | 98% |
-| telefono valido | 255 | 97% |
-| horario por dia | 22 | 8% |
-| whatsapp | 0 | 0% |
-| email | 0 | 0% |
-| web | 0 | 0% |
-| coordenadas | 264 | 100% |
-| rating | 262 | 99% |
-| barrio | 223 | 84% |
-| partido | 64 | 24% |
+| total | 445 | 100% |
+| telefono | 309 | 69% |
+| telefono valido | 302 | 68% |
+| horario por dia | 55 | 12% |
+| whatsapp | 1 | 0% |
+| email | 3 | 1% |
+| web | 27 | 6% |
+| coordenadas | 445 | 100% |
+| rating | 262 | 59% |
+| barrio | 445 | 100% |
+| partido | 245 | 55% |
 
 "horario por día" = campo `horarios` normalizado (incluye los 24 h). El texto de Google sin días no cuenta.
 
@@ -24,9 +24,9 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 
 | Tipo | Registros |
 |---|---:|
-| veterinaria | 173 |
-| petshop | 53 |
-| peluqueria | 36 |
+| veterinaria | 255 |
+| petshop | 150 |
+| peluqueria | 38 |
 | laboratorio | 2 |
 
 ## Por zona
@@ -34,15 +34,19 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 | Zona | Registros |
 |---|---:|
 | CABA | 200 |
+| GBA Norte | 172 |
 | GBA Sur | 37 |
-| GBA Norte | 16 |
-| GBA Oeste | 11 |
+| GBA Oeste | 36 |
 
 ## Por partido (GBA)
 
 | Partido | Registros |
 |---|---:|
 | CABA (no aplica) | 200 |
+| San Isidro | 65 |
+| Vicente López | 52 |
+| General San Martín | 48 |
+| Tres de Febrero | 25 |
 | La Plata | 16 |
 | Avellaneda | 5 |
 | La Matanza | 5 |
@@ -50,9 +54,7 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 | Lomas de Zamora | 5 |
 | Morón | 5 |
 | Quilmes | 5 |
-| San Isidro | 5 |
 | Tigre | 4 |
-| Vicente López | 4 |
 | San Fernando | 3 |
 | Berazategui | 1 |
 | San Miguel | 1 |
@@ -61,149 +63,254 @@ Generado el 2026-11-03 desde `data.json` con `scripts/reporte-calidad.mjs`.
 
 | Barrio | Registros |
 |---|---:|
-| (sin dato) | 41 |
-| Palermo | 25 |
-| Caballito | 20 |
-| Flores | 18 |
+| Palermo | 31 |
+| Caballito | 22 |
+| Martínez | 21 |
+| Almagro | 19 |
+| Flores | 19 |
+| San Isidro | 19 |
 | La Plata | 16 |
-| Almagro | 14 |
-| Balvanera | 9 |
-| Barrio Norte | 9 |
-| Boedo | 9 |
-| Recoleta | 8 |
-| Barracas | 7 |
-| Villa Crespo | 7 |
-| Belgrano | 6 |
-| Lanús | 5 |
+| Olivos | 16 |
+| Recoleta | 15 |
+| Florida | 13 |
+| Balvanera | 12 |
+| Béccar | 10 |
+| San Andrés | 9 |
+| San Martín | 9 |
+| Barracas | 8 |
+| Villa Crespo | 8 |
+| Belgrano | 7 |
+| Villa Adelina | 7 |
+| Acassuso | 6 |
+| Santos Lugares | 6 |
+| Vicente López | 6 |
+| Boedo | 5 |
+| Boulogne Sur Mer | 5 |
+| Chacarita | 5 |
 | Lomas de Zamora | 5 |
 | Morón | 5 |
+| Parque Chacabuco | 5 |
 | Ramos Mejía | 5 |
-| San Isidro | 5 |
-| Avellaneda | 4 |
+| Villa General José Tomás Guido | 5 |
+| Villa General Juan Gregorio de Las Heras | 5 |
+| Caseros | 4 |
 | Constitución | 4 |
-| Floresta | 4 |
+| José León Suárez | 4 |
+| La Lucila | 4 |
 | Monserrat | 4 |
+| Munro | 4 |
+| Parque Patricios | 4 |
 | Quilmes | 4 |
-| San Cristóbal | 4 |
+| Sáenz Peña | 4 |
 | Tigre | 4 |
+| Villa Ballester | 4 |
+| Villa General Mitre | 4 |
+| Avellaneda | 3 |
+| Florida Oeste | 3 |
+| Lanús Este | 3 |
+| Parque Avellaneda | 3 |
+| San Cristóbal | 3 |
+| Villa Lynch | 3 |
+| Villa Martelli | 3 |
 | Villa Urquiza | 3 |
-| Agronomía | 2 |
-| Colegiales | 2 |
+| Ciudad Jardín Lomas del Palomar | 2 |
+| Ciudadela | 2 |
 | La Boca | 2 |
-| Olivos | 2 |
+| La Paternal | 2 |
+| Lanús Oeste | 2 |
+| Loma Hermosa | 2 |
+| Pablo Podestá | 2 |
 | San Fernando | 2 |
-| Vicente López | 2 |
+| Vélez Sarsfield | 2 |
+| Villa Bosch | 2 |
+| Villa del Parque | 2 |
+| Villa Maipú | 2 |
+| Villa Santa Rita | 2 |
+| Agronomía | 1 |
 | Berazategui | 1 |
-| Gerli | 1 |
+| Colegiales | 1 |
+| Dock Sud | 1 |
+| Floresta | 1 |
+| Martín Coronado | 1 |
+| Monte Castro | 1 |
+| Nueva Pompeya | 1 |
+| Piñeyro | 1 |
 | Quilmes Oeste | 1 |
 | Retiro | 1 |
 | San Miguel | 1 |
 | San Nicolás | 1 |
+| Villa Ayacucho | 1 |
+| Villa Chacabuco | 1 |
+| Villa Ciudad Jardín El Libertador | 1 |
+| Villa Juan Martín de Pueyrredón | 1 |
+| Villa Libertad | 1 |
+| Villa Marqués Alejandro María de Aguado | 1 |
+| Villa Ortúzar | 1 |
+| Villa Soldati | 1 |
+| Villa Yapeyú | 1 |
 | Virreyes | 1 |
 
 ## Registros sospechosos
 
-### Barrio inválido o vacío (41)
-- #176 Piscu Pet Shop — Don Bosco 3882 C1206AAB (localidad original: "C1206AAB")
-- #184 Centro Veterinario Dorrego Pet Shop Peluqueria Canina — Av. Corrientes 6335 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #185 Profesional Farmacia Veterinaria — Av. Warnes 2700 (localidad original: "DPS")
-- #186 Al Toque Perro Pet shop — Roseti 1849 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #187 Pet's Club. "El club de las Mascotas" — C1417AAG, Cuenca 2550 (localidad original: "AAH")
-- #188 +Cotas Pet shop — Terrada 2055 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #189 ZONA Pet Veterinaria — Av. Córdoba 6400 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #190 CLUB MASCOTAS PETSHOP BAÑO Y PELUQUERÍA CANINA — Gavilán 1725 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #191 TotalPet Chacarita — Av. Federico Lacroze 3776 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #192 Veterinaria Rumah — Álvarez Jonte 2600 (localidad original: "EXX")
-- #195 El Parque Pet Shop y veterinaria — La Rioja 1956 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #196 8 Patitas Pet Shop — Av. Caseros 2744 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #199 Asamblea Pet Shop — Av. Asamblea 76 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #201 Veteba — Av. Suárez 3360 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #202 Veterinaria Cobo Vet — Av. Cobo 540 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #203 Pet Shop Firulais Farmacia veterinaria — Gral. Fructuoso Rivera 2961 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #207 Peluquería Canina PELU DOGS — Av. Eva Perón 3781 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #208 Peluquería Canina Marie Pets — Av. Lacarra 640 (localidad original: "C1406GZD")
-- #212 Veterinaria El Parque Lacarra — Av. Lacarra 634 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #214 Pet Shop Vallese — Felipe Vallese 2376 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #215 Peluquería Canina "Toys" — Yerbal 2328 (localidad original: "GKB")
-- #216 VETERINARIA SHREK — Av. Tte. Gral. Donato Álvarez 575 (localidad original: "BOD")
-- #220 LETVET — Av. José María Moreno 811 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #224 Lo de Fidel (Veterinaria) — Av. Tte. Gral. Donato Álvarez 862 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #225 VETERINARIA FARMAVET — Av. Gaona 2999 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #230 Veterinaria Pacalú — Gurruchaga 632 (localidad original: "C1414DHN")
-- #231 Peluquería Canina Patas & Pelos Pet Shop — Yerbal 721 Loc 4 (localidad original: "C1405CDO")
-- #237 Pet shop Peluquería Canina "Don Fleco" — Olleros 4145 (localidad original: "EEM")
-- #241 Las Razas Vet — Paraguay 3514 (localidad original: "BRV")
-- #246 Pet Shop El bulldog - Huellitas — Av. Directorio 1508 (localidad original: "Buenos Aires")
-- #250 Bubbels Pet Shop y Peluquería Canina — Gavilán 1087 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #251 Bruna Belleza Canina — Gral. José Gervasio Artigas 892 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #253 PET SHOP — Gavilán 2315 (localidad original: "EFU")
-- #254 La Nueva Esquina — Av. Tte. Gral. Donato Álvarez 1300 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #255 Happy Pet Accesorios - Venta Mayorista de Productos para mascotas — Pedro Del Castillo 1336 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #256 Puppis Veterinaria, Peluqueria y Pet Shop — Av. Álvarez Thomas 311 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #258 Puppy Shop — Moreno 1819 (localidad original: "ABA")
-- #261 Pet Shop y Clínica Veterinaria Mascotas de la Abadía — Av. Jorge Newbery 1761 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #263 Veterinaria TIPPY — Migueletes 1214 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #264 DOG WASH — Jerónimo Salguero 2537 (localidad original: "Cdad. Autónoma de Buenos Aires")
-- #265 Puppis Veterinaria, Peluquería y Pet Shop — Bulnes 2052 (localidad original: "DKJ")
+### Barrio inválido o vacío (0)
+- Ninguno
 
-### Teléfono vacío o inválido (9)
+### Teléfono vacío o inválido (143)
 - #173 Pet shop / peluquería canina — sin teléfono
 - #182 Pupys Pet Shop y Peluquería Canina — sin teléfono
 - #203 Pet Shop Firulais Farmacia veterinaria — sin teléfono
 - #219 Veterinaria Pet Shop — sin teléfono
+- #266 Clinica Verinaria Maggiolo — sin teléfono
+- #267 Cota's 24hs Veterinaría — sin teléfono
+- #268 Veterinaría — sin teléfono
+- #269 Catdog Pet Shop — sin teléfono
+- #270 Husky — sin teléfono
+- #271 Veterinaria — sin teléfono
+- #272 Mundo Mascota — sin teléfono
+- #273 Peluquería Canina Estilon — sin teléfono
+- #274 La Mascota de su Casa — sin teléfono
+- #275 Madagascar — sin teléfono
+- #276 La Huella — sin teléfono
+- #277 My Sweet Friends — sin teléfono
+- #278 T&T Consultorio Veterinario — sin teléfono
+- #279 Black Dog Peluquería Canina — sin teléfono
+- #280 Sarratea — sin teléfono
+- #281 Viverito Sarratea — sin teléfono
+- #282 Forrajería — sin teléfono
+- #283 Hueso's — sin teléfono
+- #285 MarketCan — sin teléfono
+- #286 Clinica Veterinaria Tropezon — sin teléfono
+- #287 Argos — sin teléfono
+- #289 Amma — sin teléfono
+- #290 Centro Mascota 2 — sin teléfono
+- #291 Pata Pata — sin teléfono
+- #292 Veterinaria Maiten — sin teléfono
+- #293 Hospital Veterinario Pasteur — sin teléfono
+- #294 FarmaPet City — sin teléfono
+- #295 Centro veterinario San Martín — sin teléfono
+- #297 Las Huellitas — sin teléfono
+- #298 Roller — sin teléfono
+- #299 Nutrican — sin teléfono
+- #300 Nutrican — sin teléfono
+- #301 Outlet Pet Shop — sin teléfono
+- #302 Clínica Veterinaría San Martín — sin teléfono
+- #303 El Rinón de la Mascotas — sin teléfono
+- #304 Natural Life — sin teléfono
+- #305 Alimentos para Mascotas — sin teléfono
+- #306 Charly Veterinario — sin teléfono
+- #307 Rock & Dog Peluquería Canina — sin teléfono
+- #308 Aires — sin teléfono
+- #309 Las Huellitas — sin teléfono
+- #310 Forrajería — sin teléfono
+- #314 Mascota Central — sin teléfono
+- #316 Veterinaria — sin teléfono
+- #321 Pet Shop Huellitas — sin teléfono
+- #322 Como Perro y Gato — sin teléfono
+- #324 Selpy Pet — sin teléfono
+- #325 Veterinaria Eduardo — sin teléfono
+- #327 Drovenort — sin teléfono
+- #329 Mundo Animal — sin teléfono
+- #331 Candy Pet Shop — sin teléfono
+- #332 Perro Al Agua — sin teléfono
+- #333 Mr. Dog — sin teléfono
+- #334 Amici — sin teléfono
+- #335 Centro Médico Veterinario Dr. Planas — sin teléfono
+- #340 Hocicos — sin teléfono
+- #341 Royal Canin — sin teléfono
+- #342 Raffus — sin teléfono
+- #343 Encalada Vet&Pet — sin teléfono
+- #345 Beethoven — sin teléfono
+- #346 El Jockey — sin teléfono
+- #348 Lucky — sin teléfono
+- #349 San Agustín — sin teléfono
+- #351 El Cuervo — sin teléfono
+- #353 CuruPet Martinez — sin teléfono
+- #354 Puppis — sin teléfono
+- #360 Centro Médico Veterinario La Horqueta — sin teléfono
+- #362 Citypet — sin teléfono
+- #363 Animal Town — sin teléfono
+- #364 Puppis — sin teléfono
+- #365 Cinovita — sin teléfono
+- #366 Pelos y Patas — sin teléfono
+- #367 Centro Médico Veterinario Martínez — sin teléfono
+- #368 Puppis — sin teléfono
+- #369 Centro Medico Veterinario — sin teléfono
+- #370 Centro Medico Veterinaria — sin teléfono
+- #371 Puppis — sin teléfono
+- #373 CVI — sin teléfono
+- #375 Lourdes — sin teléfono
+- #377 Wapp — sin teléfono
+- #378 Veterinaría Lavalle — sin teléfono
+- #379 Cuatro Patas — sin teléfono
+- #380 Hocikos — sin teléfono
+- #381 La Chicha — sin teléfono
+- #382 Gasmar — sin teléfono
+- #383 ProPlan — sin teléfono
+- #384 Arturo — sin teléfono
+- #387 Super Pet's — sin teléfono
+- #388 Roma — sin teléfono
+- #389 Maskota's — sin teléfono
+- #390 Veterinaria Ciudad Jardín — sin teléfono
+- #391 Damaroma — sin teléfono
+- #393 Don Boston — sin teléfono
+- #394 Centro Veterinario — sin teléfono
+- #395 Pet Shop Baloo — sin teléfono
+- #396 Neyen — sin teléfono
+- #397 Wapp — sin teléfono
+- #398 Fernández Moreno — sin teléfono
+- #399 Ciudadela — sin teléfono
+- #400 Natural Life — sin teléfono
+- #401 Animalis — sin teléfono
+- #404 Perro al Agua — sin teléfono
+- #406 El Arca — sin teléfono
+- #407 Consultorio Veterinario — sin teléfono
+- #411 Old Prince — sin teléfono
+- #412 Peluquería Canina — sin teléfono
+- #413 Veterinaria — sin teléfono
+- #414 Star Can — sin teléfono
+- #415 Puppis — sin teléfono
+- #416 Veterinaria de la Quinta — sin teléfono
+- #417 CuruPet Olivos — sin teléfono
+- #418 Consultorio Veterinario — sin teléfono
+- #419 Pulguitas — sin teléfono
+- #420 Puppy Food — sin teléfono
+- #423 Baufi — sin teléfono
+- #428 Otto — sin teléfono
+- #430 Distribuidora Carapachay — sin teléfono
+- #431 Veterinaria Paraná — sin teléfono
+- #432 Veterinaria del Este — sin teléfono
+- #433 Mascocenter — sin teléfono
+- #434 Veterinaria Mundo Animal — sin teléfono
+- #435 Compostela — sin teléfono
+- #436 Manchitas — sin teléfono
+- #437 Malaika — sin teléfono
+- #438 Bacanes — sin teléfono
+- #439 Puppis — sin teléfono
+- #441 Mapanis — sin teléfono
+- #442 Nuevo Sol — sin teléfono
+- #443 Madagascar — sin teléfono
+- #444 Mascota Point — sin teléfono
+- #445 Clínica Veterinaria VIDA — sin teléfono
+- #447 Canguro — sin teléfono
 - #187 Pet's Club. "El club de las Mascotas" — "+54 48282674": 8 dígitos nacionales (se esperan 10)
 - #189 ZONA Pet Veterinaria — "+54 53706400": 8 dígitos nacionales (se esperan 10)
 - #234 Dame La Pata - Pet shop y Peluqueria — "+54 48288668": 8 dígitos nacionales (se esperan 10)
 - #235 Luly Vet Veterinaria y Pet Shop — "+54 21428363": 8 dígitos nacionales (se esperan 10)
 - #263 Veterinaria TIPPY — "+54 75636873": 8 dígitos nacionales (se esperan 10)
+- #357 Puppis — "+54 810 220 2345": característica inválida (81)
+- #440 Puppis — "+54 810 220 2345": característica inválida (81)
 
-### Tipo que no coincide con el nombre (0)
-- Ninguno
+### Tipo que no coincide con el nombre (5)
+- #273 Peluquería Canina Estilon — petshop → peluqueria (nombre:peluqueria)
+- #307 Rock & Dog Peluquería Canina — petshop → peluqueria (nombre:peluqueria)
+- #343 Encalada Vet&Pet — petshop → veterinaria (nombre:veterinaria)
+- #376 Peluquería canina lila — petshop → peluqueria (nombre:peluqueria)
+- #412 Peluquería Canina — petshop → peluqueria (nombre:peluqueria)
 
 ### Posibles duplicados (2)
 - #66 Laboratorio Rapela (Análisis Vet.) ↔ #67 Laboratorio Dr. Rapela (REVISAR: a 17 m, nombre parecido, distinta dirección (¿2 locales?))
 - #74 Veterinaria M.A.P.A. Lanús Oeste ↔ #75 Hospital Veterinario M.A.P.A (REVISAR: mismo teléfono pero a 3.8 km (¿sucursales?))
 
 ### Horario "Horario comercial" (placeholder, no es un horario) (133)
-### Sin horario (6)
-### Sin calificación (2)
-
----
-
-## Antes y después (backup del 03/11/2026 vs. data.json actual)
-
-| Métrica | Antes | Después | Δ |
-|---|---:|---:|---:|
-| Total de registros | 265 | 264 | -1 |
-| Registros GBA | 64 | 64 | +0 |
-| Con partido (GBA) | 0 | 64 | +64 |
-| Horario por día | 22 | 22 | +0 |
-| Email | 0 | 0 | +0 |
-| WhatsApp confirmado | 0 | 0 | +0 |
-| Web | 0 | 0 | +0 |
-| Teléfono válido (E.164) | 256 | 255 | -1 |
-| Fuente OSM | 0 | 0 | +0 |
-
-### Registros por partido (GBA)
-
-| Partido | Antes | Después |
-|---|---:|---:|
-| La Plata | 0 | 16 |
-| San Isidro | 0 | 5 |
-| Avellaneda | 0 | 5 |
-| Lanús | 0 | 5 |
-| Quilmes | 0 | 5 |
-| Lomas de Zamora | 0 | 5 |
-| Morón | 0 | 5 |
-| La Matanza | 0 | 5 |
-| Vicente López | 0 | 4 |
-| Tigre | 0 | 4 |
-| San Fernando | 0 | 3 |
-| Berazategui | 0 | 1 |
-| San Miguel | 0 | 1 |
-| (sin dato) | 64 | 0 |
-| General San Martín | 0 | 0 |
-| Tres de Febrero | 0 | 0 |
-
-
-**Qué sigue sin moverse y por qué:** horario por día, email, WhatsApp, web y las zonas nuevas (General San Martín, Tres de Febrero y más registros de Vicente López / San Isidro) dependen de overpass-api.de, nominatim.openstreetmap.org, cdn.buenosaires.gob.ar y las webs de cada lugar. En la corrida del 03/11/2026 (2.ª sesión) el proxy del entorno siguió respondiendo 403 a todos esos dominios. El partido de los 64 registros de GBA se asignó sin internet a partir de la localidad (`partido_fuente: "localidad"`); #71 (Gerli) queda marcado para revisar.
+### Sin horario (152)
+### Sin calificación (183)
