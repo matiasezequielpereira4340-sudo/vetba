@@ -115,6 +115,16 @@
       "permanent": true
     },
     {
+      "source": "/ficha/centro-medico-veterinario",
+      "destination": "/ficha/centro-medico-veterinario-av-de-mayo",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/centro-medico-veterinario-la-horqueta",
+      "destination": "/ficha/centro-medico-veterinario-la-horqueta-srl",
+      "permanent": true
+    },
+    {
       "source": "/ficha/centro-medico-veterinario-tigre-99",
       "destination": "/ficha/centro-medico-veterinario-tigre",
       "permanent": true
@@ -152,6 +162,11 @@
     {
       "source": "/ficha/cima-centro-medico-vet-36",
       "destination": "/ficha/cima-centro-medico-vet",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/clinica-verinaria-maggiolo",
+      "destination": "/ficha/veterinaria-maggiolo",
       "permanent": true
     },
     {
@@ -200,6 +215,11 @@
       "permanent": true
     },
     {
+      "source": "/ficha/como-perro-y-gato",
+      "destination": "/ficha/como-perro-y-gato-martinez",
+      "permanent": true
+    },
+    {
       "source": "/ficha/como-perros-y-gatos-51",
       "destination": "/ficha/como-perros-y-gatos",
       "permanent": true
@@ -217,6 +237,11 @@
     {
       "source": "/ficha/cvo-centro-vet-olivos-42",
       "destination": "/ficha/cvo-centro-vet-olivos",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/damaroma",
+      "destination": "/ficha/pet-shop-damaroma",
       "permanent": true
     },
     {
@@ -245,6 +270,11 @@
       "permanent": true
     },
     {
+      "source": "/ficha/dr-smolny",
+      "destination": "/ficha/veterinaria-dr-smolny",
+      "permanent": true
+    },
+    {
       "source": "/ficha/el-perro-de-cullan-155",
       "destination": "/ficha/el-perro-de-cullan",
       "permanent": true
@@ -262,6 +292,11 @@
     {
       "source": "/ficha/fixvet-24-96",
       "destination": "/ficha/fixvet-24",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/gasmar",
+      "destination": "/ficha/petshop-gasmar",
       "permanent": true
     },
     {
@@ -335,6 +370,11 @@
       "permanent": true
     },
     {
+      "source": "/ficha/las-huellitas",
+      "destination": "/ficha/las-huellitas-pet-shop",
+      "permanent": true
+    },
+    {
       "source": "/ficha/leocan-1",
       "destination": "/ficha/leocan",
       "permanent": true
@@ -342,6 +382,11 @@
     {
       "source": "/ficha/lomas-del-sur-veterinaria-87",
       "destination": "/ficha/lomas-del-sur-veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/mapanis",
+      "destination": "/ficha/veterinaria-mapanis",
       "permanent": true
     },
     {
@@ -377,6 +422,11 @@
     {
       "source": "/ficha/my-vet-s-avellaneda-72",
       "destination": "/ficha/my-vet-s-avellaneda",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/nuevo-sol",
+      "destination": "/ficha/petshop-nuevo-sol",
       "permanent": true
     },
     {
@@ -495,6 +545,11 @@
       "permanent": true
     },
     {
+      "source": "/ficha/puppis",
+      "destination": "/ficha/puppis-veterinaria-peluqueria-y-pet-shop-martinez",
+      "permanent": true
+    },
+    {
       "source": "/ficha/puppis-veterinaria-peluqueria-y-pet-shop-2",
       "destination": "/ficha/puppis-veterinaria-peluqueria-y-pet-shop-caba",
       "permanent": true
@@ -512,6 +567,16 @@
     {
       "source": "/ficha/quilmes-veterinary-hospital-78",
       "destination": "/ficha/quilmes-veterinary-hospital",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/roller",
+      "destination": "/ficha/roller-san-martin",
+      "permanent": true
+    },
+    {
+      "source": "/ficha/roma",
+      "destination": "/ficha/pet-shop-roma",
       "permanent": true
     },
     {

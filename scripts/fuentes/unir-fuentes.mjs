@@ -53,14 +53,18 @@ for (const f of archivos.filter((f) => /^osm-.*\.json$/.test(f))) {
     candidatos.push(c);
   }
 }
-const TIPO_GOOGLE = [[/veterin/i, 'veterinaria'], [/pet groom|peluquer/i, 'peluqueria'], [/pet (store|supply)|tienda de (animales|mascotas)|pet shop/i, 'petshop']];
+const TIPO_GOOGLE = [[/veterin/i, 'veterinaria'], [/pet groom|peluquer/i, 'peluqueria'], [/pet (store|supply)|tienda de (animales|mascotas)|productos para mascotas|alimentos para animales|pet shop/i, 'petshop']];
 for (const f of archivos.filter((f) => /^apify-.*\.json$/.test(f))) {
   const j = leerJSON(path.join(SRC, f));
   const objetivo = [j.vetba?.localidad, j.vetba?.partido].filter(Boolean).map(norm);
   for (const it of j.items || []) {
     if (it.permanentlyClosed) { descartados.push(f + ' ' + it.title + ': cerrado permanentemente'); continue; }
     const dondeTxt = norm([it.city, it.neighborhood, it.address].join(' '));
-    if (!objetivo.some((o) => dondeTxt.includes(o)) && !Object.keys(PARTIDOS).some((p) => dondeTxt.includes(norm(p)))) { descartados.push(f + ' ' + it.title + ': fuera de la zona (' + (it.city || it.address) + ')'); continue; }
+    // Google devuelve resultados cercanos aunque estén en otro partido: se acepta todo lo que cae en el AMBA
+    // y el partido definitivo lo pone validar-data --red por coordenadas (Nominatim).
+    const la = it.location?.lat, lo = it.location?.lng;
+    if (!(la > -35.3 && la < -34.1 && lo > -59.3 && lo < -57.7)) { descartados.push(f + ' ' + it.title + ': fuera del AMBA (' + (it.city || it.address) + ')'); continue; }
+    void objetivo; void dondeTxt;
     const cat = [it.categoryName, ...(it.categories || [])].join(' ');
     const porCat = (TIPO_GOOGLE.find(([rx]) => rx.test(cat)) || [])[1];
     const c = {
