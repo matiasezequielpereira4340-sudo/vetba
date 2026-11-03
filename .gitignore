@@ -5,3 +5,6 @@
 /sitemap.xml
 node_modules/
 .DS_Store
+
+# Cache de pedidos a Nominatim / sitios web (se regenera)
+/cache/
