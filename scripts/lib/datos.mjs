@@ -193,3 +193,11 @@ export const ZONAS_PARTIDO = {
   'Vicente López': 'GBA Norte',
   'San Isidro': 'GBA Norte',
 };
+
+// Zonas nuevas: localidades por partido (null = el partido completo).
+export const PARTIDOS = {
+  'General San Martín': ['José León Suárez', 'Villa Ballester', 'San Andrés', 'Villa Maipú', 'Billinghurst', 'Villa Lynch', 'San Martín', 'Chilavert', 'Loma Hermosa', 'Villa Libertad', 'Villa Chacabuco', 'Villa Zagala'],
+  'Tres de Febrero': ['Caseros', 'Ciudadela', 'Santos Lugares', 'Sáenz Peña', 'Martín Coronado', 'Ciudad Jardín Lomas del Palomar', 'El Palomar', 'Villa Bosch', 'Loma Hermosa', 'Pablo Podestá'],
+  'Vicente López': null, // completo: se busca por partido
+  'San Isidro': null,
+};
