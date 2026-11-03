@@ -73,9 +73,9 @@ for (const r of data) {
 /* ---------------- 3. teléfonos ---------------- */
 for (const r of data) {
   const t = normalizarTelefono(r.telefono);
-  delete r.telefono_e164;
-  if (t.valido) { r.telefono_e164 = t.e164; if (t.movil) r.celular = t.e164; }
-  else if (r.telefono) log.telInvalidos.push({ id: r.id, nombre: r.nombre, telefono: r.telefono, motivo: t.motivo });
+  // Se asigna en el lugar (sin borrar y recrear) para que el orden de las claves no cambie entre corridas.
+  if (t.valido) { r.telefono_e164 = t.e164; if (t.movil && !r.celular) r.celular = t.e164; }
+  else { delete r.telefono_e164; if (r.telefono) log.telInvalidos.push({ id: r.id, nombre: r.nombre, telefono: r.telefono, motivo: t.motivo }); }
 }
 
 /* ---------------- 4. duplicados ---------------- */
